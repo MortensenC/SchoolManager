@@ -1,45 +1,39 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Escuela de la Ciudad</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet'
-        type='text/css' />
-    <meta name="viewport" content="width=device-width" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.mobile-menu-trigger').click(function () {
-                if ($(this).hasClass('active')) {
-                    $(this).removeClass('active');
-                    $(this).next().slideUp(300);
-                }
-                else {
-                    $(this).addClass('active');
-                    $(this).next().slideDown(300);
-                }
-            });
-        });
-    </script>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Escuela de la Ciudad</title>
+	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet'
+		type='text/css' />
+	<meta name="viewport" content="width=device-width" />
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
+	@Scripts.Render("~/bundles/jquery")
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.mobile-menu-trigger').click(function () {
+				if ($(this).hasClass('active')) {
+					$(this).removeClass('active');
+					$(this).next().slideUp(300);
+				}
+				else {
+					$(this).addClass('active');
+					$(this).next().slideDown(300);
+				}
+			});
+		});
+	</script>
 </head>
 <body>
-    <header>
-            <div class="content-wrapper cwa">
-                <img class="logo" src="@Url.Content("~/Content/Images/logo-header-72px.png")" alt="" />
-                <div id="login" style="
-                                    position: absolute;
-                                    right: 0;
-                                    top: 0;
-                                    border-top: 4px solid #ec7522;
-                                    padding: 4px 25px 4px 70px;
-                                ">
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </div>
+	<header>
+			<div class="content-wrapper cwa">
+				<img class="logo" src="@Url.Content("~/Content/Images/logo-header-72px.png")" alt="" />
+				<div id="login">
+					@Html.Partial("_LoginPartial")
+				</div>
+			</div>
 			<nav>
 				<div class="content-wrapper">
 					<div class="mobile-menu-trigger"></div>
@@ -56,11 +50,11 @@
 					</ul>
 				</div>
 			</nav>
-        </header>
-    <div id="body">
-        @RenderBody()
-    </div>
-    <footer>
+		</header>
+	<div id="body">
+		@RenderBody()
+	</div>
+	<footer>
 			<div class="a-row">
 				<div class="content-wrapper">
 					<p>Nuestro objetivo es una formación integral que tienda un puente <span>entre la vida escolar y el acontecer social y cultural del niño</span></p>
@@ -87,7 +81,7 @@
 					<p class="cr">&copy; @DateTime.Now.Year - Escuela de la ciudad - Todos los derechos reservados. <a href="http://www.jooin.us/" target="_blank">Jooin.us</a></p>
 				</div>
 			</div>
-        </footer>
-    @RenderSection("scripts", required: false)
+		</footer>
+	@RenderSection("scripts", required: false)
 </body>
 </html>

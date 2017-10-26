@@ -1,4 +1,7 @@
-﻿@if (Request.IsAuthenticated) {
+﻿@model IEnumerable<SchoolManager.Domain.Entities.User>
+@if (Request.IsAuthenticated)
+{
+    <p>Hola, </p>@Html.ActionLink(User.Identity.Name, "Profile", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })<p>!</p>
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
