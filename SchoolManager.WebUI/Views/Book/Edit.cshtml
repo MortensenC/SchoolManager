@@ -1,0 +1,58 @@
+﻿@model SchoolManager.Domain.Entities.Book
+@{
+    ViewBag.Title = "Editar";
+}
+<div class="banner-seccion">
+    <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+</div>
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>
+            Estás aquí: <span>Admin</span> > <span>Libros</span> > <span class="hlited">Editar</span></p>
+    </div>
+</div>
+<div class="content-wrapper seccion">
+    <h1 class="header-seccion">
+        Editar libro</h1>
+    @using (Html.BeginForm("Edit", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+
+        <fieldset class="regularform editform">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Title)
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Link)
+                @Html.EditorFor(model => model.Link)
+                @Html.ValidationMessageFor(model => model.Link)
+            </div>
+            <div class="editor-label">
+                Descripción
+                @Html.TextAreaFor(model => model.Description, new { style = "width:100%; height:200px" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Author)
+                @Html.EditorFor(model => model.Author)
+                @Html.ValidationMessageFor(model => model.Author)
+            </div>
+            <div class="editor-label">
+                @Html.EditorFor(model => model.Highlighted)
+                @Html.LabelFor(model => model.Highlighted)
+            </div>
+            <div class="editor-label">
+                <label>
+                    Portada</label>
+                <input name="photo" id="Photo" type="file" accept="image/*" />
+            </div>
+            <input class="regularbtn" type="submit" value="Editar" />
+            <div class="secbtn">@Html.ActionLink("Volver", "Index")</div>
+        </fieldset>
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

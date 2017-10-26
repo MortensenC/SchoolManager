@@ -1,0 +1,91 @@
+﻿@model SchoolManager.Domain.Entities.Post
+@{
+    ViewBag.Title = "Nueva publicación";
+}
+<link href="@Url.Content("~/Content/jHtmlArea/jHtmlArea.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jHtmlArea-0.8.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $("textarea").htmlarea({
+            toolbar: [
+                "bold", "italic", "underline",
+                "|",
+                "link", "unlink"
+            ]
+        });
+    });
+</script>
+
+<div class="banner-seccion">
+    <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+</div>
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>
+            Estás aquí: <span class="hlited">Admin</span> > <span>Publicaciones</span></p>
+    </div>
+</div>
+<div class="content-wrapper _novedades seccion">
+    <h1 class="header-seccion">
+        Nueva publicación</h1>
+    @using (Html.BeginForm("Create", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+
+        <fieldset class="regularform editform">
+            <div class="editor-label">
+                <label for="Title">Título</label>
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+            <div class="editor-label">
+                <label style="margin-bottom:8px;" for="Text">Texto</label>
+                @Html.TextAreaFor(model => model.Text, new { style = "width: 600px; height: 300px;" })
+                @Html.ValidationMessageFor(model => model.Text)
+            </div>
+            <div class="editor-label">
+				@Html.EditorFor(model => model.Public)<label for="Public">Pública</label>
+            </div>
+            <div class="editor-label">
+                <label for="Category">Categoría</label>
+                @Html.DropDownListFor(model => model.Category, new SelectList(Enum.GetValues(typeof(SchoolManager.Domain.Entities.Category)).Cast<SchoolManager.Domain.Entities.Category>().Select(e => new { Id = (int)e, Value = e.ToString() }), "Id", "Value"))
+            </div>
+
+            @*, new { @onchange = "if(this.value == 5) { $('#tasks').show(); } else { $('#tasks').hide(); }" }*@
+
+			<div class="editor-label">
+			   <label for="Subject">Materia</label>
+				@Html.DropDownListFor(model => model.Subject, (new SelectList(Enum.GetValues(typeof(SchoolManager.Domain.Entities.Subject)).Cast<SchoolManager.Domain.Entities.Subject>().Select(e => new { Id = (int)e, Value = e.ToString() }), "Id", "Value")), string.Empty)
+			</div>
+			<div class="editor-label">
+				<label for="Classroom">Grado</label>
+				@Html.DropDownListFor(model => model.ClassroomId, new SelectList(ViewBag.Classrooms, "Id", "Name"), string.Empty)
+			</div>
+			<div class="editor-label">
+				<label for="file">Archivo adjunto</label>
+				<input name="file" id="file" type="file" />
+			</div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FlickrAlbum)
+                @Html.EditorFor(model => model.FlickrAlbum)
+                Ejemplo: https://www.flickr.com/photos/nombredeusuario/sets/721...083
+                @Html.ValidationMessageFor(model => model.FlickrAlbum)
+            </div>
+            <div class="editor-label">
+                <label for="YouTubeVideo">Video de YouTube</label>
+                @Html.EditorFor(model => model.YouTubeVideo)
+                Copiar texto de "embed"
+            </div>
+            <div class="editor-label">
+                <label for="Photo">Foto</label>
+                <input name="photo" id="Photo" type="file" accept="image/*" />
+            </div>
+			<input class="regularbtn float-left" type="submit" value="Publicar" />
+			<div class="secbtn">@Html.ActionLink("Volver", "Index")</div>
+        </fieldset>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

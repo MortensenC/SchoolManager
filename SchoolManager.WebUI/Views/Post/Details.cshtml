@@ -1,0 +1,48 @@
+﻿@model SchoolManager.Domain.Entities.Post
+<div class="content-wrapper _novedades seccion">
+	<h1 class="header-seccion">
+		Novedades</h1>
+	<div class="row">
+		<article>
+				@if (Model.Photo != null)
+				{
+					<img src="@Url.Content(Model.Photo)" />
+				}
+				<p class="titulo">@Model.Title</p>
+				<p class="tipofecha"><span class="categoria">@Model.CategoryText</span> | @Model.Date.ToString("d/M/yyyy")</p>
+				<p class="contenido">@Html.Raw(Model.ShortText)</p>
+
+				@if (!string.IsNullOrEmpty(Model.FlickrAlbum))
+				{
+					<br />
+						<object width="600" height="400">
+							<param name="flashvars" value="offsite=true&lang=es-us&page_show_url=%2Fphotos%2F@(Model.GetFlickrUser)%2Fsets%2F@(Model.GetFlickrAlbum)%2Fshow%2F&page_show_back_url=%2Fphotos%2F@(Model.GetFlickrUser)%2Fsets%2F@(Model.GetFlickrAlbum)%2F&set_id=@(Model.GetFlickrAlbum)&jump_to="></param>
+							<param name="movie" value="https://www.flickr.com/apps/slideshow/show.swf?v=143270"></param>
+							<param name="allowFullScreen" value="true"></param>
+							<embed type="application/x-shockwave-flash" src="https://www.flickr.com/apps/slideshow/show.swf?v=143270" allowFullScreen="true" flashvars="offsite=true&lang=es-us&page_show_url=%2Fphotos%2F@(Model.GetFlickrUser)%2Fsets%2F@(Model.GetFlickrAlbum)%2Fshow%2F&page_show_back_url=%2Fphotos%2F@(Model.GetFlickrUser)%2Fsets%2F@(Model.GetFlickrAlbum)%2F&set_id=@(Model.GetFlickrAlbum)&jump_to=" width="400" height="300"></embed>
+						</object>
+				}
+
+				@if (!string.IsNullOrEmpty(Model.YouTubeVideo))
+				{
+					<h2>Video</h2>
+					<br />
+					@Html.Raw(Model.YouTubeVideo)
+				}
+
+				@if (Model.Files != null && Model.Files.Count > 0)
+				{
+					<br />
+					<h2>Archivos</h2>
+					<ul>
+					@foreach (var file in Model.Files)
+					{
+						<li>
+							@Html.ActionLink((string)file, "Download", new { file = file, id = Model.Id })
+						</li>
+					}
+					</ul>
+				}
+			</article>
+	</div>
+</div>

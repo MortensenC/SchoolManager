@@ -1,0 +1,114 @@
+﻿@model SchoolManager.Domain.Entities.User
+@{
+    ViewBag.Title = "Usuario";
+}
+<div class="banner-seccion">
+    <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+</div>
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>
+            Estás aquí: <span>Usuario</span> > <span class="hlited">Perfil</span></p>
+    </div>
+</div>
+<div class="content-wrapper seccion">
+    <h1 class="header-seccion">
+        Perfil</h1>
+    <div class="profile-content">
+        <fieldset class="regularform editform">
+            <div class="image-upload">
+                <label for="file">
+                    <img id="profilepic" class="profile-picture" alt="profile picture" height="300px" src="@Url.Content(ViewBag.ProfilePicturePath)" />
+                    <div class="hover">
+                        <span>+</span></div>
+                </label>
+                <input name="file" id="file" type="file" />
+                <script type="text/javascript">
+                    $("#file").change(function () {
+                        var data = new FormData();
+                        var files = $("#file").get(0).files;
+                        if (files.length > 0) {
+                            data.append("HelpSectionImages", files[0]);
+                        }
+                        $.ajax({
+                            url: "@Url.Action("EditPicture", "User")",
+                            type: "POST",
+                            processData: false,
+                            contentType: false,
+                            data: data,
+                            success: function (response) {
+                                var picture = $("#profilepic");
+                                picture.load(function() {
+                                $(this).hide();
+                                $(this).fadeIn('slow');
+                              }).attr('src', response + '?' + new Date().getTime());
+                            },
+                            error: function (er) {
+                                alert(er);
+                            }
+
+                        });
+                    });
+                </script>
+            </div>
+        </fieldset>
+        <div class="rightside">
+            <p>
+                Nombre: <span>@Model.FullName</span></p>
+            @if (!User.IsInRole("Admin") && !User.IsInRole("SuperAdmin"))
+            {
+                <p>
+                    Teléfono: <span>@Model.Phone</span></p>
+                <p>
+                    DNI: <span>@Model.Username</span></p>
+                <p>
+                    Mail: <span>@Model.Email</span></p>
+                <p>
+                    Dirección: <span>@Model.Address</span></p>
+
+                if (User.IsInRole("Student"))
+                {
+                <p>
+                    Grado: <span>@Model.ClassroomText</span></p>
+                }
+                if (User.IsInRole("Teacher"))
+                {
+                <p>
+                    Grados: <span>@Model.Teaches</span></p>
+                }
+            }
+            <div class="options">
+                <br />
+                <br />
+                @if (User.IsInRole("Student") || User.IsInRole("Father"))
+                {
+                    @Html.ActionLink("Novedades", "Novedades", "Post")
+                    @Html.ActionLink("Contactos", "Contacts", "User")
+                }
+                @if (User.IsInRole("Father"))
+                {
+                    @Html.ActionLink("Docentes", "Docentes", "User")
+                }
+                @if (User.IsInRole("Teacher"))
+                {
+                    @Html.ActionLink("Manejar Publicaciones", "Index", "Post")
+                    @Html.ActionLink("Contactos", "Contacts", "User")
+                    <a href="http://www.escueladelaciudad.com.ar/webmail" target="_blank">WebMail</a>
+                }
+                @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                {
+                    @Html.ActionLink("Manejar Publicaciones", "Index", "Post")
+                    @Html.ActionLink("Manejar Docentes", "Index")
+                    @Html.ActionLink("Manejar Libros", "Index", "Book")
+                    @Html.ActionLink("Manejar Galerías", "Index", "Gallery")
+                    @Html.ActionLink("Manejar Alumnos y Padres", "Contacts", "User")
+                    <a href="http://www.escueladelaciudad.com.ar/webmail" target="_blank">WebMail</a>
+                    <br />
+                    <br />
+                    <br />
+                    @Html.ActionLink("Cambiar de año", "MoveYear")
+                }
+            </div>
+        </div>
+    </div>
+</div>

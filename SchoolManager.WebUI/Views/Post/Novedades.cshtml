@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "Novedades";
+}
+<script type="text/javascript">
+    var actual = 1;
+
+    if ('@(ViewBag.Id)' != 0) { openPost('@(ViewBag.Id)'); }
+
+    function openPost(id) {
+        $.post("@Url.Action("GetById", "Post")", { "id" : id }, function(data) {
+            $("#posts-container").html(data);
+        });
+    }
+
+    function updateCurrent(li)
+    {
+        var lis = document.getElementById("categorias").getElementsByTagName("li");
+
+        for (var i = 0; i < lis.length; i++) {
+            $(lis[i]).removeClass('current');
+        }
+
+        if (li != null) {
+            $(li).addClass("current");
+        }
+    }
+
+    function search() {
+        updateCurrent();
+        var text = $("#searchText").val();
+        var mine = $("#onlyMine").is(':checked');
+        $("#posts-container").fadeOut("fast");
+        $.post("@Url.Action("Search", "Post")", { "text" : text, "category" : 0, "subject" : 0, "classroom" : 0, "mine" : mine }, function(data) {
+            $("#posts-container").html(data).fadeIn("fast");
+        });
+    }
+
+    function getCategory(id, li) {
+        updateCurrent(li);
+        var mine = $("#onlyMine").is(':checked');
+        $("#posts-container").fadeOut("fast");
+        $.post("@Url.Action("Search", "Post")", { "text" : "", "category" : id, "subject" : 0, "classroom" : 0, "mine" : mine }, function(data) {
+            $("#posts-container").html(data).fadeIn("fast");
+        });
+    }
+
+    function getClassroom(id, li) {
+        updateCurrent(li);
+        var mine = $("#onlyMine").is(':checked');
+        $("#posts-container").fadeOut("fast");
+        $.post("@Url.Action("Search", "Post")", { "text" : "", "category" : 0, "subject" : 0, "classroom" : id, "mine" : mine }, function(data) {
+            $("#posts-container").html(data).fadeIn("fast");
+        });
+    }
+
+    function getSubject(id, li) {
+        updateCurrent(li);
+        var mine = $("#onlyMine").is(':checked');
+        $("#posts-container").fadeOut("fast");
+        $.post("@Url.Action("Search", "Post")", { "text" : "", "category" : 0, "subject" : id, "classroom" : 0, "mine" : mine }, function(data) {
+            $("#posts-container").html(data).fadeIn("fast");
+        });
+    }
+
+    function prevPost() {
+        if (actual > 1) {
+            actual--;
+            getPost(actual);
+        }
+    }
+
+    function nextPost() {
+        if (actual < @ViewBag.PageCount) {
+            actual++;
+            getPost(actual);
+        }
+    }
+
+    function lastPost() {
+        getPost(@ViewBag.PageCount);
+    }
+
+    function getPost(page) {
+        actual = page;
+
+        var lis = document.getElementById("paginador").getElementsByTagName("li");
+
+        for (var i = 1; i < 4; i++) {
+            $(lis[i]).removeClass('current');
+        }
+
+        if (page == 1) {
+            $(lis[0]).addClass("disabled");
+        } else {
+            $(lis[0]).removeClass("disabled");
+        }
+
+        if (page >= @ViewBag.PageCount) {
+            $(lis[4]).addClass("disabled");
+        } else {
+            $(lis[4]).removeClass("disabled");
+        }
+
+        if (page >= @ViewBag.PageCount) {
+            $(lis[5]).addClass("current");
+        } else {
+            $(lis[5]).removeClass("current");
+        }
+
+        if (page < 4) {
+            $(lis[page]).addClass('current');
+        }
+
+        $("#actualPage").html(page);
+        $("#article-container").fadeOut("fast");
+        $.post("@Url.Action("Preview", "Post")", { "page" : page }, function(data) {
+            $("#article-container").html(data).fadeIn("fast");
+        });
+}
+</script>
+<div class="banner-seccion">
+    <img src="@Url.Content("~/Content/Images/banner_novedades.jpg")" />
+</div>
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>
+            Estás aquí: <span class="hlited">Home</span> > <span>Novedades</span></p>
+    </div>
+</div>
+<div class="content-wrapper _novedades seccion">
+    <h1 class="header-seccion">
+        Novedades</h1>
+    <div class="row">
+        <div class="cell cell-2">
+            <div id="posts-container">
+            <div id="article-container">
+                @Html.Action("Preview", "Post", new { page = 1 })
+            </div>
+            <div class="fin-listado">
+                <ul id="paginador" class="paginador">
+                    <li onclick="prevPost();" class="arrow prev disabled"></li>
+                    <li class="current" onclick="getPost(1);">1</li>
+                    <li onclick="getPost(2);">2</li>
+                    <li onclick="getPost(3);">3</li>
+                    <li onclick="nextPost();" class="arrow next"></li>
+                    <li onclick="lastPost();">Última</li>
+                </ul>
+                <div class="posicion">
+                    Página <span id="actualPage">1</span> de @Math.Ceiling((Decimal)ViewBag.PostCount / 8)
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="cell cell-1">
+            <div class="blue-box">
+                <p class="high">
+                    ¿Qué encuentro aquí?</p>
+                <p class="regular">
+                    Aquí encontrarás novedades sobre la escuela, reuniones, eventos, material para compartir
+                    y consultar.</p>
+            </div>
+            <div class="buscador">
+                <input id="searchText" type="search" onkeydown="if (event.keyCode == 13) search();" />
+                <input type="submit" value="" onclick="search();" />
+            </div>
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Teacher"))
+            {
+                <div>
+                    <input type="checkbox" id="onlyMine" />Sólo mis publicaciones
+                </div>
+                <br />
+            }
+            <div id="categorias" class="categorias-box">
+                <p class="high">Categorías</p>
+                <ul>
+                    @if (User.IsInRole("Student") && ViewBag.Classroom.Name == "Exalumnos")
+                    {
+                        foreach (var category in Enum.GetValues(typeof(SchoolManager.Domain.Entities.Category)).Cast<SchoolManager.Domain.Entities.Category>()
+                            .Where(c => c == SchoolManager.Domain.Entities.Category.Reuniones
+                                || c == SchoolManager.Domain.Entities.Category.Comunicados
+                                || c == SchoolManager.Domain.Entities.Category.Eventos)
+                            .Select(e => new { Id = (int)e, Value = e.ToString() }))
+                        {
+                            <li onclick="getCategory(@category.Id, this);">@category.Value</li>
+                        }
+                    }
+                    else if (ViewBag.Classroom == null || ViewBag.Classroom.Name != "Exalumnos")
+                    {
+                        foreach (var category in Enum.GetValues(typeof(SchoolManager.Domain.Entities.Category)).Cast<SchoolManager.Domain.Entities.Category>().Select(e => new { Id = (int)e, Value = e.ToString() }))
+                        {
+                            <li onclick="getCategory(@category.Id, this);">@category.Value</li>
+                        }
+                    }
+                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <br />
+                    <p class="high">Cursos</p>
+                    <ul>
+                        @foreach (var classroom in ViewBag.Classrooms)
+                        {
+                            <li onclick="getClassroom(@classroom.Id, this);">@classroom.Name</li>
+                        }
+                    </ul>
+                    <br />
+                    <p class="high">Materias</p>
+                    <ul>
+                        @foreach (var subject in Enum.GetValues(typeof(SchoolManager.Domain.Entities.Subject)).Cast<SchoolManager.Domain.Entities.Subject>().Select(e => new { Id = (int)e, Value = e.ToString() }))
+                        {
+                            <li onclick="getSubject(@subject.Id, this);">@subject.Value</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>

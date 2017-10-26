@@ -1,0 +1,50 @@
+﻿@model SchoolManager.Domain.Entities.User
+
+@{
+    ViewBag.Title = "Log in";
+}
+<script type="text/javascript">
+    function foco(idElemento) {
+        document.getElementById(idElemento).focus();
+    }
+
+    $(document).ready(function () {
+        foco("Username");
+    });
+</script>
+
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>Estás aquí: <span class="hlited">Log In</span></p>
+    </div>
+</div>
+
+<div class="content-wrapper seccion">
+	<h1 class="header-seccion">Log in</h1>
+	<section id="loginForm" class="regularform">
+		<p>Ingresa tu número de documento y tu contraseña para acceder</p>
+		@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<fieldset>
+			<ul>
+				<li>
+					@Html.LabelFor(u => u.Username)
+					@Html.TextBoxFor(u => u.Username)
+					@Html.ValidationMessageFor(u => u.Username)
+				</li>
+				<li>
+					@Html.LabelFor(u => u.Password)
+					@Html.PasswordFor(u => u.Password)
+					@Html.ValidationMessageFor(u => u.Password)
+				</li>
+			</ul>
+			<input class="regularbtn" type="submit" value="Log in" />
+		</fieldset>
+	}
+	</section>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

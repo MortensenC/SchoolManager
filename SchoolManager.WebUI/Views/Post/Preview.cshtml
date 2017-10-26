@@ -1,0 +1,15 @@
+﻿@model IEnumerable<SchoolManager.Domain.Entities.Post>
+@foreach (var post in Model)
+{
+    <article>
+	    @if (post.Photo != null)
+        {
+            <img src="@Url.Content(post.Photo)" />
+        }
+	    <p class="titulo">@post.Title</p>
+	    <p class="tipofecha"><span class="categoria">@post.CategoryText</span> | @post.Date.ToString("d/M/yyyy")</p>
+	    <p class="contenido">@Html.Raw(post.ShortText)</p>
+	    <a class="vermas" onclick="openPost(@post.Id);">Ver más</a>
+    </article>
+    <br />
+}

@@ -1,0 +1,135 @@
+﻿@model SchoolManager.Domain.Entities.User
+@{
+    ViewBag.Title = "Nuevo usuario";
+}
+<div class="banner-seccion">
+    <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+</div>
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>
+            Estás aquí: <span>Admin</span> > <span>Usuarios</span> > <span class="hlited">Crear
+                nuevo</span></p>
+    </div>
+</div>
+<div class="content-wrapper seccion">
+    <h1 class="header-seccion">
+        Crear nuevo usuario</h1>
+    @using (Html.BeginForm("Create", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        <fieldset class="regularform editform">
+            <div class="image-upload">
+                <label for="file">
+                    <img class="profile-picture" alt="profile picture" height="300px" src="@Url.Content(ViewBag.ProfilePicturePath)" />
+                    <div class="hover">
+                        <span>+</span></div>
+                </label>
+                <input name="file" id="file" type="file" />
+            </div>
+            <div class="form-right-side">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Username)
+                    @Html.EditorFor(model => model.Username)
+                    @Html.ValidationMessageFor(model => model.Username)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Name)
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Surname)
+                    @Html.EditorFor(model => model.Surname)
+                    @Html.ValidationMessageFor(model => model.Surname)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Phone)
+                    @Html.EditorFor(model => model.Phone)
+                    @Html.ValidationMessageFor(model => model.Phone)
+                    @Html.EditorFor(model => model.SharePhone)
+                    @Html.LabelFor(model => model.SharePhone)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Address)
+                    @Html.EditorFor(model => model.Address)
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Birthdate)
+                    @Html.EditorFor(model => model.Birthdate)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Email)
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                    @Html.EditorFor(model => model.ShareEmail)
+                    @Html.LabelFor(model => model.ShareEmail)
+                </div>
+                <div class="editor-label trigger_display">
+                    <span>Tipo de usuario:</span>
+                    <label>@Html.RadioButtonFor(model => model.UserType, "Student", new { Checked = "checked" })
+                        Alumno</label>
+                    <label>@Html.RadioButtonFor(model => model.UserType, "Father") Padre</label>
+                    <label>@Html.RadioButtonFor(model => model.UserType, "Teacher") Profesor</label>
+                </div>
+                <div class="display-alumnos">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DadId)
+                        @Html.DropDownListFor(model => model.DadId, new SelectList(ViewBag.Users, "Id", "FullName"), string.Empty)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MomId)
+                        @Html.DropDownListFor(model => model.MomId, new SelectList(ViewBag.Users, "Id", "FullName"), string.Empty)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Classroom)
+                        @Html.DropDownListFor(model => model.ClassroomId, new SelectList(ViewBag.Classrooms, "Id", "Name"), string.Empty)
+                    </div>
+                </div>
+                <div class="display-teachers">
+                    <div class="editor-label">
+                        <label for="Teaches">
+                            Grados</label>
+                        @Html.EditorFor(model => model.Teaches)
+                        <p>
+                            Ingrese texto, por ejemplo "Primer y segundo grado"</p>
+                    </div>
+                    <div class="editor-label">
+                        <label for="Subject">
+                            Materia</label>
+                        @Html.DropDownListFor(model => model.Subject, (new SelectList(Enum.GetValues(typeof(SchoolManager.Domain.Entities.Subject)).Cast<SchoolManager.Domain.Entities.Subject>().Select(e => new { Id = (int)e, Value = e.ToString() }), "Id", "Value")), string.Empty)
+                    </div>
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Notes)
+                    @Html.TextAreaFor(model => model.Notes)
+                    @Html.ValidationMessageFor(model => model.Notes)
+                </div>
+                <input class="regularbtn" type="submit" value="Guardar" />
+                <div class="secbtn">
+                    <a href="javascript:history.back()">Volver al listado</a></div>
+            </div>
+        </fieldset>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $('.display-alumnos').slideDown(300);
+    $('.trigger_display input').change(function () {
+        if ($(this).attr('value') == 'Student') {
+            $('.display-alumnos').slideDown(300);
+            $('.display-teachers').slideUp(300);
+        }
+        else if ($(this).attr('value') == 'Teacher') {
+            $('.display-alumnos').slideUp(300);
+            $('.display-teachers').slideDown(300);
+        }
+        else {
+            $('.display-alumnos').slideUp(300);
+            $('.display-teachers').slideUp(300);
+        }
+    });
+</script>

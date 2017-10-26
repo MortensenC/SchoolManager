@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "Escuela de la Ciudad";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.royalslider.min.js")"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var rsi = $('#full-width-slider').royalSlider({
+			arrowsNav: false,
+			//arrowsNav: true,
+			loop: true,
+			keyboardNavEnabled: true,
+			controlsInside: false,
+			imageScaleMode: 'fill',
+			randomizeSlides: true,
+			arrowsNavAutoHide: false,
+			//controlNavigation: 'bullets',
+			controlNavigation: false,
+			navigateByClick: true,
+			startSlideId: 0,
+			autoPlay: {
+				// autoplay options go gere
+				enabled: true,
+				pauseOnHover: true,
+					delay: 6500
+			},
+
+			transitionType:'slide',
+			globalCaption: false,
+			deeplinking: {
+			  enabled: true,
+			  change: false
+			}
+		}).data('royalSlider');
+    });
+</script>
+
+<div id="full-width-slider" class="royalSlider rsMinW rslider">
+		<div class="rsContent">
+		<img class="rsImg" src="@Url.Content("~/Content/Images/slider_convivencia.jpg")" />
+		<div class="content-wrapper">
+			<div class="vertical-align">
+				<p class="rsBlock">Proponemos desafíos que permitan explorar diferentes estrategias de resolución y desarrollar diferentes formas de pensamiento.</p>
+			</div>
+		</div>
+	</div>
+	<div class="rsContent">
+		<img class="rsImg"src="@Url.Content("~/Content/Images/slider_educacionartistica.jpg")" />
+		<div class="content-wrapper">
+			<div class="vertical-align">
+				<p class="rsBlock">Favorecemos el diálogo y la reflexión en la resolución de conflictos, construyendo relaciones de confianza  que formen una red social de contención.</p>
+			</div>
+		</div>
+	</div>
+	<div class="rsContent">
+		<img class="rsImg" src="@Url.Content("~/Content/Images/slider_educaciontecnologica.jpg")" />
+		<div class="content-wrapper">
+			<div class="vertical-align">
+				<p class="rsBlock">Priorizamos el respeto, la solidaridad y el trabajo en equipo.</p>
+			</div>
+		</div>
+	</div>
+	<div class="rsContent">
+		<img class="rsImg" src="@Url.Content("~/Content/Images/slider_tallerderesolucion.jpg")" />
+		<div class="content-wrapper">
+			<div class="vertical-align">
+				<p class="rsBlock">Trabajamos  con empeño para despertar la curiosidad, el entusiasmo y el deseo de aprender.</p>
+			</div>
+		</div>
+	</div>
+    <div class="rsContent">
+		<img class="rsImg" src="@Url.Content("~/Content/Images/slider_educaciontecnologica.jpg")" />
+		<div class="content-wrapper">
+			<div class="vertical-align">
+				<p class="rsBlock">Confiamos en que todos nuestros alumnos puedan aprender. Ellos necesitan saber que pueden, que deben esforzarse y que estamos para acompañarlos y guiarlos.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content-wrapper">
+	<div class="row row-home-1">
+		<div class="cell cell-2">
+			<p class="high">Pequeña historia de la escuela</p>
+			<p class="regular">La Escuela de la Ciudad abre sus puertas en marzo de 1995 con 24 alumnos que comienzan primer grado.</p>
+            <p class="regular">Se propone desde sus inicios atender las distintas instancias de la educación primaria.</p>
+            <p class="regular">Con el paso del tiempo fue ampliando sus instalaciones, personalizando sus espacios y adquiriendo materiales acordes a las edades de su alumnado.</p>
+            <p class="regular">Su equipo estable de maestros y profesores se capacita de manera continua con el objetivo de construir un entorno de aprendizaje que tenga solidez académica y que entusiasme y atrape a nuestros alumnos.</p>
+		</div>
+		<div class="cell cell-1">
+			<img src="@Url.Content("~/Content/Images/home-alumnos.png")" />
+			<p class="custom">26 alumnos</p>
+			<p class="regular">Cada grado cuenta con un cupo máximo de 26 alumnos  para poder trabajar con un enfoque personalizado que estimule el rendimiento individual y social.</p>
+		</div>
+		<div class="cell cell-1">
+			<img src="@Url.Content("~/Content/Images/home-muebles.png")" />
+			<p class="custom">muebles ecológicos</p>
+			<p class="regular">En el diseño del mobiliario se propuso un elemento constituyente que es rezago de las grandes bobinas de papel. Los caños de cartón conforman la estructura de bibliotecas, mesas, sillas, percheros, banquetas, etc.</p>
+		</div>
+	</div>
+</div>
+
+<div class="row-home-2">
+	<p class="high">¿Cómo y cuándo inscribir a tu hijo?</p>
+	@Html.ActionLink("Ver más", "Institucional", "Home")
+	<img style="width:100%; display: block;" src="@Url.Content("~/Content/Images/inscripciones_home.jpg")" />
+</div>
+
+<div class="content-wrapper">
+	<div class="row-home-3">
+		<h2>Noticias y Novedades</h2>
+		<div class="row">
+            @if (ViewBag.Post1 != null)
+            {
+                <div class="cell leftcell">
+				    <article>
+                        @if (ViewBag.Photo1 != null)
+                        {
+                            <img src="@Url.Content(ViewBag.Photo1)" />
+                        }
+					    <p class="titulo">@(((SchoolManager.Domain.Entities.Post)ViewBag.Post1).Title)</p>
+					    <p class="tipofecha">@(((SchoolManager.Domain.Entities.Post)ViewBag.Post1).CategoryText) - @(((SchoolManager.Domain.Entities.Post)ViewBag.Post1).Date.ToString("d/M/yyyy"))</p>
+					    <div class="contenido">@Html.Raw(((SchoolManager.Domain.Entities.Post)ViewBag.Post1).ShortText)</div>
+                        @Html.ActionLink("Ver más", "Novedades", "Post", new { id = ((SchoolManager.Domain.Entities.Post)ViewBag.Post1).Id }, htmlAttributes: new { @class = "vermas" })
+				    </article>
+			    </div>
+            }
+            @if (ViewBag.Post2 != null)
+            {
+                <div class="cell midcell">
+				    <article>
+                        @if (ViewBag.Photo2 != null)
+                        {
+                            <img src="@Url.Content(ViewBag.Photo2)" />
+                        }
+					    <p class="titulo">@(((SchoolManager.Domain.Entities.Post)ViewBag.Post2).Title)</p>
+					    <p class="tipofecha">@(((SchoolManager.Domain.Entities.Post)ViewBag.Post2).CategoryText) - @(((SchoolManager.Domain.Entities.Post)ViewBag.Post2).Date.ToString("d/M/yyyy"))</p>
+					    <div class="contenido">@Html.Raw(((SchoolManager.Domain.Entities.Post)ViewBag.Post2).ShortText)</div>
+                        @Html.ActionLink("Ver más", "Novedades", "Post", new { id = ((SchoolManager.Domain.Entities.Post)ViewBag.Post2).Id }, htmlAttributes: new { @class = "vermas" })
+				    </article>
+			    </div>
+            }
+            @if (ViewBag.Post3 != null)
+            {
+                <div class="cell rightcell">
+				    <article>
+                        @if (ViewBag.Photo3 != null)
+                        {
+                            <img src="@Url.Content(ViewBag.Photo3)" />
+                        }
+					    <p class="titulo">@(((SchoolManager.Domain.Entities.Post)ViewBag.Post3).Title)</p>
+					    <p class="tipofecha">@(((SchoolManager.Domain.Entities.Post)ViewBag.Post3).CategoryText) - @(((SchoolManager.Domain.Entities.Post)ViewBag.Post3).Date.ToString("d/M/yyyy"))</p>
+					    <div class="contenido">@Html.Raw(((SchoolManager.Domain.Entities.Post)ViewBag.Post3).ShortText)</div>
+                        @Html.ActionLink("Ver más", "Novedades", "Post", new { id = ((SchoolManager.Domain.Entities.Post)ViewBag.Post3).Id }, htmlAttributes: new { @class = "vermas" })
+				    </article>
+			    </div>
+            }
+		</div>
+	</div>
+</div>
+
+@*<div class="row row-home-4">
+	<div class="cell no-image">
+		<h3>galería de imágenes</h3>
+		<a href="#">ver más</a>
+	</div>
+	<div class="cell">
+		<img src="@Url.Content("~/Content/Images/ejemplo-02.jpg")" />
+	</div>
+	<div class="cell">
+		<img src="@Url.Content("~/Content/Images/ejemplo-02.jpg")" />
+	</div>
+	<div class="cell">
+		<img src="@Url.Content("~/Content/Images/ejemplo-02.jpg")" />
+	</div>
+</div>
+
+<div class="content-wrapper">
+	<div class="row row-home-5">
+		<div class="cell">
+			<p class="super">Testimonios de nuestros alumnos</p>
+			<blockquote>
+				<p class="quote">"Wwrrte tre gfd lgfdk gdfkg dfklg dfkg lfkd gkf gkldfkl gfdlkgfdl kgdfklgfdklgfd kl gfd"</p>
+				<p class="author">- Martín Maretín</p>
+			</blockquote>
+		</div>
+	</div>
+</div>*@

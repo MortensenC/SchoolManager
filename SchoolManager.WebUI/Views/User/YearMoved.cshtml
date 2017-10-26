@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Cambiar de año";
+}
+
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>Estás aquí: <span>Admin</span> > <span>Usuarios</span>  > <span class="hlited">Cambiar de año</span></p>
+    </div>
+</div>
+
+<div class="content-wrapper seccion clear-fix">
+	<h1 class="header-seccion">¡Feliz Año Nuevo!</h1>
+	<br />
+    <h2>Los alumnos y las publicaciones se cambiaron de año correctamente.</h2>
+    <br />
+
+    @Html.ActionLink("Volver", "Profile", "User", new { id = User.Identity.Name.Split('|')[0] }, htmlAttributes: new { @class = "username", title = "Ir al perfil" })
+</div>

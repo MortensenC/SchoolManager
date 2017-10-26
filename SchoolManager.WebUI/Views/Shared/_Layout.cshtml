@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Escuela de la Ciudad</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet'
+        type='text/css' />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.mobile-menu-trigger').click(function () {
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active');
+                    $(this).next().slideUp(300);
+                }
+                else {
+                    $(this).addClass('active');
+                    $(this).next().slideDown(300);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+            <div class="content-wrapper cwa">
+                <img class="logo" src="@Url.Content("~/Content/Images/logo-header-72px.png")" alt="" />
+
+				<section id="login">
+					@Html.Partial("_LoginPartial")
+				</section>
+            </div>
+			<nav>
+				<div class="content-wrapper">
+					<div class="mobile-menu-trigger"></div>
+					<ul id="menu">
+						<li>@Html.ActionLink("HOME", "Index", "Home")</li>
+						<li>@Html.ActionLink("LA CASA", "LaCasa", "Home")</li>
+						<li>@Html.ActionLink("PROPUESTA", "Propuesta", "Home")</li>
+						<li>@Html.ActionLink("EN EL AULA", "Aula", "Home")</li>
+						<li>@Html.ActionLink("INSTITUCIONAL", "Institucional", "Home")</li>
+						<li>@Html.ActionLink("BIBLIOTECA", "Biblioteca", "Book")</li>
+						<li><a href="/Post/Novedades">NOVEDADES</a></li>
+						<li>@Html.ActionLink("GALERÍA", "Galerias", "Gallery")</li>
+						<li>@Html.ActionLink("CONTACTO", "Contacto", "Home")</li>
+					</ul>
+				</div>
+			</nav>
+        </header>
+    <div id="body">
+        @RenderBody()
+    </div>
+    <footer>
+			<div class="a-row">
+				<div class="content-wrapper">
+					<p>Nuestro objetivo es una formación integral que tienda un puente <span>entre la vida escolar y el acontecer social y cultural del niño</span></p>
+				</div>
+			</div>
+			<div class="b-row">
+				<div class="content-wrapper">
+					<div class="a-block">
+						<p class="super">Dónde encontrarnos</p>
+						<p class="regular c1">Zapiola 261, (8000) Bahía Blanca, Pcia. Buenos Aires, Argentina.</p>
+						<p class="regular c2">Tel. (291) 453-1914</p>
+						<p class="regular c3">info@escueladelaciudad.com.ar</p>
+					</div>
+					<div class="b-block">
+						<p class="super">Conectate con nosotros:</p>
+						<div class="connect">
+							<a href="https://www.facebook.com/escueladelaciudad" target="_blank" class="c1"></a>
+							<a href="#" class="c2"></a>
+							<a href="#" class="c3"></a>
+							<a href="#" class="c4"></a>
+						</div>
+					</div>
+					<div class="clear-fix"></div>
+					<p class="cr">&copy; @DateTime.Now.Year - Escuela de la ciudad - Todos los derechos reservados. <a href="http://www.jooin.us/" target="_blank">Jooin.us</a></p>
+				</div>
+			</div>
+        </footer>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

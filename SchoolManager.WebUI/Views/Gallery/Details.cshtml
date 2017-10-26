@@ -1,0 +1,31 @@
+﻿	@model SchoolManager.Domain.Entities.Gallery
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="banner-seccion">
+    <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+</div>
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>Estás aquí: <span>Admin</span> > <span>Galería</span> > <span class="hlited">Detalles</span></p>
+    </div>
+</div>
+<div class="content-wrapper seccion clear-fix">
+    <h1 class="header-seccion">Detalles</h1>
+	<fieldset class="regularform editform detailsform">
+		<div class="display-label">
+			@Html.DisplayNameFor(model => model.Title):
+			@Html.DisplayFor(model => model.Title)
+		</div>
+		<div class="display-label">
+			@Html.DisplayNameFor(model => model.Description):
+			@Html.DisplayFor(model => model.Description)
+		</div>
+	</fieldset>
+	<object width="600" height="400"> <param name="flashvars" value="offsite=true&lang=es-us&page_show_url=%2Fphotos%2Fjulianbaldoni%2Fsets%2F72157646063071083%2Fshow%2F&page_show_back_url=%2Fphotos%2Fjulianbaldoni%2Fsets%2F72157646063071083%2F&set_id=72157646063071083&jump_to="></param> <param name="movie" value="https://www.flickr.com/apps/slideshow/show.swf?v=143270"></param> <param name="allowFullScreen" value="true"></param><embed type="application/x-shockwave-flash" src="https://www.flickr.com/apps/slideshow/show.swf?v=143270" allowFullScreen="true" flashvars="offsite=true&lang=es-us&page_show_url=%2Fphotos%2Fjulianbaldoni%2Fsets%2F72157646063071083%2Fshow%2F&page_show_back_url=%2Fphotos%2Fjulianbaldoni%2Fsets%2F72157646063071083%2F&set_id=72157646063071083&jump_to=" width="400" height="300"></embed></object>
+	<p>
+		<div class="rb-cont">@Html.ActionLink("Editar", "Edit", new { id=Model.Id })</div>
+		<div class="secbtn padfix">@Html.ActionLink("Volver al listado", "Index")</div>
+	</p>
+</div>

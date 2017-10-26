@@ -1,0 +1,106 @@
+﻿@model IEnumerable<SchoolManager.Domain.Entities.Book>
+@{
+    ViewBag.Title = "Biblioteca";
+}
+<script type="text/javascript">
+    function search() {
+        var text = $("#searchText").val();
+        $("#book-container").fadeOut("fast");
+        $.post("@Url.Action("Search", "Book")", { "text" : text }, function(data) {
+            $("#book-container").html(data).fadeIn("fast");
+        });
+    }
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.bxslider.min.js")"></script>
+<link rel="stylesheet" href="@Url.Content("~/Content/jquery.bxslider.css")">
+<div class="banner-seccion">
+    <img src="@Url.Content("~/Content/Images/banner_biblioteca.jpg")" />
+</div>
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>
+            Estás aquí: <span>Home</span> > <span class="hlited">Biblioteca</span></p>
+    </div>
+</div>
+<div class="content-wrapper _biblioteca seccion">
+    <h1 class="header-seccion">
+        Biblioteca</h1>
+    <div class="regularp">
+        <p>
+            La Biblioteca es el espacio en donde los chicos miran, leen, escuchan, releen, revuelven,
+            descubren y juegan con los libros. En este espacio se realizan actividades diversas
+            vinculadas a la difusión del libro, la lectura y la escritura, siempre bajo un criterio
+            lúdico e informal. Los encuentros semanales en la Biblioteca concluyen con la elección
+            por parte de los chicos de uno o dos libros para llevarse a casa en una Bolsa Viajera.</p>
+        <br />
+        <p>
+            Sin perder su condición del “lugar de los libros”, la Biblioteca incorpora también
+            discursos y soportes afines a la cotidianidad de los alumnos, enriqueciendo y multiplicando
+            la experiencia lectora y la construcción del camino lector. Se cuenta con una amplia
+            biblioteca digital que incluye selecciones de videos en alta definición, colecciones
+            de imágenes, películas y canciones, presentaciones multimedias, entre otros materiales.</p>
+        <br />
+        <p>
+            Este espacio se integra con el trabajo en las bibliotecas aúlicas de cuarto, quinto
+            y sexto grado, que incluye las lecturas para todo el año junto a una selección de
+            textos ajustados a los gustos y pedidos de cada grupo.</p>
+        <br />
+        <p>
+            La Biblioteca se encarga de organizar, también, junto a los docentes y los chicos
+            la Maratón de Lectura y un Concurso Literario para alumnos de quinto y sexto grado,
+            entre otras actividades.</p>
+    </div>
+    <div class="listado_publicidades">
+        <p class="high">
+            Publicaciones de nuestros alumnos</p>
+        <p class="regular">
+            Estos títulos fueron escritos, diseñados, editados y publicados en la escuela.</p>
+        <div class="slider">
+            @foreach (var item in Model)
+            {
+                <article class="libro">
+						<img src="@Url.Content(@ViewBag.PictureMaps[item.Id])"/>
+						@if (!string.IsNullOrEmpty(item.Link))
+      { 
+                              <a href="@item.Link" target="@item.Link" class="titulo">@item.Title</a> 
+      }
+      else
+      {
+                                <p class="titulo">@item.Title</p>
+      }
+						<p class="autor">@item.Author</p>
+						<p class="descr">@item.Description</p>
+					</article>
+            }
+        </div>
+    </div>
+    <div class="busqueda_libros">
+        <p class="high">
+            Búsqueda de libros</p>
+        <p class="regular">
+            Aquí podrás consultar los títulos de los libros que tenemos disponibles en nuestra
+            biblioteca para que los alumnos consulten dentro de la escuela</p>
+        <div class="buscador">
+            <div class="mixedinput">
+                <input id="searchText" type="search" onkeydown="if (event.keyCode == 13) search();"
+                    placeholder="Buscar..." />
+                <input type="submit" value="" onclick="search();" />
+            </div>
+        </div>
+    </div>
+    <div id="book-container" class="row">
+        @Html.Action("Search", "Book", new { text = "" })
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.listado_publicidades .slider').bxSlider({
+                pager: false,
+                minSlides: 1,
+                maxSlides: 4,
+                slideWidth: 190,
+                slideMargin: 58,
+                moveSlides: 1
+            });
+        });
+    </script>
+</div>

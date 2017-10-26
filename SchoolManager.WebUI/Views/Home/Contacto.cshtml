@@ -1,0 +1,120 @@
+﻿@model SchoolManager.Domain.Entities.ContactDTO
+@{
+    ViewBag.Title = "Contact";
+}
+<div class="fwmap">
+    <div id="map">
+    </div>
+</div>
+<div class="content-wrapper _contacto seccion">
+    <h1 class="header-seccion">
+        Escribinos</h1>
+    <div class="row">
+        <div class="cell cell-2">
+            <p class="regular">
+                Comunicate con nosotros ante cualquier duda que tengas. Te responderemos a la brevedad</p>
+            <div id="fcontacto">
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="formrow">
+                        <label>
+                            Nombre y apellido*<br />
+                            @Html.EditorFor(model => model.Name)
+                            <span style="color:Red">@Html.ValidationMessageFor(model => model.Name)</span>
+                        </label>
+                        <label>
+                            Mail*<br />
+                            @Html.EditorFor(model => model.Email)
+                            <span style="color:Red">@Html.ValidationMessageFor(model => model.Email)</span>
+                        </label>
+                    </div>
+                    <div class="formrow">
+                        <label>
+                            Teléfono<br />
+                            @Html.EditorFor(model => model.Phone)
+                        </label>
+                        <label>
+                            Asunto<br />
+                            @Html.EditorFor(model => model.Subject)
+                        </label>
+                    </div>
+                    <div class="textzone">
+                        <label>
+                            Mensaje*</label>
+                        @Html.TextAreaFor(model => model.Comment)
+                        <span style="color:Red">@Html.ValidationMessageFor(model => model.Comment)</span>
+                    </div>
+                    <label class="concopia">
+                        @Html.CheckBoxFor(model => model.SendMeCopy)Enviarme una copia</label>
+                    <input type="submit" value="Enviar" />
+                }
+            </div>
+        </div>
+        <div class="cell cell-1">
+            <div class="box-contacto">
+                <p class="high">
+                    ¿Dónde encontrarnos?</p>
+                <p class="regular c1">
+                    Zapiola 261, (8000) Bahía Blanca, Pcia. Buenos Aires, Argentina.</p>
+                <p class="regular c2">
+                    Tel. (291) 453-1914</p>
+                <p class="regular c3">
+                    info@escueladelaciudad.com.ar</p>
+            </div>
+            <div class="box-contacto">
+                <p class="high">
+                    Conectate con nosotros</p>
+                <div class="connect">
+                    <a href="#" class="c1"></a><a href="#" class="c2"></a><a href="#" class="c3"></a>
+                    <a href="#" class="c4"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+    var el = $('#map');
+    var map;
+
+    function enableScrollingWithMouseWheel() {
+        map.setOptions({ scrollwheel: true });
+    }
+
+    function disableScrollingWithMouseWheel() {
+        map.setOptions({ scrollwheel: false });
+    }
+
+    function init() {
+        map = new google.maps.Map(el[0], {
+            zoom: 16,
+            center: new google.maps.LatLng(-38.7120383, -62.2642707),
+            scrollwheel: false // disableScrollingWithMouseWheel as default
+        });
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(-38.7120383, -62.2642707),
+            title: "Distribuidora Frais"
+        });
+        marker.setMap(map);
+
+        google.maps.event.addListener(map, 'mousedown', function () {
+            enableScrollingWithMouseWheel()
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', init);
+
+    $('body').on('mousedown', function (event) {
+        var clickedInsideMap = $(event.target).parents('#map').length > 0;
+
+        if (!clickedInsideMap) {
+            disableScrollingWithMouseWheel();
+        }
+    });
+
+    $(window).scroll(function () {
+        disableScrollingWithMouseWheel();
+    });
+</script>

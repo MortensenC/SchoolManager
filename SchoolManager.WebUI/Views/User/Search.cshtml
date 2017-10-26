@@ -1,0 +1,164 @@
+﻿@model IEnumerable<SchoolManager.Domain.Entities.User>
+@foreach (var usersByClassroom in Model.GroupBy(u => u.Classroom))
+{
+    <h2>
+        @if (@usersByClassroom.Key == null)
+        { <p>Usuarios sin curso asignado</p> }
+        else
+        { @usersByClassroom.Key.Name }
+    </h2>
+    <br />
+    <table class="listausers">
+        <tr>
+            @if (@usersByClassroom.Key != null && @usersByClassroom.Key.Name == "Exalumnos")
+            {
+                <th>
+                    Año Egreso
+                </th>
+            }
+            <th>
+                Nombre
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Teléfono
+            </th>
+            <th>
+                Dirección
+            </th>
+            @if (User.IsInRole("Father") || User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Teacher"))
+            {
+                <th>
+                    DNI
+                </th>
+                <th>
+                    Fecha de Nacimiento
+                </th>
+            }
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+            {
+                <th>
+                    Acciones
+                </th>
+            }
+        </tr>
+        @foreach (var item in usersByClassroom)
+        {
+            <tr>
+                @if (@usersByClassroom.Key != null && @usersByClassroom.Key.Name == "Exalumnos")
+                {
+                    <td>@Html.DisplayFor(modelItem => item.Promotion)
+                    </td>
+                }
+                <td>@Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @if (item.ShareEmail || User.IsInRole("Admin") || User.IsInRole("Teacher") || User.IsInRole("SuperAdmin"))
+                    { @Html.DisplayFor(modelItem => item.Email) }
+                </td>
+                <td>
+                    @if (item.SharePhone || User.IsInRole("Admin") || User.IsInRole("Teacher") || User.IsInRole("SuperAdmin"))
+                    { @Html.DisplayFor(modelItem => item.Phone) }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Address)
+                </td>
+                @if (User.IsInRole("Father") || User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Teacher"))
+                {
+                    <td>@Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Birthdate)
+                    </td>
+                }
+                @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                {
+                    <td class="actions">
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Ver", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
+                        @Html.ActionLink("Reset", "Reset", new { id = item.Id })
+                    </td>
+                }
+            </tr>
+            if (item.Dad != null && (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Teacher")) && ((@usersByClassroom.Key != null && @usersByClassroom.Key.Name != "Exalumnos") || @usersByClassroom.Key == null))
+                {
+            <tr style="background-color: #81DAF5">
+                <td style="padding-left: 5em">
+                    @item.Dad.FullName
+                </td>
+                <td>
+                    @if (item.Dad.ShareEmail || User.IsInRole("Admin") || User.IsInRole("Teacher") || User.IsInRole("SuperAdmin"))
+                    {
+                        @item.Dad.Email;
+                    }
+                </td>
+                <td>
+                    @if (item.Dad.SharePhone || User.IsInRole("Admin") || User.IsInRole("Teacher") || User.IsInRole("SuperAdmin"))
+                    {
+                        @item.Dad.Phone;
+                    }
+                </td>
+                <td>
+                    @item.Dad.Address
+                </td>
+                @if (User.IsInRole("Father") || User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Teacher"))
+                {
+                    <td>@Html.DisplayFor(modelItem => item.Dad.Username)
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Dad.Birthdate)
+                    </td>
+                }
+                @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                {
+                    <td class="actions">
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Dad.Id }) |
+                        @Html.ActionLink("Ver", "Details", new { id = item.Dad.Id }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Dad.Id }) |
+                        @Html.ActionLink("Reset", "Reset", new { id = item.Dad.Id })
+                    </td>
+                }
+            </tr>
+                }
+            if (item.Mom != null && (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Teacher")) && ((@usersByClassroom.Key != null && @usersByClassroom.Key.Name != "Exalumnos") || @usersByClassroom.Key == null))
+                {
+            <tr style="background-color: #F781F3">
+                <td style="padding-left: 5em">
+                    @item.Mom.FullName
+                </td>
+                <td>
+                    @if (item.Mom.ShareEmail || User.IsInRole("Admin") || User.IsInRole("Teacher") || User.IsInRole("SuperAdmin"))
+                    {
+                        @item.Mom.Email;
+                    }
+                </td>
+                <td>
+                    @if (item.Mom.SharePhone || User.IsInRole("Admin") || User.IsInRole("Teacher") || User.IsInRole("SuperAdmin"))
+                    {
+                        @item.Mom.Phone;
+                    }
+                </td>
+                <td>
+                    @item.Mom.Address
+                </td>
+                @if (User.IsInRole("Father") || User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Teacher"))
+                {
+                    <td>@Html.DisplayFor(modelItem => item.Mom.Username)
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Mom.Birthdate)
+                    </td>
+                }
+                @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                {
+                    <td class="actions">
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Mom.Id }) |
+                        @Html.ActionLink("Ver", "Details", new { id = item.Mom.Id }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Mom.Id }) |
+                        @Html.ActionLink("Reset", "Reset", new { id = item.Mom.Id })
+                    </td>
+                }
+            </tr>
+                }
+        }
+    </table>
+}

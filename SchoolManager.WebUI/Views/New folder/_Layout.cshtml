@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - School Manager</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("School Manager", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <img src="../../Content/Images/img.jpg" alt="El frente de la casa" width="50" height="50"/>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("La Casa", "LaCasa", "Home")</li>
+                            <li>@Html.ActionLink("Propuesta", "Propuesta", "Home")</li>
+                            <li>@Html.ActionLink("En el aula", "Aula", "Home")</li>
+                            <li>@Html.ActionLink("Inscripción", "Inscripcion", "Home")</li>
+                            <li>@Html.ActionLink("Biblioteca", "Biblioteca", "Book")</li>
+                            <li>@Html.ActionLink("Novedades", "Novedades", "Post")</li>
+                            <li>@Html.ActionLink("Galería", "Galerias", "Gallery")</li>
+                            <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - <a href="http://www.jooin.us/" target="_blank">Jooin.us</a></p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

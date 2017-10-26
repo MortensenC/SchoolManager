@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SchoolManager.Domain.Entities.Post>
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    function search() {
+        var text = $("#searchText").val();
+        var category = $("#searchCategory").val();
+        $("#container").fadeOut("fast");
+        $.post("@Url.Action("SearchPosts", "Post")", { "text" : text, "category" : category }, function(data) {
+            $("#container").html(data).fadeIn("fast");
+        });
+    }
+</script>
+<div class="banner-seccion">
+    <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+</div>
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>
+            Estás aquí: <span>Admin</span> > <span class="hlited">Publicaciones</span></p>
+    </div>
+</div>
+<div class="content-wrapper _posts seccion clear-fix">
+    <h1 class="header-seccion">
+        Publicaciones</h1>
+    <div class="regularbtn">@Html.ActionLink("Nueva publicación", "Create")</div>
+    <br />
+    <br />
+    <div class="buscador">
+        <div class="mixedinput">
+            @Html.DropDownList("searchCategory", new SelectList(Enum.GetValues(typeof(SchoolManager.Domain.Entities.Category)).Cast<SchoolManager.Domain.Entities.Category>().Select(e => new { Id = (int)e, Value = e.ToString() }), "Id", "Value"), string.Empty)
+        </div>
+        <div class="mixedinput">
+            <input id="searchText" type="search" onkeydown="if (event.keyCode == 13) search();"
+                placeholder="Buscar..." />
+            <input type="submit" value="" onclick="search();" />
+        </div>
+    </div>
+    <div id="container">
+        @Html.Action("SearchPosts", "Post", new { text = "" })
+    </div>
+</div>

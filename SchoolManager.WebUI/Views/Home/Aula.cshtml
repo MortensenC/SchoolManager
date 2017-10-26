@@ -1,0 +1,351 @@
+﻿@{
+    ViewBag.Title = "En el aula";
+}
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs({
+            show: 400
+        });
+    });
+</script>
+<div class="banner-seccion" id="listado_banners">
+    <img class="banner01 active" src="@Url.Content("~/Content/Images/banner_enelaula.jpg")" />
+    <img class="banner02" src="@Url.Content("~/Content/Images/banner_educaciontecnologica.jpg")" />
+    <img class="banner03" src="@Url.Content("~/Content/Images/banner_educacionartistica.jpg")" />
+    <img class="banner04" src="@Url.Content("~/Content/Images/banner_educaciondeportiva.jpg")" />
+    <img class="banner05" src="@Url.Content("~/Content/Images/banner_ingles.jpg")" />
+    <img class="banner06" src="@Url.Content("~/Content/Images/banner_tallerderesolucion.jpg")" />
+    <img class="banner07" src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+    <img class="banner08" src="@Url.Content("~/Content/Images/banner_normasdeconvivencia.jpg")" />
+</div>
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>
+            Estás aquí: <span class="hlited">Home</span> > <span>En el aula</span> > <span id="pos_tab">
+                Alumnos y mobiliario</span></p>
+    </div>
+</div>
+<div class="content-wrapper _aula seccion">
+    <div class="row" id="tabs">
+        <div class="cell cell-1">
+            <h2>
+                En el Aula</h2>
+            <ul class="aula-tabs">
+                <li><a href="#aula_tab_1" data="tab1">alumnos y mobiliario</a></li>
+                <li><a href="#aula_tab_2" data="tab2">educación tecnológica</a></li>
+                <li><a href="#aula_tab_3" data="tab3">educación artística</a></li>
+                <li><a href="#aula_tab_4" data="tab4">educación física</a></li>
+                <li><a href="#aula_tab_5" data="tab5">inglés</a></li>
+                <li><a href="#aula_tab_6" data="tab6">taller de resolución de problemas</a></li>
+                <li><a href="#aula_tab_7" data="tab7">los talleres</a></li>
+                <li><a href="#aula_tab_8" data="tab8">normas de convivencia</a></li>
+            </ul>
+        </div>
+        <div class="cell cell-2">
+            <div id="aula_tab_1">
+                <h1 class="header-seccion">
+                    Alumnos y mobiliario</h1>
+                <div>
+                    <h2 style="color: #EC7522">
+                        Alumnos</h2>
+                    <p class="regular">
+                        Cada grado cuenta con un cupo máximo de 26 alumnos para poder trabajar con un enfoque
+                        personalizado que estimule el rendimiento individual y social.</p>
+                    <br />
+                    <img src="@Url.Content("~/Content/Images/home-alumnos.png")" />
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <div>
+                    <h2 style="color: #EC7522">
+                        Mobiliario</h2>
+                    <p class="regular">
+                        En el diseño del mobiliario se propuso un elemento constituyente que es rezago de
+                        las grandes bobinas de papel. Los caños de cartón conforman la estructura de bibliotecas,
+                        mesas, sillas, percheros, banquetas, etc. De esta manera las políticas de recuperación
+                        y reciclaje que proponemos desde los objetivos culturales a conseguir, se ven reflejadas
+                        dentro del funcionamiento del establecimiento de la manera más simple.</p>
+                    <br />
+                    <img id="muebles-image" src="@Url.Content("~/Content/Images/muebles.jpg")" />
+                </div>
+            </div>
+            <div id="aula_tab_2">
+                <h1 class="header-seccion">
+                    Educación tecnológica</h1>
+                <p>
+                    Como en la vida cotidiana, la tecnología atraviesa la mayoría de las actividades
+                    que se realizan en la escuela.</p>
+                <br />
+                <p>
+                    En particular, la computadora es un recurso de uso diario en el aula. Las maestras
+                    y los alumnos utilizan la computadora para buscar información, para obtener y producir
+                    diferentes tipos de documentos multimediales y como soporte en la presentación de
+                    distintos temas. Las presentaciones animadas son herramientas poderosas para describir
+                    e interpretar sistemas y procesos, en especial cuando se construyen o modifican
+                    en el aula, con la participación activa de los niños.</p>
+                <br />
+                <p>
+                    La tecnología tiene además espacios curriculares propios en la escuela. Desde primero
+                    a tercer grado los alumnos tienen dos clases semanales de Informática en las que
+                    desarrollan el razonamiento lógico y la percepción espacial a través de juegos didácticos.
+                    Muchas de las actividades permiten además retomar y reforzar contenidos presentados
+                    previamente, especialmente vinculados a la Matemática y las Ciencias. Los alumnos
+                    tienen además un primer contacto con utilitarios para producir textos y animaciones.</p>
+                <br />
+                <p>
+                    Desde cuarto a sexto grado la planificación de Informática incluye la construcción
+                    de distintos tipos de textos, cuentos, planillas, gráficos, presentaciones y animaciones
+                    a partir de consignas orales y escritas. Muchas de las actividades requieren navegar
+                    en la web seleccionando criterios de búsqueda pertinentes. Se proponen diferentes
+                    recorridos para la lectura y escritura de textos. El desarrollo de las competencias
+                    comunicativas tiene un rol protagónico en el diseño de las actividades, además,
+                    por supuesto, de las destrezas técnicas que demanda cada software. Los alumnos tienen
+                    un primer contacto con la programación a través de distintos desafíos cuya resolución
+                    implica construir un programa a partir de bloques.</p>
+                <br />
+                <p>
+                    <span style="font-weight: bold;">Tecnología</span> es también una asignatura curricular
+                    a partir de cuarto grado, en la cual, a través de la construcción de puentes, faros,
+                    grúas, ascensores y otros tipos de aparatos, se introducen conceptos de Física,
+                    Mecánica y Electrónica, junto con temas vinculados al desarrollo sustentable y el
+                    cuidado del medio ambiente.</p>
+            </div>
+            <div id="aula_tab_3">
+                <h1 class="header-seccion">
+                    Educación artística</h1>
+                <p>
+                    El arte está presente en la escuela generando espacios para el desarrollo de una
+                    línea de pensamiento divergente. Los lenguajes artísticos por su esencia creativa
+                    ponen en juego la sensibilidad de los chicos para captar el mundo que lo rodea,
+                    para comunicarse y expresarse con y a través de distintos medios.</p>
+                <br />
+                <p>
+                    El juego, la creación y la interacción con los otros se despliegan a través de diversas
+                    actividades tales como música, expresión corporal, plástica, la hora de biblioteca, teatro,
+                    talleres, paseos educativos y otras propuestas. En estas actividades, el niño adquiere
+                    las herramientas y la plasticidad necesarias para hacer uso de los diferentes lenguajes
+                    combinándolos en nuevas propuestas interdisciplinarias.</p>
+                <br />
+                <p>
+                    El arte concebido como objeto de conocimiento proporciona los elementos adecuados
+                    para dar respuesta a personales modos de contar el mundo subjetivo en el marco de
+                    la realidad objetiva y propende a la formación de seres sensibles, autónomos y críticos,
+                    capaces de comunicar en forma significativa.</p>
+                <br />
+                <p>
+                    Nos proponemos orientar este cúmulo de experiencias dentro de un marco ético y estético,
+                    favoreciendo los aprendizajes con el aporte de distintas aspectos de la cultura
+                    que se articularán en un objetivo común: introducir a nuestros alumnos en el mundo
+                    del arte.</p>
+            </div>
+            <div id="aula_tab_4">
+                <h1 class="header-seccion">
+                    Educación física</h1>
+                <p>
+                    En las horas de Educación Física nos proponemos contribuir a la formación integral
+                    de los niños a través de la enseñanza de las habilidades motrices y el juego.
+                </p>
+                <br />
+                <p>
+                    A lo largo de la escuela primaria, se adquieren y construyen formas de jugar y actuar
+                    cada vez mas especificas. Incorporamos los juegos reglados que son modificados de
+                    acuerdo a las necesidades e intereses de los niños en esta etapa escolar. En los
+                    juegos deportivos damos prioridad a los principios tácticos y a la cooperación sobre
+                    la competencia.
+                </p>
+                <br />
+                <p>
+                    A partir de la interacción motriz, la meta es:
+                </p>
+                <ul style="list-style: disc outside none">
+                    <li>el intercambio y comunicación con el otro,</li>
+                    <li>el conocimiento de las propias posibilidades motrices,</li>
+                    <li>la formación del pensamiento crítico y</li>
+                    <li>el logro paulatino de autonomía.</li>
+                </ul>
+                <br />
+                <p>
+                    Estos objetivos son fundamentales en la propuesta escolar y están presentes al momento
+                    de diseñar las experiencias y practicas lúdicas.
+                </p>
+                <br />
+                <p>
+                    La Educación Física incentiva el trabajo en equipo, la asunción de roles y funciones,
+                    la camaradería, el cuidado de si mismo y del compañero, proponiendo una forma de
+                    actuación pedagógica centrada tanto en el niño, como en el vínculo con los otros
+                    y con el ambiente en el que se desarrollan.
+                </p>
+            </div>
+            <div id="aula_tab_5">
+                <h1 class="header-seccion">
+                    Inglés</h1>
+                <p>
+                    Formamos alumnos que puedan comunicarse en la lengua inglesa para promover el encuentro
+                    de culturas y la apertura al mundo a través de una segunda lengua. La idea motora
+                    es formar personas que sabiendo de dónde vienen, puedan desarrollar una visión internacional
+                    amplia.</p>
+                <br />
+                <p>
+                    El contacto con el inglés es gradual a partir del primer grado a través de actividades
+                    lúdicas y trabajos de aula que refuerzan la comunicación oral-aural.</p>
+                <br />
+                <p>
+                    A partir del tercer grado se va formalizando el aprendizaje a través de proyectos
+                    que ponen a prueba las potencialidades de los chicos incentivados a usar la segunda
+                    lengua para la transmisión de sus propios significados.</p>
+                <br />
+                <p>
+                    Se trabaja teniendo en cuenta las nociones del aprendizaje para las múltiples inteligencias,
+                    con una metodología variada dónde predomina el aprendizaje a través de contenidos,
+                    CLIL (Content and Language Integrated Learning), lo que ayuda a cruzar los contenidos
+                    de ciencia y literatura con el aprendizaje del inglés.</p>
+                <br />
+                <p>
+                    En el cuarto grado, se ofrece a los alumnos el primer examen de Cambridge English
+                    Language Assessment, comenzando de este modo un plan que articula certificaciones
+                    locales con las internacionales de modo que vayan aprendiendo cómo enfrentar instancias
+                    de examen formal con tranquilidad y de modo placentero.</p>
+                <br />
+                <p>
+                    En los últimos años los alumnos son lectores independientes en la segunda lengua
+                    y se trabaja con contenidos de diferentes fuentes, literatura clásica, moderna,
+                    música, video films y clips que acercan la lengua inglesa nativa a la situación
+                    del aula.</p>
+                <br />
+                <p>
+                    La escuela tiene el asesoramiento y respaldo académico de la Asociación Bahiense
+                    de Cultura Inglesa incluyendo el acceso a los exámenes de validez internacional
+                    otorgados por Cambridge English Language Assessment, que forma parte de la Universidad
+                    de Cambridge, Reino Unido.</p>
+                <br />
+                <br />
+                <a style="color: blue;" href="http://www.cambridgeenglish.org/exams/young-learners-english/"
+                    target="_blank">http://www.cambridgeenglish.org/exams/young-learners-english/</a>
+                <div class="english-logos">
+                    <a target="_blank" href="http://www.abci.org.ar/">
+                        <img class="english-logo1" src="@Url.Content("~/Content/Images/logo ABCI.png")" /></a>
+                    <a target="_blank" href="http://www.cambridgeenglish.org/">
+                        <img class="english-logo2" src="@Url.Content("~/Content/Images/logo Cambridge.png")" /></a>
+                </div>
+            </div>
+            <div id="aula_tab_6">
+                <h1 class="header-seccion">
+                    Taller de resolución de problemas</h1>
+                <p>
+                    El taller comienza en segundo grado y se cursa en todos los años hasta sexto.</p>
+                <br />
+                <p>
+                    Se presentan problemas no convencionales en un intento por estimular el razonamiento
+                    lógico y reforzar las estructuras de pensamiento adquiridas en el aula.</p>
+                <br />
+                <p>
+                    En general se persiguen los siguientes objetivos:</p>
+                <ul style="list-style: disc outside none">
+                    <li>Estimular la búsqueda permanente de soluciones alternativas y la aplicación de estrategias
+                        originales. </li>
+                    <li>Favorecer la reflexión y la discusión acerca de las distintas estrategias y formas
+                        de razonamiento. </li>
+                    <li>Lograr una actitud positiva frente al error como forma de aprendizaje. </li>
+                    <li>Promover la integración interdisciplinaria. </li>
+                </ul>
+            </div>
+            <div id="aula_tab_7">
+                <h1 class="header-seccion">
+                    Los talleres</h1>
+                <p>
+                    Los talleres se ponen en marcha con un número no mayor de doce alumnos para poder
+                    desarrollar la dinámica participativa y exploratoria propia de esta modalidad de
+                    trabajo.</p>
+                <br />
+                <p>
+                    El aula-taller requiere de un espacio-tiempo apropiado, provisto de materiales y
+                    recursos suficientes para que todos los niños puedan realizar las tareas previstas,
+                    como así también las reflexiones y conceptualizaciones orientadas a la consecución
+                    de los objetivos propuestos por el coordinador.</p>
+                <br />
+                <p>
+                    Para llevar a cabo la tarea con esta modalidad de trabajo buscamos contar con sujetos
+                    deseosos de participar y para ello se les ofrece la opción de elegir dos talleres
+                    entre una variable de cuatro a seis diferentes de acuerdo al grado al que concurren.</p>
+                <br />
+                <p>
+                    El Taller en la escuela está organizado de modo que todos los cursos accedan a él
+                    una vez por semana y tiene una duración de un cuatrimestre.</p>
+                <br />
+                <p>
+                    En primer año se proponen dos: carpintería y teatro. El curso se divide en dos grupos
+                    iguales y concurren a cada taller de manera alternativa semana por medio.</p>
+                <br />
+                <p>
+                    Segundo y tercer año comparten una oferta de cinco talleres: alfarería y/o fabricación
+                    de pan, teatro, modelado en porcelana fría, tecnología y carpintería. Los chicos
+                    deben elegir dos talleres y tomar uno por cuatrimestre.</p>
+                <br />
+                <p>
+                    De cuarto a sexto grado se ofrecen seis talleres en la misma hora: video, teatro,
+                    arte sustentable, música, tecnología, y bijouterie.</p>
+            </div>
+            <div id="aula_tab_8">
+                <h1 class="header-seccion">
+                    Normas de convivencia</h1>
+                <p>
+                    Uno de los objetivos importantes de la escuela, además de enseñar contenidos de
+                    distintas áreas de conocimiento, es preparar a los niños para enfrentar y resolver
+                    los conflictos a través del diálogo y la reflexión, para ayudarlos a crecer y a
+                    aprender encontrando compañeros y amigos en el grupo.</p>
+                <br />
+                <p>
+                    El reglamento se construye para que, frente a los conflictos, todos los alumnos
+                    del colegio se sientan protegidos de la misma manera.</p>
+                <br />
+                <p>
+                    Estar protegido es sentirse cuidado, saber que existe una ley, que por ser igual
+                    para todos, ofrece derechos y al mismo tiempo obligaciones respecto de la convivencia
+                    con los otros.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.aula-tabs a').click(function () {
+        $('#listado_banners img').hide();
+        var toshow = $(this).attr('data');
+        switch (toshow) {
+            case 'tab1':
+                $('#listado_banners img.banner01').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Alumnos y mobiliario');
+                break;
+            case 'tab2':
+                $('#listado_banners img.banner02').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Educación tecnológica');
+                break;
+            case 'tab3':
+                $('#listado_banners img.banner03').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Educación artística');
+                break;
+            case 'tab4':
+                $('#listado_banners img.banner04').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Educación física');
+                break;
+            case 'tab5':
+                $('#listado_banners img.banner05').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Inglés');
+                break;
+            case 'tab6':
+                $('#listado_banners img.banner06').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Taller de resolución de problemas');
+                break;
+            case 'tab7':
+                $('#listado_banners img.banner07').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Talleres');
+                break;
+            case 'tab8':
+                $('#listado_banners img.banner08').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Normas de convivencia');
+                break;
+        }
+    });
+</script>

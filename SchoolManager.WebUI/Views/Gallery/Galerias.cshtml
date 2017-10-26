@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SchoolManager.Domain.Entities.Gallery>
+@{
+    ViewBag.Title = "Galerias";
+}
+
+<div class="banner-seccion">
+	<img src="@Url.Content("~/Content/Images/banner_galeria.jpg")" />
+</div>
+
+<div class="row-donde">
+	<div class="content-wrapper">
+		<p>Estás aquí: <span class="hlited">Home</span> > <span>Galerías</span></p>
+	</div>
+</div>
+<div class="content-wrapper seccion">
+	<div class="row">
+		<div class="col_1">
+			<h1 class="header-seccion">Galería</h1>
+		</div>
+		<div>
+		@{ var par = false; }
+        @foreach (var item in Model) {
+            <article class="galeria">
+				<p class="titulo">@Html.DisplayFor(modelItem => item.Title)</p>
+				<p class="descripcion">@Html.DisplayFor(modelItem => item.Description)</p>
+				@if (@item.CreationDate.HasValue)
+                {
+                    <p class="fecha">@item.CreationDate.Value.ToString("d/M/yyyy")</p>
+                }
+				<object>
+					<param name="flashvars" value="offsite=true&lang=es-us&page_show_url=%2Fphotos%2F@(item.GetFlickrUser)%2Fsets%2F@(item.GetFlickrAlbum)%2Fshow%2F&page_show_back_url=%2Fphotos%2F@(item.GetFlickrUser)%2Fsets%2F@(item.GetFlickrAlbum)%2F&set_id=@(item.GetFlickrAlbum)&jump_to="></param>
+					<param name="movie" value="https://www.flickr.com/apps/slideshow/show.swf?v=143270"></param>
+					<param name="allowFullScreen" value="true"></param>
+					<embed type="application/x-shockwave-flash" src="https://www.flickr.com/apps/slideshow/show.swf?v=143270" allowFullScreen="true" flashvars="offsite=true&lang=es-us&page_show_url=%2Fphotos%2F@(item.GetFlickrUser)%2Fsets%2F@(item.GetFlickrAlbum)%2Fshow%2F&page_show_back_url=%2Fphotos%2F@(item.GetFlickrUser)%2Fsets%2F@(item.GetFlickrAlbum)%2F&set_id=@(item.GetFlickrAlbum)&jump_to=" width="400" height="300"></embed>
+				</object>
+			</article>
+			if (par) { <div class="clear-fix"></div><div class="clear-fix"></div> }
+			par = !par;
+        }
+		</div>
+	</div>
+</div>

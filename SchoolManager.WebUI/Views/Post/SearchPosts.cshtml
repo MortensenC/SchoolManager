@@ -1,0 +1,56 @@
+﻿@model List<SchoolManager.Domain.Entities.Post>
+@{ var par = false; }
+@if (Model.Count() == 0)
+{
+    <p>
+        No se encontraron publicaciones para esta búsqueda</p>
+}
+else
+{
+    using (Html.BeginForm("DeleteBatch", "Post"))
+    {
+        <table class="listausers">
+        <tr>
+            <th>
+                X
+            </th>
+            <th>
+                Título
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Categoría
+            </th>
+            <th style="width: 184px;">
+                Acciones
+            </th>
+        </tr>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.HiddenFor(x => x[i].Id)
+                    @Html.CheckBoxFor(x => x[i].Selected)
+                </td>
+                <td>
+                    @Model[i].Title
+                </td>
+                <td>
+                    @Model[i].Date.ToString("d/M/yyyy")
+                </td>
+                <td>
+                    @Model[i].CategoryText
+                </td>
+                <td class="actions">
+                    @Html.ActionLink("Editar", "Edit", new { id = Model[i].Id }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = Model[i].Id }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = Model[i].Id })
+                </td>
+            </tr>
+        }
+    </table>
+    <input class="regularbtn float-left" type="submit" value="Eliminar publicaciones seleccionadas" />
+    }
+}

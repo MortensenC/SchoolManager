@@ -1,0 +1,44 @@
+﻿@model SchoolManager.Domain.Entities.Gallery
+
+@{
+    ViewBag.Title = "Nueva galería";
+}
+
+<div class="banner-seccion">
+    <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+</div>
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>Estás aquí: <span>Admin</span> > <span>Galería</span> > <span class="hlited">Crear</span></p>
+    </div>
+</div>
+<div class="content-wrapper _novedades seccion">
+    <h1 class="header-seccion">Nueva galería</h1>
+	@using (Html.BeginForm()) {
+		@Html.ValidationSummary(true)
+
+		<fieldset class="regularform editform">
+			<div class="editor-label">
+				@Html.LabelFor(model => model.Title)
+				@Html.EditorFor(model => model.Title)
+				@Html.ValidationMessageFor(model => model.Title)
+			</div>
+			<div class="editor-label">
+				@Html.LabelFor(model => model.Description)
+				@Html.TextAreaFor(model => model.Description)
+				@Html.ValidationMessageFor(model => model.Description)
+			</div>
+			<div class="editor-label">
+				@Html.LabelFor(model => model.FlickrAlbum)
+				@Html.EditorFor(model => model.FlickrAlbum)
+				Ejemplo: https://www.flickr.com/photos/nombredeusuario/sets/721...083
+				@Html.ValidationMessageFor(model => model.FlickrAlbum)
+			</div>
+			<input class="regularbtn float-left" type="submit" value="Crear" />
+			<div class="secbtn">@Html.ActionLink("Volver", "Index")</div>
+		</fieldset>
+	}
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

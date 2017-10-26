@@ -1,0 +1,454 @@
+﻿@{
+    ViewBag.Title = "Institucional";
+}
+
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs({
+            show: 400
+        });
+    });
+</script>
+
+<div class="banner-seccion" id="listado_banners">
+	<img class="banner01 active" src="@Url.Content("~/Content/Images/banner_inscripciones2.jpg")" />
+	<img class="banner02" src="@Url.Content("~/Content/Images/banner_educaciontecnologica.jpg")" />
+	<img class="banner03" src="@Url.Content("~/Content/Images/banner_educacionartistica.jpg")" />
+    <img class="banner04" src="@Url.Content("~/Content/Images/banner_normasdeconvivencia.jpg")" />
+</div>
+
+<div class="row-donde">
+	<div class="content-wrapper">
+		<p>Estás aquí: <span class="hlited">Home</span> > <span>Institucional</span> > <span id="pos_tab">Inscripción</span></p>
+	</div>
+</div>
+
+<div class="content-wrapper _aula seccion">
+	<div class="row" id="tabs">
+		<div class="cell cell-1">
+			<h2>Institucional</h2>
+			<ul class="aula-tabs">
+				<li><a href="#aula_tab_1" data="tab1">Inscripción</a></li>
+				<li><a href="#aula_tab_2" data="tab2">Horarios</a></li>
+				<li><a href="#aula_tab_3" data="tab3">Equipo de trabajo</a></li>
+                <li><a href="#aula_tab_4" data="tab4">Normas administrativas</a></li>
+			</ul>
+		</div>
+		<div class="cell cell-2">
+			<div id="aula_tab_1">
+				<h1 class="header-seccion">Inscripción</h1>
+                <p>La reserva de vacante se puede realizar en cualquier mes del año.</p>
+                <br />
+                <p>Es importante que se solicite una entrevista para conocer la oferta y los requerimientos de la escuela.</p>
+                <br />
+                <p>Los alumnos que ingresan en primer grado tienen que:</p>
+                <br />
+                <ul style="list-style: disc outside none">
+                    <li>
+                        Completar la planilla inicial
+                    </li>
+                    <li>
+                        Traer fotocopia de su DNI  junto con el original
+                    </li>
+                    <li>
+                        Solicitar una entrevista con la psicopedagoga
+                    </li>
+                    <li>
+                        Pagar la matrícula correspondiente
+                    </li>
+                    <li>
+                        Lo concerniente a la planilla de salud y las vacunas lo solicitamos en el mes  de marzo para dar tiempo a la vacunación requerida en el ingreso escolar
+                    </li>
+                </ul>
+                <br />
+                <p>Los alumnos que ingresan por pase de otra escuela a cualquiera de los grados siguientes tienen que:</p>
+                <br />
+                <ul style="list-style: disc outside none">
+                    <li>
+                        Completar la planilla inicial
+                    </li>
+                    <li>
+                        Traer fotocopia de su DNI  junto con el original
+                    </li>
+                    <li>
+                        Traer certificado  de alumno regular
+                    </li>
+                    <li>
+                        Boletín de calificaciones
+                    </li>
+                    <li>
+                        Completar la planilla de salud
+                    </li>
+                    <li>
+                        Pagar la matrícula correspondiente
+                    </li>
+                    <li>
+                        Solicitar una entrevista con la psicopedagoga
+                    </li>
+                </ul>
+			</div>
+			<div id="aula_tab_2">
+				<h1 class="header-seccion">Horarios</h1>
+
+                <h2>Primer y segundo grado</h2>
+                <h3>MAÑANA</h3>
+                <br />
+                <table class="time-table" style="width:100%">
+                    <tr>
+                        <td>
+                            Lunes
+                        </td>
+                        <td>
+                            Martes
+                        </td>
+                        <td>
+                            Miércoles
+                        </td>
+                        <td>
+                            Jueves
+                        </td>
+                        <td>
+                            Viernes
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <h3>TARDE</h3>
+                <br />
+                <table class="time-table" style="width:40%">
+                    <tr>
+                        <td>
+                            Martes
+                        </td>
+                        <td>
+                            Jueves
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            15,15 a 17,15 hs
+                        </td>
+                        <td>
+                            15,15 a 17,15 hs
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <h2>Tercer y cuarto grado</h2>
+                <h3>MAÑANA</h3>
+                <br />
+                <table class="time-table" style="width:100%">
+                    <tr>
+                        <td>
+                            Lunes
+                        </td>
+                        <td>
+                            Martes
+                        </td>
+                        <td>
+                            Miércoles
+                        </td>
+                        <td>
+                            Jueves
+                        </td>
+                        <td>
+                            Viernes
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <h3>TARDE</h3>
+                <br />
+                <table class="time-table" style="width:60%">
+                    <tr>
+                        <td>
+                            Martes
+                        </td>
+                        <td>
+                            Miércoles
+                        </td>
+                        <td>
+                            Jueves
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            15,15 a 17,15 hs
+                        </td>
+                        <td>
+                            15,15 a 17,15 hs
+                        </td>
+                        <td>
+                            15,15 a 17,15 hs
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <h2>Quinto y sexto grado</h2>
+                <h3>MAÑANA</h3>
+                <br />
+                <table class="time-table" style="width:100%">
+                    <tr>
+                        <td>
+                            Lunes
+                        </td>
+                        <td>
+                            Martes
+                        </td>
+                        <td>
+                            Miércoles
+                        </td>
+                        <td>
+                            Jueves
+                        </td>
+                        <td>
+                            Viernes
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                        <td>
+                            8,30  a 13 hs.
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <h3>TARDE</h3>
+                <br />
+                <table class="time-table"  style="width:60%">
+                    <tr>
+                        <td>
+                            Martes
+                        </td>
+                        <td>
+                            Miércoles
+                        </td>
+                        <td>
+                            Jueves
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            13,45 a 17,15 hs
+                        </td>
+                        <td>
+                            15,15 a 17,15 hs
+                        </td>
+                        <td>
+                            13,45 a 17,15 hs
+                        </td>
+                    </tr>
+                </table>
+			</div>
+			<div id="aula_tab_3">
+				<h1 class="header-seccion">Equipo de trabajo</h1>
+                <p class="cargo">Dirección y coordinación institucional</p>
+                <p>M. Mercedes Monacci de Pedemonte</p>
+                <br />
+                <p class="cargo">Asesoramiento psicopedagógico</p>
+                <p>Teresita Ciarniello de López</p>
+                <br />
+                <p class="cargo">Coordinación de Lengua Inglesa</p>
+                <p>Sandra Aliotti de Ionni</p>
+                <br />
+                <p class="cargo">Coordinación de Informática educativa</p>
+                <p>Sonia Rueda de Cabo</p>
+                <br />
+                <p class="cargo">Coordinadores de la producción artística</p>
+                <p>Sebastián Pérez Traviezo</p>
+                <p>Amalia Montecino</p>
+                <br />
+                <p class="cargo">Maestras de Primer Ciclo</p>
+                <p>Paula Fontana</p>
+                <p>Luciana Iannamico</p>
+                <p>Ana Victoria Corsiglia</p>
+                <br />
+                <p class="cargo">Maestras de Segundo Ciclo</p>
+                <p>Natalia Gallardo</p>
+                <p>Verónica Zan</p>
+                <p>Natalia Such</p>
+                <br />
+                <p class="cargo">Profesores de Educación Física</p>
+                <p>Alejandro Marchesi</p>
+                <p>Guillermina Etcheverry</p>
+                <br />
+                <p class="cargo">Profesora de Plástica</p>
+                <p>Mirta Estebanez de Claverie</p>
+                <br />
+                <p class="cargo">Profesor de Tecnología</p>
+                <p>Guillermo Cabo</p>
+                <br />
+                <p class="cargo">Profesor de música</p>
+                <p>Nicolás Leidi</p>
+                <br />
+                <p class="cargo">Profesoras de Computación</p>
+                <p>Sonia Rueda</p>
+                <p>Andrea Gil</p>
+                <br />
+                <p class="cargo">Profesoras de Inglés</p>
+                <p>Regina Yomha</p>
+                <p>Victoria Montero</p>
+                <p>Agustina Gerbino</p>
+                <p>Sofía Severini</p>
+                <p>Agustina Negretti</p>
+                <p>Sandra Aliotti</p>
+                <br />
+                <p class="cargo">Bibliotecario</p>
+                <p>Emiliano Vuela</p>
+                <br />
+                <p class="cargo">Preceptor</p>
+                <p>Mauro Linares</p>
+                <br />
+                <p class="cargo">Profesores de Taller</p>
+                <p class="cargo">Carpinteria</p>
+                <p>Natalia Morena</p>
+                <br />
+                <p class="cargo">Tecnología</p>
+                <p>Guillermo Cabo</p>
+                <br />
+                <p class="cargo">Fabricación de pan</p>
+                <p>Mirta Estebanez de Claverie</p>
+                <br />
+                <p class="cargo">De música</p>
+                <p>Nicolás Leidi</p>
+                <br />
+                <p class="cargo">Teatro</p>
+                <p>Sebastián Perez Traviezo</p>
+                <p>Irupé González</p>
+                <br />
+                <p class="cargo">Bijouterie y modelado en porcelana fría</p>
+                <p>Ana Gonzalez Casali</p>
+                <br />
+                <p class="cargo">Arte sustentable</p>
+                <p>Guillermo Beluzo</p>
+                <br />
+                <p class="cargo">Video</p>
+                <p>Ana Laura Amante</p>
+                <br />
+                <p class="cargo">Maestras de la tarde</p>
+                <p>Alicia Guglielmi</p>
+                <p>Luján Cocce</p>
+                <br />
+                <p class="cargo">Personal de maestranza</p>
+                <p>Norma Fredes</p>
+                <p>Bernarda Henríquez</p>
+                <p>Mariana Sassone</p>
+                <p>Miriam Martínez</p>
+                <p>Jorge Marcos</p>
+			</div>
+            <div id="aula_tab_4">
+				<h1 class="header-seccion">Normas administrativas</h1>
+                <h2>Arancelamiento</h2>
+                <ul style="list-style: disc outside none">
+                    <li>
+                        Durante el período lectivo se abonarán 11 cuotas de Febrero a Diciembre.
+                    </li>
+                    <li>
+                        El importe de la undécima cuota se abonará por tercios en los meses de Septiembre, Octubre y Noviembre.
+                    </li>
+                    <li>
+                        El arancel será diferenciado de acuerdo al grado que curse el alumno.
+                    </li>
+                    <li>
+                        El valor de la matriculación es equivalente a una cuota mensual y debe ser cancelada en el transcurso del mes de diciembre.
+                    </li>
+                    <li>
+                        Toda familia que tenga dos o más hijos en la escuela gozará de un descuento del 10% en los aranceles.
+                    </li>
+                    <li>
+                        Los alumnos que a partir del tercer grado deseen rendir su examen en la Asociación Bahiense de Cultura Inglesa, deberán pagar la matrícula que fija esa institución cada año para sus alumnos regulares.
+                    </li>
+                    <li>
+                        Las cuotas no contemplan ningún impuesto que grave la enseñanza educativa, reservándose la Escuela el derecho a trasladar a las mismas su importe ante la eventual creación legislativa.
+                    </li>
+                    <li>
+                        Los aranceles fijados por los servicios educativos prestados son estimados teniendo en cuenta el receso del mes de julio, feriados, etc.; por lo que sobre los mismos no se efectuará quita alguna por ningún concepto. En idéntica situación se encuentran las ausencias en que pudiera incurrir el alumno (enfermedad, viajes, etc.).</p>
+                    </li>
+                </ul>
+                <br />
+                <h2>Reglamento interno</h2>
+                <ul style="list-style: disc outside none">
+                    <li>
+                        Es importante que tanto los padres como los alumnos conozcan y acepten el reglamento de la escuela.
+                    </li>
+                    <li>
+                        Los alumnos concurren a la escuela sin uniforme, si bien recomendamos vestir con ropa sencilla.
+                    </li>
+                </ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+    $('.aula-tabs a').click(function () {
+        $('#listado_banners img').hide();
+        var toshow = $(this).attr('data');
+        switch (toshow) {
+            case 'tab1':
+                $('#listado_banners img.banner01').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Inscripción');
+                break;
+            case 'tab2':
+                $('#listado_banners img.banner02').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Horarios');
+                break;
+            case 'tab3':
+                $('#listado_banners img.banner03').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Equipo de trabajo');
+                break;
+            case 'tab4':
+                $('#listado_banners img.banner04').fadeIn(300).css('display', 'block');
+                $('span#pos_tab').text('Normas administrativas');
+                break;
+        }
+    });
+</script>
