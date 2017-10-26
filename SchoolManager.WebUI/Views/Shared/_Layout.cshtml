@@ -8,7 +8,6 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet'
         type='text/css' />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -31,10 +30,15 @@
     <header>
             <div class="content-wrapper cwa">
                 <img class="logo" src="@Url.Content("~/Content/Images/logo-header-72px.png")" alt="" />
-
-				<section id="login">
-					@Html.Partial("_LoginPartial")
-				</section>
+                <div id="login" style="
+                                    position: absolute;
+                                    right: 0;
+                                    top: 0;
+                                    border-top: 4px solid #ec7522;
+                                    padding: 4px 25px 4px 70px;
+                                ">
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
 			<nav>
 				<div class="content-wrapper">
