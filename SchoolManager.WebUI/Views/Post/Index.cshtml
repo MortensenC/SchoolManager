@@ -12,9 +12,9 @@
         });
     }
 </script>
-<div class="banner-seccion">
+@*<div class="banner-seccion">
     <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
-</div>
+</div>*@
 <div class="row-donde">
     <div class="content-wrapper">
         <p>
@@ -22,19 +22,17 @@
     </div>
 </div>
 <div class="content-wrapper _posts seccion clear-fix">
-    <h1 class="header-seccion">
-        Publicaciones</h1>
-    <div class="regularbtn">@Html.ActionLink("Nueva publicación", "Create")</div>
-    <br />
-    <br />
-    <div class="buscador">
-        <div class="mixedinput">
-            @Html.DropDownList("searchCategory", new SelectList(Enum.GetValues(typeof(SchoolManager.Domain.Entities.Category)).Cast<SchoolManager.Domain.Entities.Category>().Select(e => new { Id = (int)e, Value = e.ToString() }), "Id", "Value"), string.Empty)
-        </div>
-        <div class="mixedinput">
-            <input id="searchText" type="search" onkeydown="if (event.keyCode == 13) search();"
-                placeholder="Buscar..." />
-            <input type="submit" value="" onclick="search();" />
+    <h1 class="header-seccion">Publicaciones</h1>
+    <div>
+        <div class="regularbtn">@Html.ActionLink("Nueva publicación", "Create")</div>
+        <div class="buscador">
+            <div class="mixedinput">
+                @Html.DropDownList("searchCategory", new SelectList(Enum.GetValues(typeof(SchoolManager.Domain.Entities.Category)).Cast<SchoolManager.Domain.Entities.Category>().Select(e => new { Id = (int)e, Value = e.ToString() }), "Id", "Value"), string.Empty)
+            </div>
+            <div class="mixedinput">
+                <input id="searchText" type="search" onkeydown="if (event.keyCode == 13) search();" placeholder="Buscar..." />
+                <input type="submit" value="" onclick="search();" />
+            </div>
         </div>
     </div>
     <div id="container">

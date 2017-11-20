@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "Usuario";
 }
-<div class="banner-seccion">
+@*<div class="banner-seccion">
     <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
-</div>
+</div>*@
 <div class="row-donde">
     <div class="content-wrapper">
         <p>
@@ -18,95 +18,102 @@
         <fieldset class="regularform editform">
             <div class="image-upload">
                 <label for="file">
-                    <img id="profilepic" class="profile-picture" alt="profile picture" height="300px" src="@Url.Content(ViewBag.ProfilePicturePath)" />
+                    <img id="profilepic" class="profile-picture" alt="profile picture" height="300px" width="300px" src="@Url.Content(ViewBag.ProfilePicturePath)" />
                     <div class="hover">
                         <span>+</span></div>
                 </label>
                 <input name="file" id="file" type="file" />
                 <script type="text/javascript">
-                    $("#file").change(function () {
-                        var data = new FormData();
-                        var files = $("#file").get(0).files;
-                        if (files.length > 0) {
-                            data.append("HelpSectionImages", files[0]);
-                        }
-                        $.ajax({
-                            url: "@Url.Action("EditPicture", "User")",
-                            type: "POST",
-                            processData: false,
-                            contentType: false,
-                            data: data,
-                            success: function (response) {
-                                var picture = $("#profilepic");
-                                picture.load(function() {
-                                $(this).hide();
-                                $(this).fadeIn('slow');
-                              }).attr('src', response + '?' + new Date().getTime());
-                            },
-                            error: function (er) {
-                                alert(er);
-                            }
+    $("#file").change(function () {
+        var data = new FormData();
+        var files = $("#file").get(0).files;
+        if (files.length > 0) {
+            data.append("HelpSectionImages", files[0]);
+        }
+        $.ajax({
+            url: "@Url.Action("EditPicture", "User")",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (response) {
+                var picture = $("#profilepic");
+                picture.load(function() {
+                    $(this).hide();
+                    $(this).fadeIn('slow');
+                }).attr('src', response + '?' + new Date().getTime());
 
-                        });
-                    });
+                var picture2 = $("#profilepiclogin");
+                response = response.replace('~', '');
+                picture2.load(function () {
+                    $(this).hide();
+                    $(this).fadeIn('slow');
+                }).attr('style', "background-image: url(" + response + '?' + new Date().getTime() + ");" );
+                //response.replace('~','') 
+                //document.getElementById('profilepiclogin').style.backgroundImage = 'url(' + response + '?' + new Date().getTime() + ')';
+            }, //response.replace('~', '') 
+            error: function (er) {
+                alert(er);
+            }
+
+        });
+    });
                 </script>
             </div>
         </fieldset>
         <div class="rightside">
-            <p>
-                Nombre: <span>@Model.FullName</span></p>
+            <p>Nombre: <span>@Model.FullName</span></p>
             @if (!User.IsInRole("Admin") && !User.IsInRole("SuperAdmin"))
             {
-                <p>
-                    Teléfono: <span>@Model.Phone</span></p>
-                <p>
-                    DNI: <span>@Model.Username</span></p>
-                <p>
-                    Mail: <span>@Model.Email</span></p>
-                <p>
-                    Dirección: <span>@Model.Address</span></p>
+                <p>Teléfono: <span>@Model.Phone</span></p>
+                <p>DNI: <span>@Model.Username</span></p>
+                <p>Mail: <span>@Model.Email</span></p>
+                <p>Dirección: <span>@Model.Address</span></p>
 
                 if (User.IsInRole("Student"))
                 {
-                <p>
-                    Grado: <span>@Model.ClassroomText</span></p>
+                <p>Grado: <span>@Model.ClassroomText</span></p>
                 }
                 if (User.IsInRole("Teacher"))
                 {
-                <p>
-                    Grados: <span>@Model.Teaches</span></p>
+                <p>Grados: <span>@Model.Teaches</span></p>
                 }
             }
             <div class="options">
-                <br />
-                <br />
                 @if (User.IsInRole("Student") || User.IsInRole("Father"))
                 {
-                    @Html.ActionLink("Novedades", "Novedades", "Post")
-                    @Html.ActionLink("Contactos", "Contacts", "User")
+                    <div style="float: left;">
+                        @Html.ActionLink("Novedades", "Novedades", "Post")
+                        @Html.ActionLink("Contactos", "Contacts", "User")
+                    </div>
                 }
                 @if (User.IsInRole("Father"))
                 {
-                    @Html.ActionLink("Docentes", "Docentes", "User")
+                    <div style="float: left;">
+                        @Html.ActionLink("Docentes", "Docentes", "User")
+                    </div>
                 }
                 @if (User.IsInRole("Teacher"))
                 {
-                    @Html.ActionLink("Manejar Publicaciones", "Index", "Post")
-                    @Html.ActionLink("Contactos", "Contacts", "User")
-                    <a href="http://www.escueladelaciudad.com.ar/webmail" target="_blank">WebMail</a>
+                    <div style="float: left;">
+                        @Html.ActionLink("Manejar Publicaciones", "Index", "Post")
+                        @Html.ActionLink("Contactos", "Contacts", "User")
+                        <a href="http://www.escueladelaciudad.com.ar/webmail" target="_blank">WebMail</a>
+                    </div>
                 }
                 @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                 {
-                    @Html.ActionLink("Manejar Publicaciones", "Index", "Post")
-                    @Html.ActionLink("Manejar Docentes", "Index")
-                    @Html.ActionLink("Manejar Libros", "Index", "Book")
-                    @Html.ActionLink("Manejar Galerías", "Index", "Gallery")
-                    @Html.ActionLink("Manejar Alumnos y Padres", "Contacts", "User")
-                    <a href="http://www.escueladelaciudad.com.ar/webmail" target="_blank">WebMail</a>
-                    <br />
-                    <br />
-                    <br />
-                    @Html.ActionLink("Cambiar de año", "MoveYear")
+                    <div style="float: left;">
+                        @Html.ActionLink("Manejar Publicaciones", "Index", "Post")
+                        @Html.ActionLink("Manejar Docentes", "Index")
+                        @Html.ActionLink("Manejar Libros", "Index", "Book")
+                        @Html.ActionLink("Manejar Galerías", "Index", "Gallery")
+                        @Html.ActionLink("Manejar Alumnos y Padres", "Contacts", "User")
+                        <a href="http://www.escueladelaciudad.com.ar/webmail" target="_blank">WebMail</a>
+                    </div>
+                    <div style="float: left;margin: 50px 0;">
+                        @Html.ActionLink("Cambiar de año", "MoveYear")
+                    </div>
                 }
             </div>
         </div>

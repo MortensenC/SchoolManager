@@ -52,9 +52,13 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize]
         public ActionResult Contacts(int ClassroomId = 0)
         {
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
             ViewBag.Classrooms = db.Classrooms.ToList();
             if (ClassroomId > 0)
                 ViewBag.ClassroomId = ClassroomId;
+
+            this.GetPicture(user);
+
             return View();
         }
 
@@ -161,6 +165,8 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin, Teacher, Father")]
         public ActionResult Docentes()
         {
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View(db.Roles.Where(r => r.Name == "Teacher").First().Users);
         }
 
@@ -381,6 +387,7 @@ namespace SchoolManager.WebUI.Controllers
                 else
                 {
                     ViewBag.ProfilePicturePath = "~/Uploads/Profile/" + user.Username + "/" + file.Split('\\').LastOrDefault();
+                    ViewBag.ProfilePicturePathWithOutSlash = "/Uploads/Profile/" + user.Username + "/" + file.Split('\\').LastOrDefault();
                 }
             }
             else

@@ -1,7 +1,7 @@
-﻿@model IEnumerable<SchoolManager.Domain.Entities.User>
-@if (Request.IsAuthenticated)
+﻿@if (Request.IsAuthenticated)
 {
-    <p>Hola, </p>@Html.ActionLink(User.Identity.Name, "Profile", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })<p>!</p>
+    <div id="profilepiclogin" class="avatar" style="background-image: url(@ViewBag.ProfilePicturePathWithOutSlash);"></div>
+    <p style="float: left; padding: 11px 0 11px 20px;">Hola, @Html.ActionLink(User.Identity.Name.Split('|')[1], "Profile", "User", routeValues: new { id = User.Identity.Name.Split('|')[0] }, htmlAttributes: new { id = "profileLink" })!</p>
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
