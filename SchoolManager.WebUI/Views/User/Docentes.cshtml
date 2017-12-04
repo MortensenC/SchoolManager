@@ -12,8 +12,7 @@
     </div>
 </div>
 <div class="content-wrapper _contacts seccion">
-    <h1 class="header-seccion">
-        Docentes</h1>
+    <h1 class="header-seccion">Docentes</h1>
     @foreach (var usersByClassroom in Model.GroupBy(u => u.Subject).OrderBy(u => u.Key))
     {
         <h2>

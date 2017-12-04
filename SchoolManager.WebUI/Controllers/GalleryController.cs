@@ -32,6 +32,7 @@ namespace SchoolManager.WebUI.Controllers
                 if (string.IsNullOrEmpty(file))
                 {
                     ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                    ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
                 }
                 else
                 {
@@ -42,6 +43,7 @@ namespace SchoolManager.WebUI.Controllers
             else
             {
                 ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
             }
         }
 
@@ -71,6 +73,8 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin, Teacher")]
         public ActionResult Create()
         {
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View();
         }
 

@@ -1,5 +1,13 @@
 ﻿@model List<SchoolManager.Domain.Entities.Post>
 @{ var par = false; }
+<script>
+    function toggle(source) {
+        checkboxes = document.getElementsByClassName('checkboxEliminar');
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            checkboxes[i].checked = source.checked;
+        }
+    }
+</script>
 @if (Model.Count() == 0)
 {
     <p>No se encontraron publicaciones para esta búsqueda</p>
@@ -10,28 +18,18 @@ else
     {
         <table class="listausers">
         <tr>
-            <th>
-                X
-            </th>
-            <th>
-                Título
-            </th>
-            <th>
-                Fecha
-            </th>
-            <th>
-                Categoría
-            </th>
-            <th style="width: 184px;">
-                Acciones
-            </th>
+            <th><input type="checkbox" name="eliminar" onclick="toggle(this)">Todos</th>
+            <th>Título</th>
+            <th>Fecha</th>
+            <th>Categoría</th>
+            <th style="width: 75px;">Acciones</th>
         </tr>
         @for (int i = 0; i < Model.Count; i++)
         {
             <tr>
                 <td>
                     @Html.HiddenFor(x => x[i].Id)
-                    @Html.CheckBoxFor(x => x[i].Selected)
+                    @Html.CheckBoxFor(x => x[i].Selected, new { @class = "checkboxEliminar" })
                 </td>
                 <td>
                     @Model[i].Title
@@ -50,6 +48,7 @@ else
             </tr>
         }
     </table>
-    <input class="regularbtn float-left" type="submit" value="Eliminar publicaciones seleccionadas" />
+    <input class="regularbtn float-left" type="submit" value="Eliminar publicaciones seleccionadas" 
+           onclick="return confirm('¿Está seguro que desea eliminar las publicaciones seleccionadas?');return false;" />
     }
 }

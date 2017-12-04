@@ -9,12 +9,12 @@
 </div>*@
 <div class="row-donde">
     <div class="content-wrapper">
-        <p>Estás aquí: <span>Admin</span> > <span>Galería</span> > <span class="hlited">Detalles</span></p>
+        <p>Estás aquí: <span>Admin</span> > <span>Libros</span> > <span class="hlited">Detalles del libro</span></p>
     </div>
 </div>
 
 <div class="content-wrapper seccion clear-fix">
-    <h1 class="header-seccion">Detalles</h1>
+    <h1 class="header-seccion">Detalles del libro</h1>
 	<fieldset class="regularform editform detailsform">
 		<div class="display-label">
 			@Html.DisplayNameFor(model => model.Title):
@@ -35,6 +35,6 @@
 	</fieldset>
 	<p>
 		<div class="rb-cont">@Html.ActionLink("Editar", "Edit", new { id=Model.Id })</div>
-		<div class="secbtn padfix">@Html.ActionLink("Back to List", "Index")</div>
+		<div class="secbtn padfix">@Html.ActionLink("Volver al listado", "Index")</div>
 	</p>
 </div>

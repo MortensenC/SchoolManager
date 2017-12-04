@@ -12,8 +12,7 @@
     </div>
 </div>
 <div class="content-wrapper seccion">
-    <h1 class="header-seccion">
-        Editar usuario</h1>
+    <h1 class="header-seccion">Editar usuario</h1>
     @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.ValidationSummary(true)

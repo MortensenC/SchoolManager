@@ -12,36 +12,20 @@
         <tr>
             @if (@usersByClassroom.Key != null && @usersByClassroom.Key.Name == "Exalumnos")
             {
-                <th>
-                    Año Egreso
-                </th>
+                <th>Año Egreso</th>
             }
-            <th>
-                Nombre
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Teléfono
-            </th>
-            <th>
-                Dirección
-            </th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
             @if (User.IsInRole("Father") || User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Teacher"))
             {
-                <th>
-                    DNI
-                </th>
-                <th>
-                    Fecha de Nacimiento
-                </th>
+                <th>DNI</th>
+                <th>Fecha de Nacimiento</th>
             }
             @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
             {
-                <th>
-                    Acciones
-                </th>
+                <th style="width: 100px;">Acciones</th>
             }
         </tr>
         @foreach (var item in usersByClassroom)
@@ -49,8 +33,7 @@
             <tr>
                 @if (@usersByClassroom.Key != null && @usersByClassroom.Key.Name == "Exalumnos")
                 {
-                    <td>@Html.DisplayFor(modelItem => item.Promotion)
-                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Promotion)</td>
                 }
                 <td>@Html.DisplayFor(modelItem => item.FullName)
                 </td>
@@ -62,22 +45,23 @@
                     @if (item.SharePhone || User.IsInRole("Admin") || User.IsInRole("Teacher") || User.IsInRole("SuperAdmin"))
                     { @Html.DisplayFor(modelItem => item.Phone) }
                 </td>
-                <td>@Html.DisplayFor(modelItem => item.Address)
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
                 @if (User.IsInRole("Father") || User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Teacher"))
                 {
-                    <td>@Html.DisplayFor(modelItem => item.Username)
-                    </td>
-                    <td>@Html.DisplayFor(modelItem => item.Birthdate)
-                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Username)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Birthdate)</td>
                 }
                 @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                 {
                     <td class="actions">
-                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                        <a href=@Url.Action("Edit", new { id = item.Id }) class="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Editar</span></a>
+                        <a href=@Url.Action("Details", new { id = item.Id }) class="tooltip"><i class="fa fa-eye" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Ver</span></a>
+                        <a href=@Url.Action("Delete", new { id = item.Id }) class="tooltip"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Eliminar</span></a>
+                        <a href=@Url.Action("Reset", new { id = item.Id }) class="tooltip"><i class="fa fa-refresh" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Resetear Clave</span></a>
+                        @*@Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                         @Html.ActionLink("Ver", "Details", new { id = item.Id }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
-                        @Html.ActionLink("Reset", "Reset", new { id = item.Id })
+                        @Html.ActionLink("Reset", "Reset", new { id = item.Id })*@
                     </td>
                 }
             </tr>
@@ -112,10 +96,14 @@
                 @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                 {
                     <td class="actions">
-                        @Html.ActionLink("Editar", "Edit", new { id = item.Dad.Id }) |
+                        @*@Html.ActionLink("Editar", "Edit", new { id = item.Dad.Id }) |
                         @Html.ActionLink("Ver", "Details", new { id = item.Dad.Id }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.Dad.Id }) |
-                        @Html.ActionLink("Reset", "Reset", new { id = item.Dad.Id })
+                        @Html.ActionLink("Reset", "Reset", new { id = item.Dad.Id })*@
+                        <a href=@Url.Action("Edit", new { id = item.Id }) class="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Editar</span></a>
+                        <a href=@Url.Action("Details", new { id = item.Id }) class="tooltip"><i class="fa fa-eye" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Ver</span></a>
+                        <a href=@Url.Action("Delete", new { id = item.Id }) class="tooltip"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Eliminar</span></a>
+                        <a href=@Url.Action("Reset", new { id = item.Id }) class="tooltip"><i class="fa fa-refresh" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Resetear Clave</span></a>
                     </td>
                 }
             </tr>
@@ -151,10 +139,14 @@
                 @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                 {
                     <td class="actions">
-                        @Html.ActionLink("Editar", "Edit", new { id = item.Mom.Id }) |
+                        <a href=@Url.Action("Edit", new { id = item.Id }) class="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Editar</span></a>
+                        <a href=@Url.Action("Details", new { id = item.Id }) class="tooltip"><i class="fa fa-eye" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Ver</span></a>
+                        <a href=@Url.Action("Delete", new { id = item.Id }) class="tooltip"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Eliminar</span></a>
+                        <a href=@Url.Action("Reset", new { id = item.Id }) class="tooltip"><i class="fa fa-refresh" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Resetear Clave</span></a>
+                        @*@Html.ActionLink("Editar", "Edit", new { id = item.Mom.Id }) |
                         @Html.ActionLink("Ver", "Details", new { id = item.Mom.Id }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.Mom.Id }) |
-                        @Html.ActionLink("Reset", "Reset", new { id = item.Mom.Id })
+                        @Html.ActionLink("Reset", "Reset", new { id = item.Mom.Id })*@
                     </td>
                 }
             </tr>

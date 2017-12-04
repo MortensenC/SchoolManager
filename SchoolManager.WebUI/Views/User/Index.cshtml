@@ -1,21 +1,30 @@
 ﻿@model IEnumerable<SchoolManager.Domain.Entities.User>
 @{
-    ViewBag.Title = "Usuarios";
+	ViewBag.Title = "Usuarios";
 }
+<script type="text/javascript">
+    function copyToClipboard(element, id) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        // copied animation
+        document.getElementById("emailcelda" + id).classList.add('copied');
+        setTimeout(function () { document.getElementById("emailcelda" + id).classList.remove('copied'); }, 1500);
+        $temp.remove();
+    }
+</script>
 @*<div class="banner-seccion">
 	<img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
 </div>*@
 <div class="row-donde">
-    <div class="content-wrapper">
-        <p>
-            Estás aquí: <span>Admin</span> > <span class="hlited">Docentes</span></p>
-    </div>
+	<div class="content-wrapper">
+		<p>Estás aquí: <span>Admin</span> > <span class="hlited">Docentes</span></p>
+	</div>
 </div>
 <div class="content-wrapper seccion">
-    <h1 class="header-seccion">Docentes</h1>
-    <div class="regularbtn">@Html.ActionLink("Crear nuevo", "Create")</div>
-    <br />
-    <br />
+	<h1 class="header-seccion">Docentes</h1>
+	<div class="regularbtn">@Html.ActionLink("Crear nuevo", "Create")</div>
 	<table class="listausers">
 		<tr>
 			<th>@Html.DisplayNameFor(model => model.Username)</th>
@@ -23,7 +32,7 @@
 			<th>@Html.DisplayNameFor(model => model.Phone)</th>
 			<th>@Html.DisplayNameFor(model => model.Address)</th>
 			<th>@Html.DisplayNameFor(model => model.Email)</th>
-			<th>Acciones</th>
+			<th style="width: 98px;">Acciones</th>
 		</tr>
 		@foreach (var item in Model) {
 			<tr>
@@ -31,12 +40,21 @@
 				<td>@Html.DisplayFor(modelItem => item.FullName)</td>
 				<td>@Html.DisplayFor(modelItem => item.Phone)</td>
 				<td>@Html.DisplayFor(modelItem => item.Address)</td>
-				<td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td id="@(String.Format("{0}{1}", "emailcelda", item.Id))" onclick="copyToClipboard('@(String.Format("#{0}{1}", "email", item.Id))',@(item.Id));">
+                    <a class="tooltip copy">
+                        <i class="fa fa-clipboard" aria-hidden="true"></i>
+                        <span id=@(String.Format("{0}{1}", "email", item.Id)) class="tooltiptext tooltip-top">@Html.DisplayFor(modelItem => item.Email)</span>
+                    </a>
+                </td>
 				<td class="actions">
-					@Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+					<a href=@Url.Action("Edit", new { id = item.Id }) class="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Editar</span></a>
+					<a href=@Url.Action("Details", new { id = item.Id }) class="tooltip"><i class="fa fa-eye" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Ver</span></a>
+					<a href=@Url.Action("Delete", new { id = item.Id }) class="tooltip"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Eliminar</span></a>
+					<a href=@Url.Action("Reset", new { id = item.Id }) class="tooltip"><i class="fa fa-refresh" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Resetear Clave</span></a>
+					@*@Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
 					@Html.ActionLink("Ver", "Details", new { id = item.Id }) |
 					@Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
-					@Html.ActionLink("Reset", "Reset", new { id = item.Id })
+					@Html.ActionLink("Reset", "Reset", new { id = item.Id })*@
 				</td>
 			</tr>
 		}

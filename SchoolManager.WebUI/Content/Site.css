@@ -54,7 +54,7 @@ nav #menu li a { padding:12px 8px; display:inline-block; text-align:center; line
 nav #menu a:hover, nav #menu a.active { border-bottom:2px solid #fff; padding-bottom:3px; }
 header .logo { margin:10px 0; float:left; max-width:100%; height: 40px;}
 /*section#login { position: absolute; right: 0; top: 0; border-top: 4px solid #ec7522; padding: 4px 25px 4px 70px; width: 70px;}*/
-#login { position: absolute; right: 0; top: 0; border-top: 4px solid #ec7522; padding: 4px 15px 4px 15px; width: 200px;}
+#login { position: absolute; right: 0; top: 0; border-top: 4px solid #ec7522; padding: 4px 15px 4px 15px; width: 250px;}
 /*#loginLink { text-transform: uppercase; color: #00609A; font-weight: 700; font-size: 12px; padding: 2px 0 2px 30px; }*/
 #loginLink { text-align: right; float: right; padding: 11px 0 11px 0;}
 #login .username { color: #00609A; font-size: 20px; }
@@ -229,7 +229,7 @@ article.bookresult:nth-child(even), article.galeria:nth-child(even), .postsearch
 ._contacts .buscador { margin-bottom:20px; }
 ._contacts .buscador:after { display:block; clear:both; content:""; }
 ._contacts .buscador label { color: #7A8889; font-size: 13px; float:left; line-height:30px; }
-._contacts .buscador select { text-transform:uppercase; color: #00609A; font-weight:700; padding:4px; margin: 0 0 0 12px; box-sizing:border-box; -moz-box-sizing:border-box; height:30px; border:1px solid #BDC3C7; float:right; }
+._contacts .buscador select { text-transform:uppercase; color: #00609A; font-weight:700; padding:4px; margin: 0 4px 0 40px; box-sizing:border-box; -moz-box-sizing:border-box; height:30px; border:1px solid #BDC3C7; float:right; }
 ._contacts .buscador .mixedinput { max-width:285px; float:left; }
 /* */
 
@@ -286,7 +286,7 @@ article.galeria object { width:100%; height:360px; }
 .editform, .profile-content { display:table; table-layout: fixed; }
 .editform .image-upload, .profile-content .imgcell { display:table-cell; vertical-align:top; width:300px; }
 .editform .form-right-side, .profile-content .rightside { display:table-cell; vertical-align:top; padding-left:22px; }
-.editform label, .editform .trigger_display span { width:140px; display: inline-table; cursor:pointer; }
+.editform label, .editform .trigger_display span { width:140px; display: inline-table; }
 .editform .editor-label { margin-bottom:6px; }
 .editform .trigger_display { margin-bottom: 10px; padding-top: 3px; }
 .editform .trigger_display label { width:auto; margin-right:14px; }
@@ -376,13 +376,13 @@ div.jHtmlArea iframe {
 .tooltip {
 	position: relative;
 	display: inline-block;
-	border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+	margin: 0px 4px;
 }
 
 /* Tooltip text */
 .tooltip .tooltiptext {
 	visibility: hidden;
-	width: 120px;
+	/*width: 120px;*/
 	background-color: black;
 	color: #fff;
 	text-align: center;
@@ -400,12 +400,46 @@ div.jHtmlArea iframe {
 }
 
 .tooltip .tooltiptext {
-	width: 120px;
+	/*width: 120px;*/
+	padding: 0px 5px;
 	bottom: 100%;
-	left: 50%;
-	margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+	left: -20px;
+	/*margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */*/
 }
 
+.copy {
+	cursor: pointer;
+}
+
+.copied::after {
+  /*position: absolute;
+  top: 12%;
+  right: 110%;
+  display: block;*/
+  content: "Copiado";
+  font-size: 1em;
+  padding: 2px 3px;
+  color: white;
+  background-color: black;
+  border-radius: 3px;
+  opacity: 0;
+  will-change: opacity, transform;
+  animation: showcopied 1.5s ease;
+}
+
+@keyframes showcopied {
+  0% {
+	opacity: 0;
+	transform: translateX(100%);
+  }
+  70% {
+	opacity: 1;
+	transform: translateX(0);
+  }
+  100% {
+	opacity: 0;
+  }
+}
 
 
 

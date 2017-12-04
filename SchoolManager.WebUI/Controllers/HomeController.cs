@@ -83,6 +83,7 @@ namespace MvcApplication1.Controllers
                     if (string.IsNullOrEmpty(file))
                     {
                         ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                        ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
                     }
                     else
                     {
@@ -93,11 +94,13 @@ namespace MvcApplication1.Controllers
                 else
                 {
                     ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                    ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
                 }
             }
             else
             {
                 ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
             }
         }
 

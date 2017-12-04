@@ -1,55 +1,55 @@
 ﻿@model SchoolManager.Domain.Entities.Book
 @{
-    ViewBag.Title = "Create";
+	ViewBag.Title = "Create";
 }
 @*<div class="banner-seccion">
-    <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+	<img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
 </div>*@
 <div class="row-donde">
-    <div class="content-wrapper">
-        <p>Estás aquí: <span>Admin</span> > <span>Libros</span> > <span class="hlited">Crear</span></p>
-    </div>
+	<div class="content-wrapper">
+		<p>Estás aquí: <span>Admin</span> > <span>Libros</span> > <span class="hlited">Crear</span></p>
+	</div>
 </div>
 <div class="content-wrapper _novedades seccion">
-    <h1 class="header-seccion">Nuevo libro</h1>
-    @using (Html.BeginForm("Create", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.ValidationSummary(true)
+	<h1 class="header-seccion">Nuevo libro</h1>
+	@using (Html.BeginForm("Create", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+		@Html.ValidationSummary(true)
 
-        <fieldset class="regularform editform">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Title)
-                @Html.EditorFor(model => model.Title)
-                @Html.ValidationMessageFor(model => model.Title)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Link)
-                @Html.EditorFor(model => model.Link)
-                @Html.ValidationMessageFor(model => model.Link)
-            </div>
-            <div class="editor-label">
-                Descripción
-                @Html.TextAreaFor(model => model.Description)
-                @Html.ValidationMessageFor(model => model.Description)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Author)
-                @Html.EditorFor(model => model.Author)
-                @Html.ValidationMessageFor(model => model.Author)
-            </div>
-            <div class="editor-label">
-                @Html.EditorFor(model => model.Highlighted)
-                @Html.LabelFor(model => model.Highlighted)
-            </div>
-            <div class="editor-label">
+		<fieldset class="regularform editform">
+			<div class="editor-label">
+				@Html.LabelFor(model => model.Title)
+				@Html.EditorFor(model => model.Title)
+				@Html.ValidationMessageFor(model => model.Title)
+			</div>
+			<div class="editor-label">
+				@Html.LabelFor(model => model.Link)
+				@Html.EditorFor(model => model.Link)
+				@Html.ValidationMessageFor(model => model.Link)
+			</div>
+			<div class="editor-label">
+				Descripción
+				@Html.TextAreaFor(model => model.Description)
+				@Html.ValidationMessageFor(model => model.Description)
+			</div>
+			<div class="editor-label">
+				@Html.LabelFor(model => model.Author)
+				@Html.EditorFor(model => model.Author)
+				@Html.ValidationMessageFor(model => model.Author)
+			</div>
+			<div class="editor-label">
+				@Html.EditorFor(model => model.Highlighted)
+				@Html.LabelFor(model => model.Highlighted)
+			</div>
+			<div class="editor-label">
 				<label for="photo">Portada</label>
 				<input name="photo" id="Photo" type="file" accept="image/*" />
 			</div>
 			<input class="regularbtn float-left" type="submit" value="Crear" />
 			<div class="secbtn">@Html.ActionLink("Volver", "Index")</div>
-        </fieldset>
-    }
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+		</fieldset>
+	}
+	@section Scripts {
+		@Scripts.Render("~/bundles/jqueryval")
+	}
 </div>
