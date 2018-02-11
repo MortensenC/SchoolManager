@@ -24,7 +24,9 @@
 </div>
 <div class="content-wrapper seccion">
 	<h1 class="header-seccion">Docentes</h1>
-	<div class="regularbtn">@Html.ActionLink("Crear nuevo", "Create")</div>
+    <div class="barraBotones">
+        <div class="regularbtn">@Html.ActionLink("Crear nuevo", "Create")</div>
+    </div>
 	<table class="listausers">
 		<tr>
 			<th>@Html.DisplayNameFor(model => model.Username)</th>

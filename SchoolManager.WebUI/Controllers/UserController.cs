@@ -629,12 +629,12 @@ namespace SchoolManager.WebUI.Controllers
                 using (var context = new Context())
                 {
                     context.Database.ExecuteSqlCommand(
-                        "UPDATE Posts SET Classroom_Id = 7 WHERE Classroom_Id = 6 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";" +
-                        "UPDATE Posts SET Classroom_Id = 6 WHERE Classroom_Id = 5 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";" +
-                        "UPDATE Posts SET Classroom_Id = 5 WHERE Classroom_Id = 4 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";" +
-                        "UPDATE Posts SET Classroom_Id = 4 WHERE Classroom_Id = 3 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";" +
-                        "UPDATE Posts SET Classroom_Id = 3 WHERE Classroom_Id = 2 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";" +
-                        "UPDATE Posts SET Classroom_Id = 2 WHERE Classroom_Id = 1 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";"
+                        "UPDATE Posts SET Classroom_Id = 7 WHERE Classroom_Id = 6 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";" +
+                        "UPDATE Posts SET Classroom_Id = 6 WHERE Classroom_Id = 5 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";" +
+                        "UPDATE Posts SET Classroom_Id = 5 WHERE Classroom_Id = 4 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";" +
+                        "UPDATE Posts SET Classroom_Id = 4 WHERE Classroom_Id = 3 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";" +
+                        "UPDATE Posts SET Classroom_Id = 3 WHERE Classroom_Id = 2 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";" +
+                        "UPDATE Posts SET Classroom_Id = 2 WHERE Classroom_Id = 1 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";"
                     );
                 }
             }
@@ -656,6 +656,7 @@ namespace SchoolManager.WebUI.Controllers
                     UPDATE Users SET Classroom_Id = 4 WHERE Classroom_Id = 3;
                     UPDATE Users SET Classroom_Id = 3 WHERE Classroom_Id = 2;
                     UPDATE Users SET Classroom_Id = 2 WHERE Classroom_Id = 1;");
+
                 }
             }
             catch (Exception)

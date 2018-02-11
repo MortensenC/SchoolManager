@@ -7,8 +7,7 @@
 </div>*@
 <div class="row-donde">
     <div class="content-wrapper">
-        <p>
-            Estás aquí: <span>Padres</span> > <span class="hlited">Docentes</span></p>
+        <p>Estás aquí: <span>Padres</span> > <span class="hlited">Docentes</span></p>
     </div>
 </div>
 <div class="content-wrapper _contacts seccion">
@@ -17,50 +16,37 @@
     {
         <h2>
             @if (@usersByClassroom.Key == null)
-            { <p>
-                Docentes sin materias asignadas</p> }
+            { <p>Docentes sin materias asignadas</p> }
             else
             {
                 if (@usersByClassroom.Key.Value == (int)SchoolManager.Domain.Entities.Subject.PrácticaDelLenguaje)
                 {
-                    <p>
-                        Práctica del Lenguaje
-                    </p>
+                    <p>Práctica del Lenguaje</p>
                 }
                 else
                 {
-                    <p>
-                        @((SchoolManager.Domain.Entities.Subject)@usersByClassroom.Key)
-                    </p>
+                    <p>@((SchoolManager.Domain.Entities.Subject)@usersByClassroom.Key)</p>
                 }
             }
         </h2>
         <br />
         <table class="listausers">
             <tr>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Grados
-                </th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Grados</th>
             </tr>
             @foreach (var item in usersByClassroom)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.FullName)
-                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.FullName)</td>
                     <td>
                         @if (item.ShareEmail || User.IsInRole("Admin") || User.IsInRole("Teacher") || User.IsInRole("SuperAdmin"))
                         {
                             <a href="mailto:@item.Email">@item.Email</a>
                         }
                     </td>
-                    <td>@Html.DisplayFor(modelItem => item.Teaches)
-                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Teaches)</td>
                 </tr>
             }
         </table>

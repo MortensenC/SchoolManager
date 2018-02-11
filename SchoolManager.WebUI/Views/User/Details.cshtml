@@ -43,7 +43,10 @@
             <label>@Html.DisplayNameFor(model => model.SharePhone): @Html.DisplayFor(model => model.SharePhone)</label>
             <label>@Html.DisplayNameFor(model => model.ShareEmail): @Html.DisplayFor(model => model.ShareEmail)</label>
             <label>@Html.DisplayNameFor(model => model.Birthdate): @Html.DisplayFor(model => model.Birthdate)</label>
-            <label>@Html.DisplayNameFor(model => model.YearOfPromotion): @Html.DisplayFor(model => model.YearOfPromotion)</label>
+            @if (@Model.Classroom.Name == "Exalumnos")
+            {
+                <label>@Html.DisplayNameFor(model => model.YearOfPromotion): @Html.DisplayFor(model => model.YearOfPromotion)</label>
+            }
             <div class="divrb">@Html.ActionLink("Editar", "Edit", new { id = Model.Id })</div>
             <div class="secbtn"><a href="javascript:history.back()">Volver al listado</a></div>
         </div>

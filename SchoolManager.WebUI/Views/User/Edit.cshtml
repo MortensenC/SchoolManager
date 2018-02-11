@@ -22,8 +22,7 @@
             <div class="image-upload">
                 <label for="file">
                     <img class="profile-picture" alt="profile picture" height="300px" src="@Url.Content(ViewBag.ProfilePicturePath)" />
-                    <div class="hover">
-                        <span>+</span></div>
+                    <div class="hover"><span>+</span></div>
                 </label>
                 <input name="file" id="file" type="file" />
             </div>
@@ -85,10 +84,13 @@
                         @Html.LabelFor(model => model.Classroom)
                         @Html.DropDownListFor(model => model.ClassroomId, new SelectList(ViewBag.Classrooms, "Id", "Name"), string.Empty)
                     </div>
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.YearOfPromotion)
-                        @Html.EditorFor(model => model.YearOfPromotion)
-                    </div>
+                    @if (@Model.Classroom.Name == "Exalumnos")
+                    { 
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.YearOfPromotion)
+                            @Html.EditorFor(model => model.YearOfPromotion)
+                        </div>
+                    }
                 </div>
                 <div class="display-teachers">
                     <div class="editor-label">

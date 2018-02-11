@@ -9,7 +9,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 
@@ -22,15 +21,12 @@ namespace SchoolManager.Domain.Entities
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        [Display(Name = "Título")]
         public string Title { get; set; }
         [DataMember]
         public string Link { get; set; }
         [DataMember]
-        [Display(Name = "Descripción")]
         public string Description { get; set; }
         [DataMember]
-        [Display(Name = "Autor")]
         public string Author { get; set; }
         [DataMember]
         public bool Highlighted { get; set; }

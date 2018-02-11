@@ -48,35 +48,36 @@
     </div>
 </div>
 <div class="content-wrapper _contacts seccion">
-    <h1 class="header-seccion">
-        Contactos</h1>
-    @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
-    {
-        <div class="regularbtn">@Html.ActionLink("Crear nuevo", "Create")</div>
-    }
-    <div class="buscador">
-        @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Teacher"))
+    <h1 class="header-seccion">Contactos</h1>
+    <div class="barraBotones">
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
         {
+            <div class="regularbtn">@Html.ActionLink("Crear nuevo", "Create")</div>
+        }
+        <div class="buscador">
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Teacher"))
+            {
+                <div class="mixedinput">
+                    @if (ViewBag.ClassroomId != null)
+                    {
+                        @Html.DropDownList("searchClassroom", new SelectList(ViewBag.Classrooms, "Id", "Name", ViewBag.ClassroomId))
+                    }
+                    else
+                    {
+                        @Html.DropDownList("searchClassroom", new SelectList(ViewBag.Classrooms, "Id", "Name"))
+                    }
+                </div>
+            }
             <div class="mixedinput">
-                @if (ViewBag.ClassroomId != null)
-                { 
-                    @Html.DropDownList("searchClassroom", new SelectList(ViewBag.Classrooms, "Id", "Name", ViewBag.ClassroomId))
-                }
-                else
-                {
-                    @Html.DropDownList("searchClassroom", new SelectList(ViewBag.Classrooms, "Id", "Name"))
-                }
+                <input id="searchText" type="search" onkeydown="if (event.keyCode == 13) search();"
+                       placeholder="Buscar..." />
+                <input type="submit" value="" onclick="search();" />
             </div>
-        }
-        <div class="mixedinput">
-            <input id="searchText" type="search" onkeydown="if (event.keyCode == 13) search();"
-                placeholder="Buscar..." />
-            <input type="submit" value="" onclick="search();" />
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Teacher"))
+            {
+                @Html.ActionLink("Exportar", "Export", new { text = "", classroom = "" }, new { id = "exportLink", style = "margin-left: 20px" })
+            }
         </div>
-        @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Teacher"))
-        {
-            @Html.ActionLink("Exportar", "Export", new { text = "", classroom = "" }, new { id = "exportLink", style = "margin-left: 20px" })
-        }
     </div>
     <div id="container">
         @Html.Action("Search", "User", new { text = "" })
