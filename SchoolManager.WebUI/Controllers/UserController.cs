@@ -24,6 +24,8 @@ namespace SchoolManager.WebUI.Controllers
         public ActionResult Index()
         {
             var teachers = db.Roles.Where(r => r.Name == "Teacher").First().Users;
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View(teachers);
         }
 
@@ -52,9 +54,13 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize]
         public ActionResult Contacts(int ClassroomId = 0)
         {
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
             ViewBag.Classrooms = db.Classrooms.ToList();
             if (ClassroomId > 0)
                 ViewBag.ClassroomId = ClassroomId;
+
+            this.GetPicture(user);
+
             return View();
         }
 
@@ -161,6 +167,8 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin, Teacher, Father")]
         public ActionResult Docentes()
         {
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View(db.Roles.Where(r => r.Name == "Teacher").First().Users);
         }
 
@@ -377,15 +385,18 @@ namespace SchoolManager.WebUI.Controllers
                 if (string.IsNullOrEmpty(file))
                 {
                     ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                    ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
                 }
                 else
                 {
                     ViewBag.ProfilePicturePath = "~/Uploads/Profile/" + user.Username + "/" + file.Split('\\').LastOrDefault();
+                    ViewBag.ProfilePicturePathWithOutSlash = "/Uploads/Profile/" + user.Username + "/" + file.Split('\\').LastOrDefault();
                 }
             }
             else
             {
                 ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
             }
         }
 
@@ -618,12 +629,12 @@ namespace SchoolManager.WebUI.Controllers
                 using (var context = new Context())
                 {
                     context.Database.ExecuteSqlCommand(
-                        "UPDATE Posts SET Classroom_Id = 7 WHERE Classroom_Id = 6 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";" +
-                        "UPDATE Posts SET Classroom_Id = 6 WHERE Classroom_Id = 5 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";" +
-                        "UPDATE Posts SET Classroom_Id = 5 WHERE Classroom_Id = 4 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";" +
-                        "UPDATE Posts SET Classroom_Id = 4 WHERE Classroom_Id = 3 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";" +
-                        "UPDATE Posts SET Classroom_Id = 3 WHERE Classroom_Id = 2 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";" +
-                        "UPDATE Posts SET Classroom_Id = 2 WHERE Classroom_Id = 1 AND Category <> " + Category.Tutoriales.ToString() + " AND Category <> " + Category.Recursos.ToString() + ";"
+                        "UPDATE Posts SET Classroom_Id = 7 WHERE Classroom_Id = 6 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";" +
+                        "UPDATE Posts SET Classroom_Id = 6 WHERE Classroom_Id = 5 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";" +
+                        "UPDATE Posts SET Classroom_Id = 5 WHERE Classroom_Id = 4 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";" +
+                        "UPDATE Posts SET Classroom_Id = 4 WHERE Classroom_Id = 3 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";" +
+                        "UPDATE Posts SET Classroom_Id = 3 WHERE Classroom_Id = 2 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";" +
+                        "UPDATE Posts SET Classroom_Id = 2 WHERE Classroom_Id = 1 AND Category <> " + ((int)Category.Tutoriales).ToString() + " AND Category <> " + ((int)Category.Recursos).ToString() + ";"
                     );
                 }
             }
@@ -645,6 +656,7 @@ namespace SchoolManager.WebUI.Controllers
                     UPDATE Users SET Classroom_Id = 4 WHERE Classroom_Id = 3;
                     UPDATE Users SET Classroom_Id = 3 WHERE Classroom_Id = 2;
                     UPDATE Users SET Classroom_Id = 2 WHERE Classroom_Id = 1;");
+
                 }
             }
             catch (Exception)

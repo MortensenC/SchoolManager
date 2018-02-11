@@ -3,14 +3,13 @@
     ViewBag.Title = "Libros";
 }
 
-<div class="banner-seccion">
+@*<div class="banner-seccion">
 	<img src="@Url.Content("~/Content/Images/banner_biblioteca.jpg")" />
-</div>
+</div>*@
 
 <div class="row-donde">
     <div class="content-wrapper">
-        <p>
-            Estás aquí: <span>Admin</span> > <span class="hlited">Libros</span></p>
+        <p>Estás aquí: <span>Admin</span> > <span class="hlited">Libros</span></p>
     </div>
 </div>
 <div class="content-wrapper seccion">
@@ -27,7 +26,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Author)
                     </th>
-                    <th>Acciones</th>
+                    <th style="width: 75px;">Acciones</th>
                 </tr>
                 @foreach (var item in Model)
                 {
@@ -39,9 +38,9 @@
                             @Html.DisplayFor(modelItem => item.Author)
                         </td>
                         <td class="actions">
-                            @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-							@Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
-                            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                            <a href=@Url.Action("Edit", new { id = item.Id }) class="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Editar</span></a>
+                            <a href=@Url.Action("Details", new { id = item.Id }) class="tooltip"><i class="fa fa-eye" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Ver</span></a>
+                            <a href=@Url.Action("Delete", new { id = item.Id }) class="tooltip"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Eliminar</span></a>
                         </td>
                     </tr>
                 }

@@ -16,6 +16,11 @@ namespace MvcApplication1.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            User user = null;
+            if (User.Identity.IsAuthenticated)
+                user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
+            //ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
             var posts = db.Posts.Where(p => p.Public).OrderByDescending(p => p.Id).Take(3).ToList();
 
             // Post 1
@@ -64,6 +69,39 @@ namespace MvcApplication1.Controllers
             }
 
             return View();
+        }
+
+        private void GetPicture(User user)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var path = Path.Combine(Server.MapPath("~/Uploads/Profile"), user.Username);
+
+                if (Directory.Exists(path))
+                {
+                    var file = Directory.GetFiles(path).FirstOrDefault();
+                    if (string.IsNullOrEmpty(file))
+                    {
+                        ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                        ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
+                    }
+                    else
+                    {
+                        ViewBag.ProfilePicturePath = "~/Uploads/Profile/" + user.Username + "/" + file.Split('\\').LastOrDefault();
+                        ViewBag.ProfilePicturePathWithOutSlash = "/Uploads/Profile/" + user.Username + "/" + file.Split('\\').LastOrDefault();
+                    }
+                }
+                else
+                {
+                    ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                    ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
+                }
+            }
+            else
+            {
+                ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
+            }
         }
 
         [AllowAnonymous]

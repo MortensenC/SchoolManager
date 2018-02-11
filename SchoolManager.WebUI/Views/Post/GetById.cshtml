@@ -1,11 +1,15 @@
 ﻿@model SchoolManager.Domain.Entities.Post
-
+<script type="text/javascript">
+    $('html,body').animate({
+        scrollTop: $("#scrollToHere").offset().top
+    }, 1000);
+</script>
 <article>
     @if (Model.Photo != null)
     {
         <img src="@Url.Content(Model.Photo)" />
     }
-	<p class="titulo">@Model.Title</p>
+    <p class="titulo">@Model.Title</p>
 	<p class="tipofecha"><span class="categoria">@Model.CategoryText @if (Model.Classroom != null) { <span>|</span> @Model.Classroom.Name }</span> | @Model.Date.ToString("d/M/yyyy") @if (Model.User.Roles.Where(r => r.Name == "Teacher").Count() > 0) { <span>| por </span> <a href="mailto:@Model.User.Email">@Model.User.FullName (@Model.User.Email)</a> }</p>
 	<p class="contenido">@Html.Raw(Model.Text)</p>
     <br />
@@ -44,3 +48,4 @@
         </ul>
     }
 </article>
+

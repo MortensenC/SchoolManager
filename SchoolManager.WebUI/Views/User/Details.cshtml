@@ -2,19 +2,16 @@
 @{
     ViewBag.Title = "Details";
 }
-<div class="banner-seccion">
+@*<div class="banner-seccion">
     <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
-</div>
+</div>*@
 <div class="row-donde">
     <div class="content-wrapper">
-        <p>
-            Estás aquí: <span>Admin</span> > <span>Usuarios</span> > <span class="hlited">Detalles
-                de la cuenta</span></p>
+        <p>Estás aquí: <span>Admin</span> > <span>Usuarios</span> > <span class="hlited">Detalles de la cuenta</span></p>
     </div>
 </div>
 <div class="content-wrapper seccion">
-    <h1 class="header-seccion">
-        Detalles de la cuenta</h1>
+    <h1 class="header-seccion">Detalles de la cuenta</h1>
     <fieldset class="regularform detailsform editform">
         <div class="image-upload">
             <img class="profile-picture" alt="profile picture" height="300px" src="@Url.Content(ViewBag.ProfilePicturePath)" />
@@ -46,7 +43,10 @@
             <label>@Html.DisplayNameFor(model => model.SharePhone): @Html.DisplayFor(model => model.SharePhone)</label>
             <label>@Html.DisplayNameFor(model => model.ShareEmail): @Html.DisplayFor(model => model.ShareEmail)</label>
             <label>@Html.DisplayNameFor(model => model.Birthdate): @Html.DisplayFor(model => model.Birthdate)</label>
-            <label>@Html.DisplayNameFor(model => model.YearOfPromotion): @Html.DisplayFor(model => model.YearOfPromotion)</label>
+            @if (@Model.Classroom.Name == "Exalumnos")
+            {
+                <label>@Html.DisplayNameFor(model => model.YearOfPromotion): @Html.DisplayFor(model => model.YearOfPromotion)</label>
+            }
             <div class="divrb">@Html.ActionLink("Editar", "Edit", new { id = Model.Id })</div>
             <div class="secbtn"><a href="javascript:history.back()">Volver al listado</a></div>
         </div>

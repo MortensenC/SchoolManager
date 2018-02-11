@@ -1,4 +1,5 @@
-﻿@{
+﻿@Model Razor.
+@{
     ViewBag.Title = "Novedades";
 }
 <script type="text/javascript">
@@ -118,9 +119,9 @@
         });
 }
 </script>
-<div class="banner-seccion">
+@*<div class="banner-seccion">
     <img src="@Url.Content("~/Content/Images/banner_novedades.jpg")" />
-</div>
+</div>*@
 <div class="row-donde">
     <div class="content-wrapper">
         <p>
@@ -128,8 +129,7 @@
     </div>
 </div>
 <div class="content-wrapper _novedades seccion">
-    <h1 class="header-seccion">
-        Novedades</h1>
+    <h1 id="scrollToHere" class="header-seccion">Novedades</h1>
     <div class="row">
         <div class="cell cell-2">
             <div id="posts-container">
@@ -145,18 +145,15 @@
                     <li onclick="nextPost();" class="arrow next"></li>
                     <li onclick="lastPost();">Última</li>
                 </ul>
-                <div class="posicion">
-                    Página <span id="actualPage">1</span> de @Math.Ceiling((Decimal)ViewBag.PostCount / 8)
+                <div class="posicion">Página <span id="actualPage">1</span> de @Math.Ceiling((Decimal)ViewBag.PostCount / 8)
                 </div>
             </div>
             </div>
         </div>
         <div class="cell cell-1">
             <div class="blue-box">
-                <p class="high">
-                    ¿Qué encuentro aquí?</p>
-                <p class="regular">
-                    Aquí encontrarás novedades sobre la escuela, reuniones, eventos, material para compartir
+                <p class="high">¿Qué encuentro aquí?</p>
+                <p class="regular">Aquí encontrarás novedades sobre la escuela, reuniones, eventos, material para compartir
                     y consultar.</p>
             </div>
             <div class="buscador">
@@ -203,13 +200,16 @@
                         }
                     </ul>
                     <br />
-                    <p class="high">Materias</p>
-                    <ul>
-                        @foreach (var subject in Enum.GetValues(typeof(SchoolManager.Domain.Entities.Subject)).Cast<SchoolManager.Domain.Entities.Subject>().Select(e => new { Id = (int)e, Value = e.ToString() }))
-                        {
-                            <li onclick="getSubject(@subject.Id, this);">@subject.Value</li>
-                        }
-                    </ul>
+                    if (User.IsInRole("Student") && ViewBag.Classroom.Name != "Exalumnos")
+                    {
+                        <p class="high">Materias</p>
+                        <ul>
+                            @foreach (var subject in Enum.GetValues(typeof(SchoolManager.Domain.Entities.Subject)).Cast<SchoolManager.Domain.Entities.Subject>().Select(e => new { Id = (int)e, Value = e.ToString() }))
+                            {
+                                <li onclick="getSubject(@subject.Id, this);">@subject.Value</li>
+                            }
+                        </ul>
+                    }
                 }
             </div>
         </div>

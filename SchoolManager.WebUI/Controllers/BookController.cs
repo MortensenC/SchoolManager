@@ -22,7 +22,34 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin, Teacher")]
         public ActionResult Index()
         {
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View(db.Books.ToList());
+        }
+
+        private void GetPicture(User user)
+        {
+            var path = Path.Combine(Server.MapPath("~/Uploads/Profile"), user.Username);
+
+            if (Directory.Exists(path))
+            {
+                var file = Directory.GetFiles(path).FirstOrDefault();
+                if (string.IsNullOrEmpty(file))
+                {
+                    ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                    ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
+                }
+                else
+                {
+                    ViewBag.ProfilePicturePath = "~/Uploads/Profile/" + user.Username + "/" + file.Split('\\').LastOrDefault();
+                    ViewBag.ProfilePicturePathWithOutSlash = "/Uploads/Profile/" + user.Username + "/" + file.Split('\\').LastOrDefault();
+                }
+            }
+            else
+            {
+                ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+                ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
+            }
         }
 
         //
@@ -98,6 +125,8 @@ namespace SchoolManager.WebUI.Controllers
         public ActionResult Create()
         {
             ViewBag.Users = db.Users.ToList();
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View();
         }
 

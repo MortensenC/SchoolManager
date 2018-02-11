@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "Editar usuario";
 }
-<div class="banner-seccion">
-    <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
-</div>
+@*<div class="banner-seccion">
+        <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+    </div>*@
 <div class="row-donde">
     <div class="content-wrapper">
         <p>
@@ -12,8 +12,7 @@
     </div>
 </div>
 <div class="content-wrapper seccion">
-    <h1 class="header-seccion">
-        Editar usuario</h1>
+    <h1 class="header-seccion">Editar usuario</h1>
     @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.ValidationSummary(true)
@@ -23,8 +22,7 @@
             <div class="image-upload">
                 <label for="file">
                     <img class="profile-picture" alt="profile picture" height="300px" src="@Url.Content(ViewBag.ProfilePicturePath)" />
-                    <div class="hover">
-                        <span>+</span></div>
+                    <div class="hover"><span>+</span></div>
                 </label>
                 <input name="file" id="file" type="file" />
             </div>
@@ -86,10 +84,13 @@
                         @Html.LabelFor(model => model.Classroom)
                         @Html.DropDownListFor(model => model.ClassroomId, new SelectList(ViewBag.Classrooms, "Id", "Name"), string.Empty)
                     </div>
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.YearOfPromotion)
-                        @Html.EditorFor(model => model.YearOfPromotion)
-                    </div>
+                    @if (@Model.Classroom.Name == "Exalumnos")
+                    { 
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.YearOfPromotion)
+                            @Html.EditorFor(model => model.YearOfPromotion)
+                        </div>
+                    }
                 </div>
                 <div class="display-teachers">
                     <div class="editor-label">

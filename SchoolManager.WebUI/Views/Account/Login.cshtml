@@ -1,7 +1,7 @@
 ﻿@model SchoolManager.Domain.Entities.User
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Acceder";
 }
 <script type="text/javascript">
     function foco(idElemento) {
@@ -15,12 +15,12 @@
 
 <div class="row-donde">
     <div class="content-wrapper">
-        <p>Estás aquí: <span class="hlited">Log In</span></p>
+        <p>Estás aquí: <span class="hlited">Acceder</span></p>
     </div>
 </div>
 
 <div class="content-wrapper seccion">
-	<h1 class="header-seccion">Log in</h1>
+	<h1 class="header-seccion">Acceder</h1>
 	<section id="loginForm" class="regularform">
 		<p>Ingresa tu número de documento y tu contraseña para acceder</p>
 		@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
@@ -29,17 +29,25 @@
 		<fieldset>
 			<ul>
 				<li>
-					@Html.LabelFor(u => u.Username)
-					@Html.TextBoxFor(u => u.Username)
-					@Html.ValidationMessageFor(u => u.Username)
-				</li>
+                    <div>
+                        @Html.LabelFor(u => u.Username)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(u => u.Username)
+                        @Html.ValidationMessageFor(u => u.Username)
+                    </div>
+                </li>
 				<li>
-					@Html.LabelFor(u => u.Password)
-					@Html.PasswordFor(u => u.Password)
-					@Html.ValidationMessageFor(u => u.Password)
-				</li>
+                    <div>
+                        @Html.LabelFor(u => u.Password)
+                    </div>
+                    <div>
+                        @Html.PasswordFor(u => u.Password)
+                        @Html.ValidationMessageFor(u => u.Password)
+                    </div>
+                </li>
 			</ul>
-			<input class="regularbtn" type="submit" value="Log in" />
+			<input class="regularbtn" type="submit" value="Acceder" />
 		</fieldset>
 	}
 	</section>

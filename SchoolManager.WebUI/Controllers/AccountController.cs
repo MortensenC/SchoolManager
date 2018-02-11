@@ -1,5 +1,6 @@
 ﻿using SchoolManager.Domain;
 using SchoolManager.Domain.Entities;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -15,6 +16,7 @@ namespace MvcApplication1.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -56,6 +58,7 @@ namespace MvcApplication1.Controllers
             ModelState.AddModelError("", "El usuario o contraseña utilizado no es correcto");
             return View(model);
         }
+
 
         //
         // POST: /Account/LogOff

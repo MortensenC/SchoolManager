@@ -582,7 +582,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Entities" ZoomLevel="72">
+      <Diagram Name="Entities" ZoomLevel="14">
         <EntityTypeShape EntityType="SchoolManagerModel.Role" Width="1.5" PointX="0.75" PointY="1" Height="1.7879850260416668" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagerModel.User" Width="1.5" PointX="4" PointY="0.625" Height="5.2494108072916656" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagerModel.Book" Width="1.5" PointX="7" PointY="1" Height="2.364889322916667" />
