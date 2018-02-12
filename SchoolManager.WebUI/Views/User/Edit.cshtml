@@ -84,8 +84,8 @@
                         @Html.LabelFor(model => model.Classroom)
                         @Html.DropDownListFor(model => model.ClassroomId, new SelectList(ViewBag.Classrooms, "Id", "Name"), string.Empty)
                     </div>
-                    @if (@Model.Classroom.Name == "Exalumnos")
-                    { 
+                    @if (@Model.Classroom != null && @Model.Classroom.Name == "Exalumnos")
+                    {
                         <div class="editor-label">
                             @Html.LabelFor(model => model.YearOfPromotion)
                             @Html.EditorFor(model => model.YearOfPromotion)
