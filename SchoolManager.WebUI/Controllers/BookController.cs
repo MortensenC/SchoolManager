@@ -116,6 +116,8 @@ namespace SchoolManager.WebUI.Controllers
             {
                 return HttpNotFound();
             }
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View(book);
         }
 
@@ -200,6 +202,8 @@ namespace SchoolManager.WebUI.Controllers
             {
                 return HttpNotFound();
             }
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View(book);
         }
 

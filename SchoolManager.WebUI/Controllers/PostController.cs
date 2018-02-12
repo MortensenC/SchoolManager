@@ -111,7 +111,8 @@ namespace SchoolManager.WebUI.Controllers
             }
 
             this.GetFiles(post);
-
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View(post);
         }
 
@@ -397,6 +398,8 @@ namespace SchoolManager.WebUI.Controllers
             }
             this.GetFiles(post);
             this.SetEditViewBag(post);
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View(post);
         }
 

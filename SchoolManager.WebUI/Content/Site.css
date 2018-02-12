@@ -377,6 +377,7 @@ div.jHtmlArea iframe {
 	position: relative;
 	display: inline-block;
 	margin: 0px 4px;
+	outline: none;
 }
 
 /* Tooltip text */

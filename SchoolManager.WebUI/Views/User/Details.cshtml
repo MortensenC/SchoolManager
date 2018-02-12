@@ -14,7 +14,7 @@
     <h1 class="header-seccion">Detalles de la cuenta</h1>
     <fieldset class="regularform detailsform editform">
         <div class="image-upload">
-            <img class="profile-picture" alt="profile picture" height="300px" src="@Url.Content(ViewBag.ProfilePicturePath)" />
+            <img class="profile-picture" alt="profile picture" height="300px" src="@Url.Content(ViewBag.EditProfilePicturePath)" />
         </div>
         <div class="form-right-side">
             <label>@Html.DisplayNameFor(model => model.Username): @Html.DisplayFor(model => model.Username)</label>
@@ -43,7 +43,7 @@
             <label>@Html.DisplayNameFor(model => model.SharePhone): @Html.DisplayFor(model => model.SharePhone)</label>
             <label>@Html.DisplayNameFor(model => model.ShareEmail): @Html.DisplayFor(model => model.ShareEmail)</label>
             <label>@Html.DisplayNameFor(model => model.Birthdate): @Html.DisplayFor(model => model.Birthdate)</label>
-            @if (@Model.Classroom.Name == "Exalumnos")
+            @if (@Model.Classroom != null && @Model.Classroom.Name == "Exalumnos")
             {
                 <label>@Html.DisplayNameFor(model => model.YearOfPromotion): @Html.DisplayFor(model => model.YearOfPromotion)</label>
             }
