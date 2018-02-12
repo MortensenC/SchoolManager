@@ -34,19 +34,22 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin, Teacher")]
         public ActionResult Details(int id = 0)
         {
-            User user = db.Users.Find(id);
+            User persona = db.Users.Find(id);
 
-            if (user == null)
+            if (persona == null)
             {
                 return HttpNotFound();
             }
 
+            //this.GetPicture(persona);
+            SetEditViewBag(persona);
+
+            ViewBag.Dad = db.Users.Find(persona.DadId);
+            ViewBag.Mom = db.Users.Find(persona.MomId);
+
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
             this.GetPicture(user);
-
-            ViewBag.Dad = db.Users.Find(user.DadId);
-            ViewBag.Mom = db.Users.Find(user.MomId);
-
-            return View(user);
+            return View(persona);
         }
 
         //
@@ -269,7 +272,9 @@ namespace SchoolManager.WebUI.Controllers
         {
             ViewBag.Classrooms = db.Classrooms.ToList();
             ViewBag.Users = db.Users.OrderBy(u => u.Surname).ToList().Where(u => u.IsInRole("Father")).ToList();
-            ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+            ViewBag.EditProfilePicturePath = "../../Content/Images/Profile.jpg";
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View();
         }
 
@@ -339,17 +344,19 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin")]
         public ActionResult Edit(int id = 0)
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            User persona = db.Users.Find(id);
+            if (persona == null)
             {
                 return HttpNotFound();
             }
 
-            user.UserType = user.Roles.Count > 0 ? user.Roles.FirstOrDefault().Name : string.Empty;
+            persona.UserType = persona.Roles.Count > 0 ? persona.Roles.FirstOrDefault().Name : string.Empty;
 
-            SetEditViewBag(user);
+            SetEditViewBag(persona);
 
-            return View(user);
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
+            return View(persona);
         }
 
         //
@@ -400,14 +407,39 @@ namespace SchoolManager.WebUI.Controllers
             }
         }
 
+        private string GetPictureEdit(User user)
+        {
+            var path = Path.Combine(Server.MapPath("~/Uploads/Profile"), user.Username);
+
+            if (Directory.Exists(path))
+            {
+                var file = Directory.GetFiles(path).FirstOrDefault();
+                if (string.IsNullOrEmpty(file))
+                {
+                    return "../../Content/Images/Profile.jpg";
+                    //ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
+                }
+                else
+                {
+                    return "~/Uploads/Profile/" + user.Username + "/" + file.Split('\\').LastOrDefault();
+                    //ViewBag.ProfilePicturePathWithOutSlash = "/Uploads/Profile/" + user.Username + "/" + file.Split('\\').LastOrDefault();
+                }
+            }
+            else
+            {
+                return "../../Content/Images/Profile.jpg";
+                //ViewBag.ProfilePicturePathWithOutSlash = "../../Content/Images/Profile.jpg";
+            }
+        }
+
         private void SetEditViewBag(User user)
         {
             user.ClassroomId = user.Classroom != null ? user.Classroom.Id.ToString() : string.Empty;
 
             ViewBag.Classrooms = db.Classrooms.ToList();
             ViewBag.Users = db.Users.OrderBy(u => u.Surname).ToList().Where(u => u.IsInRole("Father")).ToList();
-
-            this.GetPicture(user);
+            ViewBag.EditProfilePicturePath = this.GetPictureEdit(user);
+            //this.GetPicture(user);
         }
 
         //
