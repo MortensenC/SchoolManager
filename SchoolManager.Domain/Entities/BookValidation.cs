@@ -24,6 +24,11 @@ namespace SchoolManager.Domain.Entities
         [DisplayName("Título")]
         public int Title { get; set; }
 
+        [DisplayName("Descripción")]
+        public string Description { get; set; }
+        [DisplayName("Autor")]
+        public string Author { get; set; }
+
         [DisplayName("Destacado")]
         public bool Highlighted { get; set; }
     }
