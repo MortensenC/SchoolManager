@@ -1,0 +1,276 @@
+﻿@*@model SchoolManager.Domain.Entities.Gallery*@
+
+@{
+    ViewBag.Title = "Nueva inscripción";
+}
+
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>Estás aquí: <span>Admin</span> > <span>Inscripciones</span> > <span class="hlited">Nueva</span></p>
+    </div>
+</div>
+<div class="content-wrapper _novedades seccion">
+    <h1 class="header-seccion">Nueva inscripción</h1>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <fieldset class="regularform editform">
+            <div class="editor-title-section">
+                <h2>EL ALUMNO SE INSCRIBE EN:</h2>
+            </div>
+            <div class="editor-label">
+                <label for="Title">NIVEL/RAMA</label>@*<br />*@
+                <select>
+                    <option value="inicial">Inicial</option>
+                    <option value="egb">E.G.B.</option>
+                    <option value="polimodal">Polimodal</option>
+                    <option value="cef">C.E.F.</option>
+                    <option value="cec">C.E.C.</option>
+                    <option value="especial">Especial</option>
+                    <option value="adultos">Adultos</option>
+                    <option value="artistica">Artística</option>
+                    <option value="otro">Otro</option>
+                </select>@*<br />*@
+
+                @*<input type="radio" name="level" value="Inicial" /> Inicial
+                <input type="radio" name="level" value="E.G.B." /> E.G.B.
+                <input type="radio" name="level" value="Polimodal" /> Polimodal
+                <input type="radio" name="level" value="C.E.F." /> C.E.F.
+                <input type="radio" name="level" value="C.E.C." /> C.E.C.
+                <input type="radio" name="level" value="Especial" /> Especial
+                <input type="radio" name="level" value="Adultos" /> Adultos
+                <input type="radio" name="level" value="Artística" /> Artística
+                <input type="radio" name="level" value="Otro" /> Otro: <input type="text" name="level">*@
+
+            @*</div>
+            <div class="editor-label">*@
+                <label for="Title">AÑO</label>@*<br />*@
+                <select>
+                    <option value="1">1°</option>
+                    <option value="2">2°</option>
+                    <option value="3">3°</option>
+                    <option value="4">4°</option>
+                    <option value="5">5°</option>
+                    <option value="6">6°</option>
+                    <option value="7">7°</option>
+                    <option value="8">8°</option>
+                    <option value="9">9°</option>
+                </select>@*<br />*@
+                @*<input type="radio" name="year" value="1" /> 1°
+                <input type="radio" name="year" value="2" /> 2°
+                <input type="radio" name="year" value="3" /> 3°
+                <input type="radio" name="year" value="4" /> 4°
+                <input type="radio" name="year" value="5" /> 5°
+                <input type="radio" name="year" value="6" /> 6°
+                <input type="radio" name="year" value="7" /> 7°
+                <input type="radio" name="year" value="8" /> 8°
+                <input type="radio" name="year" value="9" /> 9°*@
+            @*</div>
+            <div class="editor-label">*@
+                <label for="Title">TURNO SOLICITADO</label>@*<br />*@
+                <select>
+                    <option value="maniana">Mañana</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="jornadaCompleta">Jornada Completa</option>
+                    <option value="vespertino">Vespertino</option>
+                    <option value="noche">Noche</option>
+                </select>@*<br />*@
+                @*<input type="radio" name="turn" value="Mañana" /> Mañana
+                <input type="radio" name="turn" value="Tarde" /> Tarde
+                <input type="radio" name="turn" value="Jornada Completa" /> Jornada Completa
+                <input type="radio" name="turn" value="Vespertino" /> Vespertino
+                <input type="radio" name="turn" value="Noche" /> Noche*@
+            </div>
+            <div class="editor-title-end"></div>
+            <div class="editor-title-section"><h2>DATOS PERSONALES DEL ALUMNO</h2></div>
+            <div class="editor-label">
+                Apellidos<br>
+                <input type="text" name="lastnames"><br>
+                Nombres<br>
+                <input type="text" name="firstnames"><br>
+                Fecha de nacimiento<br>
+                <input type="date" name="bday"><br>
+                Lugar de nacimiento<br>
+                <input type="text" name="birthplace"><br>
+                DNI<br>
+                <input type="number" name="dni"><br>
+                Sexo<br>
+                <input type="radio" name="gender" value="male"> Masculino
+                <input type="radio" name="gender" value="female"> Femenino<br>
+                Domicilio familiar<br>
+                Calle <input type="text" name="street"> N° <input type="number" name="number"> Piso <input type="text" name="floor"> Dpto <input type="text" name="dpto"><br /> 
+                Localidad <input type="text" name="loc"> Código Postal <input type="text" name="code"><br />
+                Telefono familiar<br>
+                <input type="text" name="phone"><br>
+                Celular<br>
+                <input type="text" name="cellphone"><br>
+                Otros teléfonos<br>
+                <input type="text" name="otherphones"><br>
+                Dirección de e-mail del padre<br>
+                <input type="email" name="fatherEmail"><br>
+                Dirección de e-mail de la madre<br>
+                <input type="email" name="motherEmail"><br>
+                ¿Cuántos hermanos tiene?<br>
+                <input type="number" name="brothers"><br>
+                ¿Cuántos en este establecimiento?<br>
+                <input type="number" name="inthisschool"><br>
+                Fecha de nacimiento de los hermanos que quiere dejar inscriptos<br>
+                <input type="text" name="bdaybrothers"><br>
+                Si no habla español, lengua hablada en el hogar<br>
+                <input type="text" name="language"><br>
+            </div>
+            <div class="editor-title-end"></div>
+            <div class="editor-title-section"><h2>ESCUELA DE PROCEDENCIA</h2> (completar si el alumno proviene de otro establecimiento)</div>
+            <div class="editor-label">
+                Distrito<br>
+                <input type="text" name="district"><br>
+                Nivel/Rama<br>
+                <input type="text" name="level"><br>
+                Nombre del establecimiento<br>
+                <input type="text" name="schoolName"> Nro <input type="text" name="schoolNumber">
+                <input type="checkbox" name="private" value="Private"> Privado<br />
+                <div>
+                    INFORMACIÓN DE SALUD<br /> 
+                    <input type="checkbox" name="completed" value="completo"> Completó <input type="checkbox" name="updated" value="Actualizo"> Actualizó<br />
+                </div>
+                <div><input type="checkbox" name="obraSocial" value="obraSocial"> Obra Social N° Afiliado <input type="number" name="affiliateNumber"><br></div>
+
+            </div>
+            <div class="editor-title-end"></div>
+            <div class="editor-title-section"><h2>DATOS DE LA MADRE, PADRE Y/O RESPONSABLE DEL ALUMNO/A</h2></div>
+            <div class="editor-label">
+                Apellidos y Nombres de la Madre<br>
+                <input type="text" name="motherName"><br>
+                Profesión u ocupación<br>
+                <input type="text" name="motherProfesion"><br>
+                Nacionalidad<br>
+                <input type="text" name="motherNationality"><br>
+                <label for="Title">Nivel de instrucción de la madre: (marque el último nivel alcanzado)</label><br />
+                <select>
+                    <option value="ninguno">Ninguno</option>
+                    <option value="primario">Primario</option>
+                    <option value="secundario">Secundario</option>
+                    <option value="terciario">Terciario</option>
+                    <option value="universitario">Universitario</option>
+                    <option value="posgrado">Posgrado</option>
+                </select><br />
+                @*<input type="radio" name="instructionLevelMother" value="Ninguno" /> Ninguno
+                <input type="radio" name="instructionLevelMother" value="Primario" /> Primario
+                <input type="radio" name="instructionLevelMother" value="Secundario" /> Secundario
+                <input type="radio" name="instructionLevelMother" value="Terciario" /> Terciario
+                <input type="radio" name="instructionLevelMother" value="Universitario" /> Universitario
+                <input type="radio" name="instructionLevelMother" value="Especial" /> Posgrado<br />*@
+
+                <input type="radio" name="instructionLevelMotherCompleted" value="Completo" /> Completo
+                <input type="radio" name="instructionLevelMotherCompleted" value="Incompleto" /> Incompleto Hasta el año/grado <input type="text" name="yearInstructionLevelMother"><br>
+                ¿Vive?<br />
+                <select>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select><br />
+                @*<input type="radio" name="motherLive" value="Completo" /> Si
+                <input type="radio" name="motherLive" value="Incompleto" /> No*@
+                Tipo de documento <input type="text" name="typeDNIMother"> N° Doc. <input type="number" name="numberDNIMother"><br />
+                Domicilio<br>
+                Calle <input type="text" name="streetMother"> N° <input type="number" name="numberStreetMother"> Piso <input type="text" name="streetFloorMother"> Torre <input type="text" name="streetTowerMother"> Dpto <input type="text" name="streetDptoMother"><br />
+                Localidad <input type="text" name="localidadMother"> Código Postal <input type="number" name="postalCodeMother"><br>
+                Teléfono<br>
+                <input type="text" name="phoneMother"><br>
+                Teléfonos del trabajo<br>
+                <input type="text" name="workPhoneMother"><br>
+            </div>
+            <div class="editor-title-end"></div>
+            <div class="editor-label">
+                Apellidos y Nombres del Padre<br>
+                <input type="text" name="fatherName"><br>
+                Profesión u ocupación<br>
+                <input type="text" name="fatherProfesion"><br>
+                Nacionalidad<br>
+                <input type="text" name="fatherNationality"><br>
+                <label for="Title">Nivel de instrucción del padre: (marque el último nivel alcanzado)</label><br />
+                <select>
+                    <option value="ninguno">Ninguno</option>
+                    <option value="primario">Primario</option>
+                    <option value="secundario">Secundario</option>
+                    <option value="terciario">Terciario</option>
+                    <option value="universitario">Universitario</option>
+                    <option value="posgrado">Posgrado</option>
+                </select><br />
+
+                @*<input type="radio" name="instructionLevelFather" value="Ninguno" /> Ninguno
+                <input type="radio" name="instructionLevelFather" value="Primario" /> Primario
+                <input type="radio" name="instructionLevelFather" value="Secundario" /> Secundario
+                <input type="radio" name="instructionLevelFather" value="Terciario" /> Terciario
+                <input type="radio" name="instructionLevelFather" value="Universitario" /> Universitario
+                <input type="radio" name="instructionLevelFather" value="Especial" /> Posgrado<br />*@
+                <input type="radio" name="instructionLevelFatherCompleted" value="Completo" /> Completo
+                <input type="radio" name="instructionLevelFatherCompleted" value="Incompleto" /> Incompleto 
+                Hasta el año/grado <input type="text" name="yearInstructionLevelFather"><br>
+                ¿Vive?<br />
+                <select>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select><br />
+                @*<input type="radio" name="fatherLive" value="Completo" /> Si
+                <input type="radio" name="fatherLive" value="Incompleto" /> No*@
+                Tipo de documento <input type="text" name="typeDNIFather"> N° Doc. <input type="number" name="numberDNIFather"><br />
+                Domicilio<br>
+                Calle <input type="text" name="streetFather"> N° <input type="number" name="numberStreetFather"> Piso <input type="text" name="streetFloorFather"> Torre <input type="text" name="streetTowerFather"> Dpto <input type="text" name="streetDptoFather"><br />
+                Localidad <input type="text" name="localidadFather"> Código Postal <input type="number" name="postalCodeFather"><br>
+                Teléfono<br>
+                <input type="text" name="phoneFather"><br>
+                Teléfonos del trabajo<br>
+                <input type="text" name="workPhoneFather"><br>
+            </div>
+            <div class="editor-title-end"></div>
+            <div class="editor-label">
+                Apellidos y Nombres del Tutor/Responsable<br>
+                <input type="text" name="tutorName"><br>
+                Profesión u ocupación<br>
+                <input type="text" name="tutorProfesion"><br>
+                Nacionalidad<br>
+                <input type="text" name="tutorNationality"><br>
+                <label for="Title">Nivel de instrucción del Tutor/Responsable: (marque el último nivel alcanzado)</label><br />
+                <select>
+                    <option value="ninguno">Ninguno</option>
+                    <option value="primario">Primario</option>
+                    <option value="secundario">Secundario</option>
+                    <option value="terciario">Terciario</option>
+                    <option value="universitario">Universitario</option>
+                    <option value="posgrado">Posgrado</option>
+                </select><br />
+                @*<input type="radio" name="instructionLevelTutor" value="Ninguno" /> Ninguno
+                <input type="radio" name="instructionLevelTutor" value="Primario" /> Primario
+                <input type="radio" name="instructionLevelTutor" value="Secundario" /> Secundario
+                <input type="radio" name="instructionLevelTutor" value="Terciario" /> Terciario
+                <input type="radio" name="instructionLevelTutor" value="Universitario" /> Universitario
+                <input type="radio" name="instructionLevelTutor" value="Especial" /> Posgrado<br />*@
+                <input type="radio" name="instructionLevelTutorCompleted" value="Completo" /> Completo
+                <input type="radio" name="instructionLevelTutorCompleted" value="Incompleto" /> Incompleto Hasta el año/grado <input type="text" name="yearInstructionLevelTutor"><br>
+                ¿Vive?<br />
+                <select>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select><br />
+                @*<input type="radio" name="tutorLive" value="Completo" /> Si
+                <input type="radio" name="tutorLive" value="Incompleto" /> No*@
+                Tipo de documento <input type="text" name="typeDNITutor"> N° Doc. <input type="number" name="numberDNITutor"><br />
+                Domicilio<br>
+                Calle <input type="text" name="streetTutor"> N° <input type="number" name="numberStreetTutor"> Piso <input type="text" name="streetFloorTutor"> Torre <input type="text" name="streetTowerTutor"> Dpto <input type="text" name="streetDptoTutor"><br />
+                Localidad <input type="text" name="localidadTutor"> Código Postal <input type="number" name="postalCodeTutor"><br>
+                Teléfono<br>
+                <input type="text" name="phoneTutor"><br>
+                Teléfonos del trabajo<br>
+                <input type="text" name="workPhoneTutor"><br>
+            </div>
+
+            <div class="editor-title-end"></div>
+            <input class="regularbtn float-left" type="submit" value="Inscribir" />
+            <div class="secbtn">@Html.ActionLink("Volver", "Index")</div>
+</fieldset>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
