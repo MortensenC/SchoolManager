@@ -100,10 +100,10 @@
                         @Html.ActionLink("Ver", "Details", new { id = item.Dad.Id }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.Dad.Id }) |
                         @Html.ActionLink("Reset", "Reset", new { id = item.Dad.Id })*@
-                        <a href=@Url.Action("Edit", new { id = item.Id }) class="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Editar</span></a>
-                        <a href=@Url.Action("Details", new { id = item.Id }) class="tooltip"><i class="fa fa-eye" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Ver</span></a>
-                        <a href=@Url.Action("Delete", new { id = item.Id }) class="tooltip"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Eliminar</span></a>
-                        <a href=@Url.Action("Reset", new { id = item.Id }) class="tooltip"><i class="fa fa-refresh" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Resetear Clave</span></a>
+                        <a href=@Url.Action("Edit", new { id = item.Dad.Id }) class="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Editar</span></a>
+                        <a href=@Url.Action("Details", new { id = item.Dad.Id }) class="tooltip"><i class="fa fa-eye" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Ver</span></a>
+                        <a href=@Url.Action("Delete", new { id = item.Dad.Id }) class="tooltip"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Eliminar</span></a>
+                        <a href=@Url.Action("Reset", new { id = item.Dad.Id }) class="tooltip"><i class="fa fa-refresh" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Resetear Clave</span></a>
                     </td>
                 }
             </tr>
@@ -139,10 +139,10 @@
                 @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                 {
                     <td class="actions">
-                        <a href=@Url.Action("Edit", new { id = item.Id }) class="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Editar</span></a>
-                        <a href=@Url.Action("Details", new { id = item.Id }) class="tooltip"><i class="fa fa-eye" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Ver</span></a>
-                        <a href=@Url.Action("Delete", new { id = item.Id }) class="tooltip"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Eliminar</span></a>
-                        <a href=@Url.Action("Reset", new { id = item.Id }) class="tooltip"><i class="fa fa-refresh" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Resetear Clave</span></a>
+                        <a href=@Url.Action("Edit", new { id = item.Mom.Id }) class="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Editar</span></a>
+                        <a href=@Url.Action("Details", new { id = item.Mom.Id }) class="tooltip"><i class="fa fa-eye" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Ver</span></a>
+                        <a href=@Url.Action("Delete", new { id = item.Mom.Id }) class="tooltip"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Eliminar</span></a>
+                        <a href=@Url.Action("Reset", new { id = item.Mom.Id }) class="tooltip"><i class="fa fa-refresh" aria-hidden="true"></i><span class="tooltiptext tooltip-top">Resetear Clave</span></a>
                         @*@Html.ActionLink("Editar", "Edit", new { id = item.Mom.Id }) |
                         @Html.ActionLink("Ver", "Details", new { id = item.Mom.Id }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.Mom.Id }) |
