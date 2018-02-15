@@ -286,7 +286,7 @@ article.galeria object { width:100%; height:360px; }
 .editform, .profile-content { display:table; table-layout: fixed; }
 .editform .image-upload, .profile-content .imgcell { display:table-cell; vertical-align:top; width:300px; }
 .editform .form-right-side, .profile-content .rightside { display:table-cell; vertical-align:top; padding-left:22px; }
-.editform label, .editform .trigger_display span { width:140px; display: inline-table; }
+.editform label, .editform .trigger_display span { width:160px; display: inline-table; }
 .editform .editor-label { margin-bottom:6px; }
 .editform .trigger_display { margin-bottom: 10px; padding-top: 3px; }
 .editform .trigger_display label { width:auto; margin-right:14px; }
