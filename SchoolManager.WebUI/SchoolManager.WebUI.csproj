@@ -267,6 +267,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="SchoolManager.WebUI.Publish.xml" />
     <Content Include="Scripts\jHtmlArea-0.8.js" />
     <Content Include="Scripts\jHtmlArea-0.8.min.js" />
     <Content Include="Scripts\jHtmlArea.ColorPickerMenu-0.8.js" />
@@ -515,6 +516,7 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <Content Include="Views\New folder\_Layout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

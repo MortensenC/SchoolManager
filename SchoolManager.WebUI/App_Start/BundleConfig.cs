@@ -23,7 +23,7 @@ namespace SchoolManager.WebUI
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/Site.css",
+                "~/Content/Site19022018.css",
                 "~/Content/royalslider.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
