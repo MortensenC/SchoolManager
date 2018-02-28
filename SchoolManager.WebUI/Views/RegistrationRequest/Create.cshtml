@@ -15,113 +15,147 @@
     {
         @Html.ValidationSummary(true)
 
-        <fieldset class="regularform editform">
-            <div class="editor-title-section">
-                <h2>EL ALUMNO SE INSCRIBE EN:</h2>
-            </div>
-            <div class="editor-label">
-                <label for="Title">NIVEL/RAMA</label>@*<br />*@
-                <select>
-                    <option value="inicial">Inicial</option>
-                    <option value="egb">E.G.B.</option>
-                    <option value="polimodal">Polimodal</option>
-                    <option value="cef">C.E.F.</option>
-                    <option value="cec">C.E.C.</option>
-                    <option value="especial">Especial</option>
-                    <option value="adultos">Adultos</option>
-                    <option value="artistica">Artística</option>
-                    <option value="otro">Otro</option>
-                </select>@*<br />*@
-
-                @*<input type="radio" name="level" value="Inicial" /> Inicial
-                <input type="radio" name="level" value="E.G.B." /> E.G.B.
-                <input type="radio" name="level" value="Polimodal" /> Polimodal
-                <input type="radio" name="level" value="C.E.F." /> C.E.F.
-                <input type="radio" name="level" value="C.E.C." /> C.E.C.
-                <input type="radio" name="level" value="Especial" /> Especial
-                <input type="radio" name="level" value="Adultos" /> Adultos
-                <input type="radio" name="level" value="Artística" /> Artística
-                <input type="radio" name="level" value="Otro" /> Otro: <input type="text" name="level">*@
-
+    <fieldset class="regularform editform">
+        <div class="editor-title-section">
+            <h2>EL ALUMNO SE INSCRIBE EN:</h2>
+        </div>
+        <div class="editor-label">
+            <label for="Title">NIVEL/RAMA</label>@*<br />*@
+            <select>
+                <option value="inicial">Inicial</option>
+                <option value="egb">E.G.B.</option>
+                <option value="polimodal">Polimodal</option>
+                <option value="cef">C.E.F.</option>
+                <option value="cec">C.E.C.</option>
+                <option value="especial">Especial</option>
+                <option value="adultos">Adultos</option>
+                <option value="artistica">Artística</option>
+                <option value="otro">Otro</option>
+            </select>
+        </div>
+        <div class="editor-label">
+            <label for="Title">AÑO</label>
+            <select>
+                <option value="1">1°</option>
+                <option value="2">2°</option>
+                <option value="3">3°</option>
+                <option value="4">4°</option>
+                <option value="5">5°</option>
+                <option value="6">6°</option>
+                <option value="7">7°</option>
+                <option value="8">8°</option>
+                <option value="9">9°</option>
+            </select>
+        </div>
+        <div class="editor-label">
+            <label for="Title">TURNO SOLICITADO</label>
+            <select>
+                <option value="maniana">Mañana</option>
+                <option value="tarde">Tarde</option>
+                <option value="jornadaCompleta">Jornada Completa</option>
+                <option value="vespertino">Vespertino</option>
+                <option value="noche">Noche</option>
+            </select>
+        </div>
+        <div class="editor-title-end"></div>
+        <div class="editor-title-section"><h2>DATOS PERSONALES DEL ALUMNO</h2></div>
+        <div class="editor-label">
+            <label for="lastnames">APELLIDOS</label>
+            <input class="extendedInput" type="text" name="lastnames">
+        </div>
+        <div class="editor-label">
+            <label for="firstnames">NOMBRES</label>
+            <input class="extendedInput" type="text" name="firstnames">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="bday">FECHA DE NACIMIENTO</label>
+            <input type="date" name="bday">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="birthplace">LUGAR DE NACIMIENTO</label>
+            <input class="extendedInput" type="text" name="birthplace">
+        </div>
+        <div class="editor-label">
+            <label for="dni">DNI</label>
+            <input type="number" name="dni">
+        </div>
+        <div class="editor-label">
+            <label for="gender">SEXO</label>
+            <input id="male" type="radio" name="gender" value="male">
+            <label for="male">Masculino</label>
+            <input id="female" type="radio" name="gender" value="female">
+            <label for="female">Femenino</label>
+        </div>
+        <div class="editor-label">
+            <div class="editor-title-section">DOMICILIO FAMILIAR</div>
+        </div>
+        <div class="editor-label">
+            <label for="street">CALLE</label>
+            <input class="extendedInput" type="text" name="street">
             @*</div>
-            <div class="editor-label">*@
-                <label for="Title">AÑO</label>@*<br />*@
-                <select>
-                    <option value="1">1°</option>
-                    <option value="2">2°</option>
-                    <option value="3">3°</option>
-                    <option value="4">4°</option>
-                    <option value="5">5°</option>
-                    <option value="6">6°</option>
-                    <option value="7">7°</option>
-                    <option value="8">8°</option>
-                    <option value="9">9°</option>
-                </select>@*<br />*@
-                @*<input type="radio" name="year" value="1" /> 1°
-                <input type="radio" name="year" value="2" /> 2°
-                <input type="radio" name="year" value="3" /> 3°
-                <input type="radio" name="year" value="4" /> 4°
-                <input type="radio" name="year" value="5" /> 5°
-                <input type="radio" name="year" value="6" /> 6°
-                <input type="radio" name="year" value="7" /> 7°
-                <input type="radio" name="year" value="8" /> 8°
-                <input type="radio" name="year" value="9" /> 9°*@
+                <div class="editor-label">*@
+            <label for="streetNumber">N°</label>
+            <input type="number" name="streetNumber">
+        </div>
+        <div class="editor-label">
+            <label for="floor">PISO</label>
+            <input type="text" name="floor">
             @*</div>
-            <div class="editor-label">*@
-                <label for="Title">TURNO SOLICITADO</label>@*<br />*@
-                <select>
-                    <option value="maniana">Mañana</option>
-                    <option value="tarde">Tarde</option>
-                    <option value="jornadaCompleta">Jornada Completa</option>
-                    <option value="vespertino">Vespertino</option>
-                    <option value="noche">Noche</option>
-                </select>@*<br />*@
-                @*<input type="radio" name="turn" value="Mañana" /> Mañana
-                <input type="radio" name="turn" value="Tarde" /> Tarde
-                <input type="radio" name="turn" value="Jornada Completa" /> Jornada Completa
-                <input type="radio" name="turn" value="Vespertino" /> Vespertino
-                <input type="radio" name="turn" value="Noche" /> Noche*@
-            </div>
-            <div class="editor-title-end"></div>
-            <div class="editor-title-section"><h2>DATOS PERSONALES DEL ALUMNO</h2></div>
-            <div class="editor-label">
-                Apellidos<br>
-                <input type="text" name="lastnames"><br>
-                Nombres<br>
-                <input type="text" name="firstnames"><br>
-                Fecha de nacimiento<br>
-                <input type="date" name="bday"><br>
-                Lugar de nacimiento<br>
-                <input type="text" name="birthplace"><br>
-                DNI<br>
-                <input type="number" name="dni"><br>
-                Sexo<br>
-                <input type="radio" name="gender" value="male"> Masculino
-                <input type="radio" name="gender" value="female"> Femenino<br>
-                Domicilio familiar<br>
-                Calle <input type="text" name="street"> N° <input type="number" name="number"> Piso <input type="text" name="floor"> Dpto <input type="text" name="dpto"><br /> 
-                Localidad <input type="text" name="loc"> Código Postal <input type="text" name="code"><br />
-                Telefono familiar<br>
-                <input type="text" name="phone"><br>
-                Celular<br>
-                <input type="text" name="cellphone"><br>
-                Otros teléfonos<br>
-                <input type="text" name="otherphones"><br>
-                Dirección de e-mail del padre<br>
-                <input type="email" name="fatherEmail"><br>
-                Dirección de e-mail de la madre<br>
-                <input type="email" name="motherEmail"><br>
-                ¿Cuántos hermanos tiene?<br>
-                <input type="number" name="brothers"><br>
-                ¿Cuántos en este establecimiento?<br>
-                <input type="number" name="inthisschool"><br>
-                Fecha de nacimiento de los hermanos que quiere dejar inscriptos<br>
-                <input type="text" name="bdaybrothers"><br>
-                Si no habla español, lengua hablada en el hogar<br>
-                <input type="text" name="language"><br>
-            </div>
-            <div class="editor-title-end"></div>
-            <div class="editor-title-section"><h2>ESCUELA DE PROCEDENCIA</h2> (completar si el alumno proviene de otro establecimiento)</div>
+                <div class="editor-label">*@
+            <label for="dpto">DPTO</label>
+            <input type="text" name="dpto"><br />
+        </div>
+        <div class="editor-label">
+            <label for="loc">LOCALIDAD</label>
+            <input class="extendedInput" type="text" name="loc">
+            @*</div>
+                <div class="editor-label">*@
+            <label for="code">CODIGO POSTAL</label>
+            <input type="text" name="code">
+        </div>
+        <div class="editor-title-end"></div>
+        <div class="editor-label">
+            <label for="phone">TELEFONO FAMILIAR</label>
+            <input type="text" name="phone">
+        </div>
+        <div class="editor-label">
+            <label for="cellphone">CELULAR</label>
+            <input type="text" name="cellphone">
+        </div>
+        <div class="editor-label">
+            <label for="otherphones">OTROS TELEFONOS</label>
+            <input class="extendedInput" type="text" name="otherphones">
+        </div>
+        <div class="editor-label">
+            <label for="fatherEmail">EMAIL DEL PADRE</label>
+            <input class="extendedInput" type="email" name="fatherEmail">
+        </div>
+        <div class="editor-label">
+            <label for="motherEmail">EMAIL DE LA MADRE</label>
+            <input class="extendedInput" type="email" name="motherEmail">
+        </div>
+        <div class="editor-label">
+            ¿CUANTOS HERMANOS TIENE?<br />
+            <input type="number" name="brothers">
+        </div>
+        <div class="editor-label">
+            ¿CUANTOS EN ESTE ESTABLECIMIENTO?<br />
+            <input type="number" name="inthisschool">
+        </div>
+        <div class="editor-label">
+            FECHA DE NACIMIENTO DE LOS HERMANOS QUE QUIERE DEJAR INSCRIPTOS<br />
+            <input class="extendedInput" type="text" name="bdaybrothers">
+        </div>
+        <div class="editor-label">
+            SI NO HABLA ESPAÑOL, LENGUA HABLADA EN EL HOGAR<br />
+            <input class="extendedInput" type="text" name="language">
+        </div>
+        <div class="editor-title-end"></div>
+        <div class="editor-label">
+            <input id="otroEst" type="checkbox" name="otroEst" value="otroEst"><label class="extended" style="width: 30%;" for="otroEst">PROVIENE DE OTRO ESTABLECIMIENTO</label>
+        </div>
+        <div id="escuelaProcedencia" style="display:none">
+            <div class="editor-title-section"><h2>ESCUELA DE PROCEDENCIA</h2></div>
             <div class="editor-label">
                 Distrito<br>
                 <input type="text" name="district"><br>
@@ -131,146 +165,243 @@
                 <input type="text" name="schoolName"> Nro <input type="text" name="schoolNumber">
                 <input type="checkbox" name="private" value="Private"> Privado<br />
                 <div>
-                    INFORMACIÓN DE SALUD<br /> 
+                    INFORMACIÓN DE SALUD<br />
                     <input type="checkbox" name="completed" value="completo"> Completó <input type="checkbox" name="updated" value="Actualizo"> Actualizó<br />
                 </div>
                 <div><input type="checkbox" name="obraSocial" value="obraSocial"> Obra Social N° Afiliado <input type="number" name="affiliateNumber"><br></div>
 
             </div>
             <div class="editor-title-end"></div>
-            <div class="editor-title-section"><h2>DATOS DE LA MADRE, PADRE Y/O RESPONSABLE DEL ALUMNO/A</h2></div>
-            <div class="editor-label">
-                Apellidos y Nombres de la Madre<br>
-                <input type="text" name="motherName"><br>
-                Profesión u ocupación<br>
-                <input type="text" name="motherProfesion"><br>
-                Nacionalidad<br>
-                <input type="text" name="motherNationality"><br>
-                <label for="Title">Nivel de instrucción de la madre: (marque el último nivel alcanzado)</label><br />
-                <select>
-                    <option value="ninguno">Ninguno</option>
-                    <option value="primario">Primario</option>
-                    <option value="secundario">Secundario</option>
-                    <option value="terciario">Terciario</option>
-                    <option value="universitario">Universitario</option>
-                    <option value="posgrado">Posgrado</option>
-                </select><br />
-                @*<input type="radio" name="instructionLevelMother" value="Ninguno" /> Ninguno
-                <input type="radio" name="instructionLevelMother" value="Primario" /> Primario
-                <input type="radio" name="instructionLevelMother" value="Secundario" /> Secundario
-                <input type="radio" name="instructionLevelMother" value="Terciario" /> Terciario
-                <input type="radio" name="instructionLevelMother" value="Universitario" /> Universitario
-                <input type="radio" name="instructionLevelMother" value="Especial" /> Posgrado<br />*@
+        </div>
+        <div class="editor-title-section"><h2>DATOS DE LA MADRE</h2></div>
+        <div class="editor-label">
+            <label class="extended" for="motherName">APELLIDOS Y NOMBRES</label>
+            <input class="extendedInput" type="text" name="motherName">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="motherProfesion">PROFESION U OCUPACION</label>
+            <input class="extendedInput" type="text" name="motherProfesion">
+        </div>
+        <div class="editor-label">
+            <label for="motherNationality">NACIONALIDAD</label>
+            <input type="text" name="motherNationality">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="Title">NIVEL DE INSTRUCCION:</label>
+            <select>
+                <option value="ninguno">Ninguno</option>
+                <option value="primario">Primario</option>
+                <option value="secundario">Secundario</option>
+                <option value="terciario">Terciario</option>
+                <option value="universitario">Universitario</option>
+                <option value="posgrado">Posgrado</option>
+            </select>
+            <input type="radio" name="instructionLevelMotherCompleted" value="Completo" /> Completo
+            <input type="radio" name="instructionLevelMotherCompleted" value="Incompleto" /> Incompleto Hasta el año/grado <input type="text" name="yearInstructionLevelMother"><br>
+        </div>
+        <div class="editor-label">
+            <label>¿VIVE?</label>
+            <select>
+                <option value="si">Si</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="typeDNIMother">TIPO DE DOCUMENTO</label>
+            <input type="text" name="typeDNIMother">
+        </div>
+        <div class="editor-label">
+            <label for="numberDNIMother">N° DOCUMENTO</label>
+            <input type="number" name="numberDNIMother">
+        </div>
+        DOMICILIO<br>
+        <div class="editor-label">
+            <label for="streetMother">CALLE</label>
+            <input class="extendedInput" type="text" name="streetMother">
+            <label for="numberStreetMother">N°</label>
+            <input type="number" name="numberStreetMother">
+        </div>
+        <div class="editor-label">
+            <label for="streetFloorMother">PISO</label>
+            <input type="text" name="streetFloorMother">
+            <label for="streetTowerMother">TORRE</label>
+            <input type="text" name="streetTowerMother">
+            <label for="streetDptoMother">DPTO</label>
+            <input type="text" name="streetDptoMother">
+        </div>
+        <div class="editor-label">
+            <label for="localidadMother">LOCALIDAD</label>
+            <input class="extendedInput" type="text" name="localidadMother">
+            <label for="postalCodeMother">CODIGO POSTAL</label>
+            <input type="number" name="postalCodeMother">
+        </div>
+        <div class="editor-label">
+            <label for="phoneMother">TELEFONO</label>
+            <input type="text" name="phoneMother">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="workPhoneMother">TELEFONOS DEL TRABAJO</label>
+            <input type="text" name="workPhoneMother">
+        </div>
+        <div class="editor-title-end"></div>
+        <div class="editor-title-section"><h2>DATOS DEL PADRE</h2></div>
+        <div class="editor-label">
+            <label class="extended" for="fatherName">APELLIDOS Y NOMBRES</label>
+            <input class="extendedInput" type="text" name="fatherName">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="fatherProfesion">PROFESION U OCUPACION</label>
+            <input class="extendedInput" type="text" name="fatherProfesion">
+        </div>
+        <div class="editor-label">
+            <label for="fatherNationality">NACIONALIDAD</label>
+            <input type="text" name="fatherNationality">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="">NIVEL DE INSTRUCCION:</label>
+            <select>
+                <option value="ninguno">Ninguno</option>
+                <option value="primario">Primario</option>
+                <option value="secundario">Secundario</option>
+                <option value="terciario">Terciario</option>
+                <option value="universitario">Universitario</option>
+                <option value="posgrado">Posgrado</option>
+            </select>
+            <input type="radio" name="instructionLevelFatherCompleted" value="Completo" /> Completo
+            <input type="radio" name="instructionLevelFatherCompleted" value="Incompleto" /> Incompleto
+            Hasta el año/grado <input type="text" name="yearInstructionLevelFather">
+        </div>
+        <div class="editor-label">
+            <label for="">¿VIVE?</label>
+            <select>
+                <option value="si">Si</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="typeDNIFather">TIPO DE DOCUMENTO</label>
+            <input type="text" name="typeDNIFather">
+        </div>
+        <div class="editor-label">
+            <label for="numberDNIFather">N° DOC.</label>
+            <input type="number" name="numberDNIFather">
+        </div>
+        <div class="editor-label">
+            DOMICILIO<br>
+            <label for="streetFather">CALLE</label>
+            <input class="extendedInput" type="text" name="streetFather">
+            <label for="numberStreetFather">N°</label>
+            <input type="number" name="numberStreetFather">
+        </div>
+        <div class="editor-label">
+            <label for="streetFloorFather">PISO</label>
+            <input type="text" name="streetFloorFather">
+            <label for="streetTowerFather">TORRE</label>
+            <input type="text" name="streetTowerFather">
+            <label for="streetDptoFather">DPTO</label>
+            <input type="text" name="streetDptoFather">
+        </div>
+        <div class="editor-label">
+            <label for="localidadFather">LOCALIDAD</label>
+            <input class="extendedInput" type="text" name="localidadFather">
+            <label for="postalCodeFather">CODIGO POSTAL</label>
+            <input type="number" name="postalCodeFather">
+        </div>
+        <div class="editor-label">
+            <label for="phoneFather">TELEFONO</label>
+            <input type="text" name="phoneFather">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="workPhoneFather">TELEFONOS DEL TRABAJO</label>
+            <input type="text" name="workPhoneFather">
+        </div>
+        <div class="editor-title-end"></div>
+        <div class="editor-title-section"><h2>DATOS DEL TUTOR/RESPONSABLE</h2></div>
+        <div class="editor-label">
+            <label class="extended" for="tutorName">APELLIDOS Y NOMBRES</label>
+            <input class="extendedInput" type="text" name="tutorName">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="tutorProfesion">PROFESION U OCUPACION</label>
+            <input class="extendedInput" type="text" name="tutorProfesion">
+        </div>
+        <div class="editor-label">
+            <label for="tutorNationality">NACIONALIDAD</label>
+            <input type="text" name="tutorNationality">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="">NIVEL DE INSTRUCCION:</label>
+            <select>
+                <option value="ninguno">Ninguno</option>
+                <option value="primario">Primario</option>
+                <option value="secundario">Secundario</option>
+                <option value="terciario">Terciario</option>
+                <option value="universitario">Universitario</option>
+                <option value="posgrado">Posgrado</option>
+            </select>
+            <input type="radio" name="instructionLevelTutorCompleted" value="Completo" /> Completo
+            <input type="radio" name="instructionLevelTutorCompleted" value="Incompleto" /> Incompleto Hasta el año/grado <input type="text" name="yearInstructionLevelTutor"><br>
+        </div>
+        <div class="editor-label">
+            <label for="">¿VIVE?</label>
+            <select>
+                <option value="si">Si</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="typeDNITutor">TIPO DE DOCUMENTO</label>
+            <input type="text" name="typeDNITutor">
+        </div>
+        <div class="editor-label">
+            <label for="numberDNITutor">N° DOC.</label>
+            <input type="number" name="numberDNITutor">
+        </div>
+        <div class="editor-label">
+            Domicilio<br>
+            <label for="streetTutor">CALLE</label>
+            <input class="extendedInput" type="text" name="streetTutor">
+            <label for="numberStreetTutor">N°</label>
+            <input type="number" name="numberStreetTutor">
+        </div>
+        <div class="editor-label">
+            <label for="streetFloorTutor">PISO</label>
+            <input type="text" name="streetFloorTutor">
+            <label for="streetTowerTutor">TORRE</label>
+            <input type="text" name="streetTowerTutor">
+            <label for="streetDptoTutor">DPTO</label>
+            <input type="text" name="streetDptoTutor">
+        </div>
+        <div class="editor-label">
+            <label for="localidadTutor">LOCALIDAD</label>
+            <input class="extendedInput" type="text" name="localidadTutor">
+            <label for="postalCodeTutor">CODIGO POSTAL</label>
+            <input type="number" name="postalCodeTutor">
+        </div>
+        <div class="editor-label">
+            <label for="phoneTutor">TELEFONO</label>
+            <input type="text" name="phoneTutor">
+        </div>
+        <div class="editor-label">
+            <label class="extended" for="workPhoneTutor">TELEFONOS DEL TRABAJO</label>
+            <input type="text" name="workPhoneTutor">
+        </div>
 
-                <input type="radio" name="instructionLevelMotherCompleted" value="Completo" /> Completo
-                <input type="radio" name="instructionLevelMotherCompleted" value="Incompleto" /> Incompleto Hasta el año/grado <input type="text" name="yearInstructionLevelMother"><br>
-                ¿Vive?<br />
-                <select>
-                    <option value="si">Si</option>
-                    <option value="no">No</option>
-                </select><br />
-                @*<input type="radio" name="motherLive" value="Completo" /> Si
-                <input type="radio" name="motherLive" value="Incompleto" /> No*@
-                Tipo de documento <input type="text" name="typeDNIMother"> N° Doc. <input type="number" name="numberDNIMother"><br />
-                Domicilio<br>
-                Calle <input type="text" name="streetMother"> N° <input type="number" name="numberStreetMother"> Piso <input type="text" name="streetFloorMother"> Torre <input type="text" name="streetTowerMother"> Dpto <input type="text" name="streetDptoMother"><br />
-                Localidad <input type="text" name="localidadMother"> Código Postal <input type="number" name="postalCodeMother"><br>
-                Teléfono<br>
-                <input type="text" name="phoneMother"><br>
-                Teléfonos del trabajo<br>
-                <input type="text" name="workPhoneMother"><br>
-            </div>
-            <div class="editor-title-end"></div>
-            <div class="editor-label">
-                Apellidos y Nombres del Padre<br>
-                <input type="text" name="fatherName"><br>
-                Profesión u ocupación<br>
-                <input type="text" name="fatherProfesion"><br>
-                Nacionalidad<br>
-                <input type="text" name="fatherNationality"><br>
-                <label for="Title">Nivel de instrucción del padre: (marque el último nivel alcanzado)</label><br />
-                <select>
-                    <option value="ninguno">Ninguno</option>
-                    <option value="primario">Primario</option>
-                    <option value="secundario">Secundario</option>
-                    <option value="terciario">Terciario</option>
-                    <option value="universitario">Universitario</option>
-                    <option value="posgrado">Posgrado</option>
-                </select><br />
-
-                @*<input type="radio" name="instructionLevelFather" value="Ninguno" /> Ninguno
-                <input type="radio" name="instructionLevelFather" value="Primario" /> Primario
-                <input type="radio" name="instructionLevelFather" value="Secundario" /> Secundario
-                <input type="radio" name="instructionLevelFather" value="Terciario" /> Terciario
-                <input type="radio" name="instructionLevelFather" value="Universitario" /> Universitario
-                <input type="radio" name="instructionLevelFather" value="Especial" /> Posgrado<br />*@
-                <input type="radio" name="instructionLevelFatherCompleted" value="Completo" /> Completo
-                <input type="radio" name="instructionLevelFatherCompleted" value="Incompleto" /> Incompleto 
-                Hasta el año/grado <input type="text" name="yearInstructionLevelFather"><br>
-                ¿Vive?<br />
-                <select>
-                    <option value="si">Si</option>
-                    <option value="no">No</option>
-                </select><br />
-                @*<input type="radio" name="fatherLive" value="Completo" /> Si
-                <input type="radio" name="fatherLive" value="Incompleto" /> No*@
-                Tipo de documento <input type="text" name="typeDNIFather"> N° Doc. <input type="number" name="numberDNIFather"><br />
-                Domicilio<br>
-                Calle <input type="text" name="streetFather"> N° <input type="number" name="numberStreetFather"> Piso <input type="text" name="streetFloorFather"> Torre <input type="text" name="streetTowerFather"> Dpto <input type="text" name="streetDptoFather"><br />
-                Localidad <input type="text" name="localidadFather"> Código Postal <input type="number" name="postalCodeFather"><br>
-                Teléfono<br>
-                <input type="text" name="phoneFather"><br>
-                Teléfonos del trabajo<br>
-                <input type="text" name="workPhoneFather"><br>
-            </div>
-            <div class="editor-title-end"></div>
-            <div class="editor-label">
-                Apellidos y Nombres del Tutor/Responsable<br>
-                <input type="text" name="tutorName"><br>
-                Profesión u ocupación<br>
-                <input type="text" name="tutorProfesion"><br>
-                Nacionalidad<br>
-                <input type="text" name="tutorNationality"><br>
-                <label for="Title">Nivel de instrucción del Tutor/Responsable: (marque el último nivel alcanzado)</label><br />
-                <select>
-                    <option value="ninguno">Ninguno</option>
-                    <option value="primario">Primario</option>
-                    <option value="secundario">Secundario</option>
-                    <option value="terciario">Terciario</option>
-                    <option value="universitario">Universitario</option>
-                    <option value="posgrado">Posgrado</option>
-                </select><br />
-                @*<input type="radio" name="instructionLevelTutor" value="Ninguno" /> Ninguno
-                <input type="radio" name="instructionLevelTutor" value="Primario" /> Primario
-                <input type="radio" name="instructionLevelTutor" value="Secundario" /> Secundario
-                <input type="radio" name="instructionLevelTutor" value="Terciario" /> Terciario
-                <input type="radio" name="instructionLevelTutor" value="Universitario" /> Universitario
-                <input type="radio" name="instructionLevelTutor" value="Especial" /> Posgrado<br />*@
-                <input type="radio" name="instructionLevelTutorCompleted" value="Completo" /> Completo
-                <input type="radio" name="instructionLevelTutorCompleted" value="Incompleto" /> Incompleto Hasta el año/grado <input type="text" name="yearInstructionLevelTutor"><br>
-                ¿Vive?<br />
-                <select>
-                    <option value="si">Si</option>
-                    <option value="no">No</option>
-                </select><br />
-                @*<input type="radio" name="tutorLive" value="Completo" /> Si
-                <input type="radio" name="tutorLive" value="Incompleto" /> No*@
-                Tipo de documento <input type="text" name="typeDNITutor"> N° Doc. <input type="number" name="numberDNITutor"><br />
-                Domicilio<br>
-                Calle <input type="text" name="streetTutor"> N° <input type="number" name="numberStreetTutor"> Piso <input type="text" name="streetFloorTutor"> Torre <input type="text" name="streetTowerTutor"> Dpto <input type="text" name="streetDptoTutor"><br />
-                Localidad <input type="text" name="localidadTutor"> Código Postal <input type="number" name="postalCodeTutor"><br>
-                Teléfono<br>
-                <input type="text" name="phoneTutor"><br>
-                Teléfonos del trabajo<br>
-                <input type="text" name="workPhoneTutor"><br>
-            </div>
-
-            <div class="editor-title-end"></div>
-            <input class="regularbtn float-left" type="submit" value="Inscribir" />
-            <div class="secbtn">@Html.ActionLink("Volver", "Index")</div>
-</fieldset>
+        <div class="editor-title-end"></div>
+        <input class="regularbtn float-left" type="submit" value="Inscribir" />
+        <div class="secbtn">@Html.ActionLink("Imprimir Inscripción", "printEmptyRegistrationRequest", "RegistrationRequest")</div>
+        <div class="secbtn">@Html.ActionLink("Volver", "Index")</div>
+    </fieldset>
     }
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $('#otroEst').change(function () {
+        if (this.checked)
+            document.getElementById("escuelaProcedencia").style.display = "block";
+        else
+            document.getElementById("escuelaProcedencia").style.display = "none";
+    });
+</script>
 }

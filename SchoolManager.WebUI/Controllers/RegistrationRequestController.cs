@@ -51,5 +51,13 @@ namespace SchoolManager.WebUI.Controllers
             }
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin, Teacher")]
+        public ActionResult printEmptyRegistrationRequest()
+        {
+            using (PdfController pdf = new PdfController())
+            {
+                return pdf.DescargarPDF(this, "pdfRegistrationRequest");
+            }
+        }
     }
 }

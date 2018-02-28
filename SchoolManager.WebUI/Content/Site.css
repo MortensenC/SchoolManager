@@ -268,14 +268,15 @@ article.galeria object { width:100%; height:360px; }
 .box-contacto p.regular.c3 { background-position: 4px -104px; }
 
 /* sección inscripción */
-div.editor-title-section { border-bottom: 1px solid #BDC3C7; margin-bottom: 6px;font-weight: bold; }
-div.editor-title-end { border-bottom: 1px solid #BDC3C7; margin-bottom: 40px; }
+div.editor-title-section { border-bottom: 1px solid #BDC3C7; margin-bottom: 6px;font-weight: bold; margin-top: 25px; }
+div.editor-title-end { border-bottom: 1px solid #BDC3C7; margin-bottom: 20px; }
 
 /* sección panel admin */
 .regularbtn, .divrb a, .options a, .rb-cont a { margin:0; display: inline-block; text-transform: uppercase; border: 1px solid #00609A; padding: 6px 9px; font-weight: 700; font-size: 15px; color: #00609A; line-height: 17px; background-color: transparent; cursor: pointer; transition:0.3s; float:left;}
 .regularbtn:hover, .divrb a:hover, .options a:hover, .rb-cont a:hover { background-color:#00609A; color:#fff; }
 .regularform { }
-.regularform input[type="text"], .regularform input[type="password"], .regularform select{ background:#fff; padding:2px; border:1px solid #CAC9C9; font-family: 'lato'; }
+.regularform input[type="text"].extendedInput, .regularform input[type="number"].extendedInput, .regularform input[type="email"].extendedInput{ background:#fff; padding:2px; border:1px solid #CAC9C9; font-family: 'lato'; width: 40%}
+.regularform input[type="text"], .regularform input[type="number"], .regularform input[type="password"], .regularform select{ background:#fff; padding:2px; border:1px solid #CAC9C9; font-family: 'lato'; }
 .regularform p { margin-bottom:14px; }
 .regularform li { margin-bottom:8px; }
 .regularform input[type="checkbox"], .regularform input[type="radio"] { display: inline-block; vertical-align: middle; margin:0; }
@@ -289,7 +290,8 @@ div.editor-title-end { border-bottom: 1px solid #BDC3C7; margin-bottom: 40px; }
 .editform, .profile-content { display:table; table-layout: fixed; }
 .editform .image-upload, .profile-content .imgcell { display:table-cell; vertical-align:top; width:300px; }
 .editform .form-right-side, .profile-content .rightside { display:table-cell; vertical-align:top; padding-left:22px; }
-.editform label, .editform .trigger_display span { display: inline-table; } /*width:140px;*/
+.editform label, .editform .trigger_display span { display: inline-table; width: 160px; } 
+.editform label.extended {display: inline-table; width: 220px; }
 .editform .editor-label { margin-bottom:6px; }
 .editform .trigger_display { margin-bottom: 10px; padding-top: 3px; }
 .editform .trigger_display label { width:auto; margin-right:14px; }

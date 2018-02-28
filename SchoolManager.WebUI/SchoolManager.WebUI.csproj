@@ -55,6 +55,9 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="NReco.PdfGenerator">
+      <HintPath>..\..\..\Descargas Chrome\HTMLTOPDF\HTMLTOPDF\C#\NReco.PdfGenerator.Examples.DemoMvc\bin\NReco.PdfGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -144,6 +147,7 @@
     <Compile Include="Controllers\ClassroomController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\RegistrationRequestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -194,6 +198,7 @@
     <Content Include="Content\Images\logo ABCI.png" />
     <Content Include="Content\Images\logo Cambridge.png" />
     <Content Include="Content\Images\logo-header-72px.png" />
+    <Content Include="Content\Images\logo_pdf.png" />
     <Content Include="Content\Images\mobile-menu-icon.png" />
     <Content Include="Content\Images\muebles.jpg" />
     <Content Include="Content\Images\Profile.jpg" />
@@ -520,6 +525,7 @@
     <Content Include="Views\RegistrationRequest\Create.cshtml" />
     <Content Include="Views\RegistrationRequest\Index.cshtml" />
     <Content Include="Views\New folder\_Layout.cshtml" />
+    <Content Include="Views\RegistrationRequest\pdfRegistrationRequest.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
