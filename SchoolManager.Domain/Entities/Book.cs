@@ -29,7 +29,13 @@ namespace SchoolManager.Domain.Entities
         [DataMember]
         public string Author { get; set; }
         [DataMember]
-        public bool Highlighted { get; set; }
+        public Nullable<bool> Highlighted { get; set; }
+        [DataMember]
+        public string Year { get; set; }
+        [DataMember]
+        public string Origin { get; set; }
+        [DataMember]
+        public string Editorial { get; set; }
     
         [DataMember]
         public virtual User User { get; set; }

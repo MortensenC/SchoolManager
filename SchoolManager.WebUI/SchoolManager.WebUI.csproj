@@ -44,8 +44,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -523,9 +523,12 @@
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <Content Include="Views\RegistrationRequest\Create.cshtml" />
-    <Content Include="Views\RegistrationRequest\Index.cshtml" />
     <Content Include="Views\New folder\_Layout.cshtml" />
     <Content Include="Views\RegistrationRequest\pdfRegistrationRequest.cshtml" />
+    <Content Include="Views\RegistrationRequest\Index.cshtml" />
+    <Content Include="Views\RegistrationRequest\Search.cshtml" />
+    <Content Include="Views\RegistrationRequest\Delete.cshtml" />
+    <Content Include="Views\RegistrationRequest\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

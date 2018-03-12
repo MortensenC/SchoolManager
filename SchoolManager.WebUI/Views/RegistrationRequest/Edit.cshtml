@@ -11,7 +11,7 @@
 </div>
 <div class="content-wrapper _novedades seccion">
     <h1 class="header-seccion">Nueva inscripción</h1>
-    @using (Html.BeginForm("Create", "RegistrationRequest", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Edit", "RegistrationRequest", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.ValidationSummary(true)
 
@@ -23,9 +23,6 @@
             @Html.LabelFor(model => model.Level)
             @Html.DropDownListFor(model => model.Level, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevels))))
             @Html.ValidationMessageFor(model => model.Level)
-
-            @Html.TextBoxFor(model => model.OtherLevel, new { style = "display:none" })
-            @Html.ValidationMessageFor(model => model.OtherLevel)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Year)
@@ -220,6 +217,7 @@
 
             @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, true, new { id = "MLIC" })@Html.Label("Completo", new { @for = "MLIC" })
             @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, false, new { id = "MLII" })@Html.Label("Incompleto", new { @for = "MLII" })
+            @Html.ValidationMessageFor(model => model.MothersLevelInstructionCompleted)
 
             @Html.LabelFor(model => model.MothersUntilYearLevel)
             @Html.TextBoxFor(model => model.MothersUntilYearLevel)
@@ -312,6 +310,7 @@
 
             @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, true, new { id = "FLIC" })@Html.Label("Completo", new { @for = "FLIC" })
             @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, false, new { id = "FLII" })@Html.Label("Incompleto", new { @for = "FLII" })
+            @Html.ValidationMessageFor(model => model.FathersLevelInstructionCompleted)
 
             @Html.LabelFor(model => model.FathersUntilYearLevel)
             @Html.TextBoxFor(model => model.FathersUntilYearLevel)
@@ -388,7 +387,7 @@
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.TutorProfession)
-            @Html.TextBoxFor(model => model.TutorProfession)
+            @Html.TextBoxFor(model => model.TutorProfession, new { @class = "extendedInput" })
             @Html.ValidationMessageFor(model => model.TutorProfession)
         </div>
         <div class="editor-label">
@@ -402,7 +401,8 @@
             @Html.ValidationMessageFor(model => model.TutorLevelInstruction)
 
             @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, true, new { id = "TLIC" })@Html.Label("Completo", new { @for = "TLIC" })
-            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, false, new { id = "TLII" })@Html.Label("Incompleto", new { @for = "TLII" })<br />
+            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, false, new { id = "TLII" })@Html.Label("Incompleto", new { @for = "TLII" })
+            @Html.ValidationMessageFor(model => model.TutorLevelInstructionCompleted)<br />
 
             @Html.LabelFor(model => model.TutorUntilYearLevel)
             @Html.TextBoxFor(model => model.TutorUntilYearLevel)
@@ -471,7 +471,7 @@
             @Html.ValidationMessageFor(model => model.TutorWorkPhone)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.OtherPersonsName, new { @class = "extended" })
+            @Html.LabelFor(model => model.OtherPersonsName)
             @Html.TextBoxFor(model => model.OtherPersonsName)
             @Html.ValidationMessageFor(model => model.OtherPersonsName)
 
@@ -487,7 +487,7 @@
 
         <div class="editor-title-end"></div>
         <input class="regularbtn float-left" type="submit" value="Inscribir" />
-        <div class="secbtn">@Html.ActionLink("Imprimir Inscripción", "printEmptyRegistrationRequest", "RegistrationRequest")</div>
+        <div class="secbtn">@Html.ActionLink("Imprimir Inscripción", "printEmptyRegistrationRequest", "RegistrationRequest", new { id = @Model.Id }, null)</div>
         <div class="secbtn">@Html.ActionLink("Volver", "Index")</div>
     </fieldset>
     }
@@ -500,14 +500,6 @@
             document.getElementById("escuelaProcedencia").style.display = "block";
         else
             document.getElementById("escuelaProcedencia").style.display = "none";
-    });
-    $('#Level').on('change', function (e) {
-        var optionSelected = $("option:selected", this);
-        var valueSelected = this.value;
-        if (valueSelected == "Otro")
-            document.getElementById("OtherLevel").style.display = "inline";
-        else
-            document.getElementById("OtherLevel").style.display = "none";
     });
 </script>
 }

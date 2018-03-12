@@ -3,6 +3,7 @@ using SchoolManager.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -57,7 +58,7 @@ namespace SchoolManager.WebUI.Controllers
         [AllowAnonymous]
         public ActionResult Biblioteca()
         {
-            var books = db.Books.Where(b => b.Highlighted).ToList();
+            var books = db.Books.Where(b => b.Highlighted.Value).ToList();
 
             ViewBag.PictureMaps = new Dictionary<int, string>();
             foreach (var book in books)
@@ -85,14 +86,14 @@ namespace SchoolManager.WebUI.Controllers
             {
                 if (string.IsNullOrEmpty(text))
                 {
-                    books = db.Books.Where(b => !b.Highlighted).Take(20).ToList();
+                    books = db.Books.Where(b => !b.Highlighted.Value).Take(20).ToList();
                 }
                 else
                 {
                     books =
                         db.Books.Where(
                             b =>
-                            !b.Highlighted &&
+                            !b.Highlighted.Value &&
                             (b.Title.ToLower().Contains(text.ToLower()) ||
                              b.Description.ToLower().Contains(text.ToLower()) ||
                              b.Author.ToLower().Contains(text.ToLower()))).ToList();

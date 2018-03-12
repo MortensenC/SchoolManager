@@ -1,6 +1,7 @@
 ﻿using SchoolManager.Domain;
 using SchoolManager.Domain.Entities;
 using System.Data;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;

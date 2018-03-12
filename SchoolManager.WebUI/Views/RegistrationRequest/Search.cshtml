@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Inscripciones";
+}
+
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>Estás aquí: <span class="hlited">Solicitudes de Inscripción</span></p>
+    </div>
+</div>
+<div class="content-wrapper seccion">
+    <div class="row">
+        <h1 class="header-seccion">Ingrese el DNI del alumno a inscribir y precione Inscribir</h1>
+        @using (Html.BeginForm("Search", "RegistrationRequest", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <fieldset class="regularform editform">
+			    <div style="margin-bottom: 25px;">
+                    <h2 style="float: left; margin-right: 20px;">DNI</h2>@Html.TextBox("dni")
+                </div>
+                <input class="regularbtn float-left" type="submit" value="Inscribir" />
+            </fieldset>
+        }
+    </div>
+</div>
