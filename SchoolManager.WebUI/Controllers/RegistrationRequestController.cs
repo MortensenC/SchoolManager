@@ -16,10 +16,10 @@ namespace SchoolManager.WebUI.Controllers
         private Context db = new Context();
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public enum eLevels { Inicial, EGB, Polimodal, CEF, CEC, Especial, Adultos, Artística, Otro };
-        public static IEnumerable<String> eYears = new List<string>() { "1°", "2°", "3°", "4°", "5°", "6°", "7°", "8°", "9°" };
-        public enum eTurn { Mañana, Tarde, Jornada_Completa, Vespertino, Noche };
-        public enum eLevelInstruction { Ninguno, Primario, Secundario, Terciario, Universitario, Posgrado }
+        //public enum eLevels { Inicial, EGB, Polimodal, CEF, CEC, Especial, Adultos, Artística, Otro };
+        //public static IEnumerable<String> eYears = new List<string>() { "1°", "2°", "3°", "4°", "5°", "6°", "7°", "8°", "9°" };
+        //public enum eTurn { Mañana, Tarde, Jornada_Completa, Vespertino, Noche };
+        //public enum eLevelInstruction { Ninguno, Primario, Secundario, Terciario, Universitario, Posgrado }
         //public enum eConditional { Sí, No };
 
         //private void SetViewBagLevel()
@@ -162,24 +162,19 @@ namespace SchoolManager.WebUI.Controllers
                 if (ModelState.IsValid)
                 {
                     RegistrationRequest rr = null;
-                    //if (RegistrationRequest.Id > 0)
-                    //    rr = db.RegistrationRequests.Find(RegistrationRequest.Id);
-                    //else 
+
                     if (!String.IsNullOrEmpty(RegistrationRequest.DNI))
                         rr = db.RegistrationRequests.Where<RegistrationRequest>(r => r.DNI.ToUpper().Equals(RegistrationRequest.DNI.ToUpper())).FirstOrDefault<RegistrationRequest>();
 
                     if (rr != null)
                     {
-                        log.Error("There is another RegistrationRequest for the same DNI");
+                        log.Error("Ya existe una solicitud de inscripción con el mismo DNI");
                         return View(RegistrationRequest);
                     }
-                    
+
+                    AnalizarEstadoSolicitud(RegistrationRequest);
                     db.RegistrationRequests.Add(RegistrationRequest);
-                    //else
-                    //{
-                    //    db.Entry(rr).CurrentValues.SetValues(RegistrationRequest);
-                    //    db.Entry(rr).State = EntityState.Modified;
-                    //}
+
                     
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -187,10 +182,18 @@ namespace SchoolManager.WebUI.Controllers
             }
             catch (Exception e)
             {
-                log.Error("Error creating new RegistrationRequest", e);
+                log.Error("Ah ocurrido un error intentando guardar la solicitud inscripción", e);
             }
 
             return View(RegistrationRequest);
+        }
+        /// <summary>
+        /// Analiza los datos que han sido cargados en la solicitud y le define un estado que se almacena en el valor status de la solicitud
+        /// </summary>
+        /// <param name="RegistrationRequest"></param>
+        private void AnalizarEstadoSolicitud(RegistrationRequest RegistrationRequest)
+        {
+            RegistrationRequest.Status = "Faltan datos";
         }
 
         //
@@ -212,6 +215,7 @@ namespace SchoolManager.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(rr).State = EntityState.Modified;
+                AnalizarEstadoSolicitud(rr);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -257,6 +261,8 @@ namespace SchoolManager.WebUI.Controllers
                 RegistrationRequest rr = null;
                 if (Int32.TryParse(id.ToString(), out result))
                     rr = db.RegistrationRequests.Find(Int32.Parse(id.ToString()));
+                else
+                    rr = new RegistrationRequest();
                 return pdfController.DescargarPDF(this, "pdfRegistrationRequest", rr);
             }
             
@@ -271,9 +277,11 @@ namespace SchoolManager.WebUI.Controllers
                 // TODO: Add insert logic here
                 var rr = db.RegistrationRequests.Where<RegistrationRequest>(r => r.DNI.ToUpper().Equals(dni.ToUpper())).FirstOrDefault<RegistrationRequest>();
                 if (rr == null)
+                {
                     return RedirectToAction("Create");
+                }
                 else
-                    return RedirectToAction("Edit",new { id = rr.Id});
+                    return RedirectToAction("Edit", new { id = rr.Id });
             }
             catch(Exception ex)
             {

@@ -21,17 +21,55 @@
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Level)
-            @Html.DropDownListFor(model => model.Level, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevels))))
+            @Html.DropDownListFor(model => model.Level,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Inicial", Value="Inicial" },
+                    new SelectListItem{ Text="E.G.B.", Value="EGB" },
+                    new SelectListItem{ Text="Polimodal", Value="Polimodal" },
+                    new SelectListItem{ Text="C.E.F.", Value="CEF" },
+                    new SelectListItem{ Text="C.E.C.", Value="CEC" },
+                    new SelectListItem{ Text="Especial", Value="Especial" },
+                    new SelectListItem{ Text="Adultos", Value="Adultos" },
+                    new SelectListItem{ Text="Artística", Value="Artística" },
+                    new SelectListItem{ Text="Otro", Value="Otro" },
+                }, "--- Seleccione un valor ---"
+            )
+            @*@Html.DropDownListFor(model => model.Level, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevels))))*@
             @Html.ValidationMessageFor(model => model.Level)
+
+            @Html.TextBoxFor(model => model.OtherLevel, new { style = (Model.Level.ToUpper().Equals("OTRO")) ? "display:inline" : "display:none" })
+            @Html.ValidationMessageFor(model => model.OtherLevel)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Year)
-            @Html.DropDownListFor(model => model.Year, new SelectList(SchoolManager.WebUI.Controllers.RegistrationRequestController.eYears))
+            @*@Html.DropDownListFor(model => model.Year, new SelectList(SchoolManager.WebUI.Controllers.RegistrationRequestController.eYears))*@
+            @Html.DropDownListFor(model => model.Year,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="1°", Value="1" },
+                    new SelectListItem{ Text="2°", Value="2" },
+                    new SelectListItem{ Text="3°", Value="3" },
+                    new SelectListItem{ Text="4°", Value="4" },
+                    new SelectListItem{ Text="5°", Value="5" },
+                    new SelectListItem{ Text="6°", Value="6" },
+                    new SelectListItem{ Text="7°", Value="7" },
+                    new SelectListItem{ Text="8°", Value="8" },
+                    new SelectListItem{ Text="9°", Value="9" },
+                }, "--- Seleccione un valor ---"
+            )
             @Html.ValidationMessageFor(model => model.Year)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Turn)
-            @Html.DropDownListFor(model => model.Level, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eTurn))))
+            @*@Html.DropDownListFor(model => model.Level, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eTurn))))*@
+            @Html.DropDownListFor(model => model.Turn,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Mañana", Value="Mañana" },
+                    new SelectListItem{ Text="Tarde", Value="Tarde" },
+                    new SelectListItem{ Text="Jornada Completa", Value="Jornada Completa" },
+                    new SelectListItem{ Text="Vespertino", Value="Vespertino" },
+                    new SelectListItem{ Text="Noche", Value="Noche" },
+                }, "--- Seleccione un valor ---"
+            )
             @Html.ValidationMessageFor(model => model.Turn)
         </div>
         <div class="editor-title-end"></div>
@@ -147,7 +185,7 @@
             @Html.CheckBoxFor(model => model.OtherSchoolNoNullExclusive)
             @Html.LabelFor(model => model.OtherSchoolNoNullExclusive, new { @class = "extended", style = "width: 30%;" })
         </div>
-        <div id="escuelaProcedencia" style="display:none">
+        <div id="escuelaProcedencia" style="@(Model.OtherSchool.HasValue && Model.OtherSchool.Value) ? display:none : display:inline">
             <div class="editor-title-section">
                 <h2>ESCUELA DE PROCEDENCIA</h2>
             </div>
@@ -159,7 +197,8 @@
                 @Html.LabelFor(model => model.OtherSchoolLevel)
                 @Html.TextBoxFor(model => model.OtherSchoolLevel)
                 @Html.ValidationMessageFor(model => model.OtherSchoolLevel)<br />
-
+            </div>
+            <div class="editor-label">
                 @Html.LabelFor(model => model.NameSchool, new { @class = "extended" })
                 @Html.TextBoxFor(model => model.NameSchool)
                 @Html.ValidationMessageFor(model => model.NameSchool)
@@ -170,6 +209,8 @@
 
                 @Html.CheckBoxFor(model => model.PrivateNoNullExclusive)
                 @Html.LabelFor(model => model.PrivateNoNullExclusive)
+            </div>
+            <div class="editor-label">
                 <div>
                     INFORMACIÓN DE SALUD:
                     @Html.CheckBoxFor(model => model.HealthCompletedNoNullExclusive)
@@ -177,12 +218,11 @@
 
                     @Html.CheckBoxFor(model => model.HealthUpdatedNoNullExclusive)
                     @Html.LabelFor(model => model.HealthUpdatedNoNullExclusive)
-                    <br />
                 </div>
                 <div>
                     @Html.LabelFor(model => model.SocialName)
                     @Html.TextBoxFor(model => model.SocialName)
-                    @Html.ValidationMessageFor(model => model.SocialName)<br />
+                    @Html.ValidationMessageFor(model => model.SocialName)
 
                     @Html.LabelFor(model => model.AffiliateSocialNumber)
                     @Html.EditorFor(model => model.AffiliateSocialNumber, new { type = "number" })
@@ -212,15 +252,25 @@
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.MothersLevelInstruction, new { style = "width:240px;" })
-            @Html.DropDownListFor(model => model.MothersLevelInstruction, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevelInstruction))))
+            @*@Html.DropDownListFor(model => model.MothersLevelInstruction, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevelInstruction))))*@
+            @Html.DropDownListFor(model => model.MothersLevelInstruction,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Ninguno", Value="Ninguno" },
+                    new SelectListItem{ Text="Primario", Value="Primario" },
+                    new SelectListItem{ Text="Secundario", Value="Secundario" },
+                    new SelectListItem{ Text="Terciario", Value="Terciario" },
+                    new SelectListItem{ Text="Universitario", Value="Universitario" },
+                    new SelectListItem{ Text="Posgrado", Value="Posgrado" },
+                }, "--- Seleccione un valor ---"
+            )
             @Html.ValidationMessageFor(model => model.MothersLevelInstruction)
 
-            @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, true, new { id = "MLIC" })@Html.Label("Completo", new { @for = "MLIC" })
-            @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, false, new { id = "MLII" })@Html.Label("Incompleto", new { @for = "MLII" })
+            @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, "Completo", new { id = "MLIC" })@Html.Label("Completo", new { @for = "MLIC" })
+            @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, "Incompleto", new { id = "MLII" })@Html.Label("Incompleto", new { @for = "MLII" })
             @Html.ValidationMessageFor(model => model.MothersLevelInstructionCompleted)
 
-            @Html.LabelFor(model => model.MothersUntilYearLevel)
-            @Html.TextBoxFor(model => model.MothersUntilYearLevel)
+            @Html.LabelFor(model => model.MothersUntilYearLevel, new { id = "MUYL", style = "display: none;" })
+            @Html.TextBoxFor(model => model.MothersUntilYearLevel, new { style = "display: none;" })
             @Html.ValidationMessageFor(model => model.MothersUntilYearLevel)
         </div>
         <div class="editor-label">
@@ -305,15 +355,25 @@
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.FathersLevelInstruction, new { style = "width:240px;" })
-            @Html.DropDownListFor(model => model.FathersLevelInstruction, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevelInstruction))))
+            @*@Html.DropDownListFor(model => model.FathersLevelInstruction, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevelInstruction))))*@
+            @Html.DropDownListFor(model => model.FathersLevelInstruction,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Ninguno", Value="Ninguno" },
+                    new SelectListItem{ Text="Primario", Value="Primario" },
+                    new SelectListItem{ Text="Secundario", Value="Secundario" },
+                    new SelectListItem{ Text="Terciario", Value="Terciario" },
+                    new SelectListItem{ Text="Universitario", Value="Universitario" },
+                    new SelectListItem{ Text="Posgrado", Value="Posgrado" },
+                }, "--- Seleccione un valor ---"
+            )
             @Html.ValidationMessageFor(model => model.FathersLevelInstruction)
 
-            @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, true, new { id = "FLIC" })@Html.Label("Completo", new { @for = "FLIC" })
-            @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, false, new { id = "FLII" })@Html.Label("Incompleto", new { @for = "FLII" })
+            @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, "Completo", new { id = "FLIC" })@Html.Label("Completo", new { @for = "FLIC" })
+            @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, "Incompleto", new { id = "FLII" })@Html.Label("Incompleto", new { @for = "FLII" })
             @Html.ValidationMessageFor(model => model.FathersLevelInstructionCompleted)
 
-            @Html.LabelFor(model => model.FathersUntilYearLevel)
-            @Html.TextBoxFor(model => model.FathersUntilYearLevel)
+            @Html.LabelFor(model => model.FathersUntilYearLevel, new { id = "FUYL", style = "display: none;" })
+            @Html.TextBoxFor(model => model.FathersUntilYearLevel, new { style = "display: none;" })
             @Html.ValidationMessageFor(model => model.FathersUntilYearLevel)
         </div>
         <div class="editor-label">
@@ -397,15 +457,25 @@
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.TutorLevelInstruction, new { style = "width:300px;" })
-            @Html.DropDownListFor(model => model.TutorLevelInstruction, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevelInstruction))))
+            @*@Html.DropDownListFor(model => model.TutorLevelInstruction, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevelInstruction))))*@
+            @Html.DropDownListFor(model => model.TutorLevelInstruction,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Ninguno", Value="Ninguno" },
+                    new SelectListItem{ Text="Primario", Value="Primario" },
+                    new SelectListItem{ Text="Secundario", Value="Secundario" },
+                    new SelectListItem{ Text="Terciario", Value="Terciario" },
+                    new SelectListItem{ Text="Universitario", Value="Universitario" },
+                    new SelectListItem{ Text="Posgrado", Value="Posgrado" },
+                }, "--- Seleccione un valor ---"
+            )
             @Html.ValidationMessageFor(model => model.TutorLevelInstruction)
 
-            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, true, new { id = "TLIC" })@Html.Label("Completo", new { @for = "TLIC" })
-            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, false, new { id = "TLII" })@Html.Label("Incompleto", new { @for = "TLII" })
+            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, "Completo", new { id = "TLIC" })@Html.Label("Completo", new { @for = "TLIC" })
+            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, "Incompleto", new { id = "TLII" })@Html.Label("Incompleto", new { @for = "TLII" })
             @Html.ValidationMessageFor(model => model.TutorLevelInstructionCompleted)<br />
 
-            @Html.LabelFor(model => model.TutorUntilYearLevel)
-            @Html.TextBoxFor(model => model.TutorUntilYearLevel)
+            @Html.LabelFor(model => model.TutorUntilYearLevel, new { id = "TUYL", style = "display: none;" })
+            @Html.TextBoxFor(model => model.TutorUntilYearLevel, new { style = "display: none;" })
             @Html.ValidationMessageFor(model => model.TutorUntilYearLevel)
         </div>
         <div class="editor-label">
@@ -471,7 +541,7 @@
             @Html.ValidationMessageFor(model => model.TutorWorkPhone)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.OtherPersonsName)
+            @Html.LabelFor(model => model.OtherPersonsName, new { @class = "extended" })
             @Html.TextBoxFor(model => model.OtherPersonsName)
             @Html.ValidationMessageFor(model => model.OtherPersonsName)
 
@@ -497,9 +567,47 @@
 <script>
     $('#OtherSchoolNoNullExclusive').change(function () {
         if (this.checked)
-            document.getElementById("escuelaProcedencia").style.display = "block";
+            $("#escuelaProcedencia").fadeIn("slow", "linear");
         else
-            document.getElementById("escuelaProcedencia").style.display = "none";
+            $("#escuelaProcedencia").fadeOut("slow", "linear");
     });
+    $('#Level').on('change', function (e) {
+        var optionSelected = $("option:selected", this);
+        var valueSelected = this.value;
+        if (valueSelected == "Otro")
+            $("#OtherLevel").fadeIn("slow", "linear");
+        else
+            $("#OtherLevel").fadeOut("slow", "linear");
+    });
+    $("input[name=MothersLevelInstructionCompleted]:radio").change(function () {
+        if (this.value == "Completo") {
+            $('#MothersUntilYearLevel').fadeOut("slow", "linear");
+            $('#MUYL').fadeOut("slow", "linear");
+        }
+        else {
+            $("#MothersUntilYearLevel").fadeIn("slow", "linear");
+            $('#MUYL').fadeIn("slow", "linear");
+        }
+    })
+    $("input[name=FathersLevelInstructionCompleted]:radio").change(function () {
+        if (this.value == "Completo") {
+            $('#FathersUntilYearLevel').fadeOut("slow", "linear");
+            $('#FUYL').fadeOut("slow", "linear");
+        }
+        else {
+            $("#FathersUntilYearLevel").fadeIn("slow", "linear");
+            $('#FUYL').fadeIn("slow", "linear");
+        }
+    })
+    $("input[name=TutorLevelInstructionCompleted]:radio").change(function () {
+        if (this.value == "Completo") {
+            $('#TutorUntilYearLevel').fadeOut("slow", "linear");
+            $('#TUYL').fadeOut("slow", "linear");
+        }
+        else {
+            $("#TutorUntilYearLevel").fadeIn("slow", "linear");
+            $('#TUYL').fadeIn("slow", "linear");
+        }
+    })
 </script>
 }
