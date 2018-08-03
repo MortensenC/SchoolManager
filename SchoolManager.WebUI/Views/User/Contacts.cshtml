@@ -69,8 +69,7 @@
                 </div>
             }
             <div class="mixedinput">
-                <input id="searchText" type="search" onkeydown="if (event.keyCode == 13) search();"
-                       placeholder="Buscar..." />
+                <input id="searchText" type="search" onkeydown="if (event.keyCode == 13) search();" placeholder="Buscar..." />
                 <input type="submit" value="" onclick="search();" />
             </div>
             @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Teacher"))

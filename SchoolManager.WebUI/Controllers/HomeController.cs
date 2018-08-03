@@ -21,6 +21,7 @@ namespace MvcApplication1.Controllers
                 user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
             this.GetPicture(user);
             //ViewBag.ProfilePicturePath = "../../Content/Images/Profile.jpg";
+            //ViewBag.IsRegistrationRequestEnable = true; // db.SystemConfigurations.Find("IsRegistrationRequestEnable").Value.ToUpper().Equals("TRUE");
             var posts = db.Posts.Where(p => p.Public).OrderByDescending(p => p.Id).Take(3).ToList();
 
             // Post 1

@@ -58,10 +58,10 @@ namespace SchoolManager.WebUI.Controllers
         [AllowAnonymous]
         public ActionResult Biblioteca()
         {
-            var books = db.Books.Where(b => b.Highlighted.Value).ToList();
+            List<Book> books = db.Books.Where(b => b.Highlighted.Value).ToList();
 
             ViewBag.PictureMaps = new Dictionary<int, string>();
-            foreach (var book in books)
+            foreach (Book book in books)
             {
                 var map = Server.MapPath("~/Uploads/Books") + "/" + book.Id;
 

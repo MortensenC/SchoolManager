@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManager.Domain", "SchoolManager.Domain\SchoolManager.Domain.csproj", "{8B7B9610-61A2-4602-9A96-0AD0AF9FAEEB}"
 EndProject
@@ -15,6 +15,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A9A5E6
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlRenderer.PdfSharp", "..\HTML-Renderer-master\Source\HtmlRenderer.PdfSharp\HtmlRenderer.PdfSharp.csproj", "{CA249F5D-9285-40A6-B217-5889EF79FD7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlRenderer", "..\HTML-Renderer-master\Source\HtmlRenderer\HtmlRenderer.csproj", "{FE611685-391F-4E3E-B27E-D3150E51E49B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfSharp", "..\3.5.0\PDFsharp\src\PdfSharp\PdfSharp.csproj", "{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfSharp.Charting", "..\3.5.0\PDFsharp\src\PdfSharp.Charting\PdfSharp.Charting.csproj", "{6F98A822-41B0-4C7A-85A6-E95C1D3E88EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,8 +42,27 @@ Global
 		{5283A839-F413-475C-B5D0-1B695F0551C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5283A839-F413-475C-B5D0-1B695F0551C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5283A839-F413-475C-B5D0-1B695F0551C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA249F5D-9285-40A6-B217-5889EF79FD7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA249F5D-9285-40A6-B217-5889EF79FD7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA249F5D-9285-40A6-B217-5889EF79FD7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA249F5D-9285-40A6-B217-5889EF79FD7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE611685-391F-4E3E-B27E-D3150E51E49B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE611685-391F-4E3E-B27E-D3150E51E49B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE611685-391F-4E3E-B27E-D3150E51E49B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE611685-391F-4E3E-B27E-D3150E51E49B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F98A822-41B0-4C7A-85A6-E95C1D3E88EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F98A822-41B0-4C7A-85A6-E95C1D3E88EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F98A822-41B0-4C7A-85A6-E95C1D3E88EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F98A822-41B0-4C7A-85A6-E95C1D3E88EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {19AB2D0A-C2C5-4EC0-B64A-B9BF1267ECD4}
 	EndGlobalSection
 EndGlobal

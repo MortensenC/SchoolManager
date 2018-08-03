@@ -9,6 +9,11 @@ namespace SchoolManager.Domain.Entities
     [MetadataType(typeof(RegistrationRequestValidation))]
     public partial class RegistrationRequest
     {
+        private const string cFaltanDatos = "Faltan datos";
+        private const string cAprobada = "Aprobada";
+        private const string cRechazada = "Rechazada";
+        private const string cAcontrolar = "A controlar";
+
         [NotMapped]
         public bool OtherSchoolNoNullExclusive
         {
@@ -33,6 +38,125 @@ namespace SchoolManager.Domain.Entities
             get { return Private ?? false; }
             set { Private = value; }
         }
+
+        public bool AControlar()
+        {
+            return Status.Equals(cAcontrolar);
+        }
+
+        public bool Aprobada()
+        {
+            return Status.Equals(cAprobada);
+        }
+
+        public bool FaltanDatos()
+        {
+            return Status.Equals(cFaltanDatos);
+        }
+
+        public void setFaltanDatos()
+        {
+            Status = cFaltanDatos;
+        }
+
+        public void setCompleto()
+        {
+            Status = cAcontrolar;
+        }
+
+        public void setAprobada()
+        {
+            Status = cAprobada;
+        }
+
+        public bool EstaCompleta()
+        {
+            return this.DatosInscripcionOK() && this.DatosAlumnoOK() && this.DatosMadreOK() && this.DatosPadreOK() && this.DatosTutorOK();
+        }
+
+        private bool DatosTutorOK()
+        {
+            return (this.FathersLive.HasValue && this.FathersLive.Value) ||
+                (this.MothersLive.HasValue && this.MothersLive.Value) ||
+                (this.MothersLive.HasValue && !this.MothersLive.Value && this.FathersLive.HasValue && !this.FathersLive.Value &&
+                    !string.IsNullOrEmpty(this.TutorName) &&
+                    this.TutorLive.HasValue &&
+                    ((this.TutorLive.Value &&
+                        !string.IsNullOrEmpty(this.TutorKindOfDocument) &&
+                        this.TutorDocumentNumber.HasValue &&
+                        !string.IsNullOrEmpty(this.TutorAddressStreet) &&
+                        !string.IsNullOrEmpty(this.TutorAddressNumber) &&
+                        !string.IsNullOrEmpty(this.TutorPhone)
+                        ) || (!this.TutorLive.Value))
+                );
+        }
+
+        private bool DatosPadreOK()
+        {
+            return !string.IsNullOrEmpty(this.FathersName) &&
+                this.FathersLive.HasValue &&
+                ((this.FathersLive.Value &&
+                    !string.IsNullOrEmpty(this.FathersKindofDocument) &&
+                    this.FathersDocumentNumber.HasValue &&
+                    !string.IsNullOrEmpty(this.FathersAddressStreet) &&
+                    !string.IsNullOrEmpty(this.FathersAddressNumber) &&
+                    !string.IsNullOrEmpty(this.FathersPhone)
+                    ) || (!this.FathersLive.Value))
+                ;
+        }
+
+        private bool DatosMadreOK()
+        {
+            return !string.IsNullOrEmpty(this.MothersName) &&
+                this.MothersLive.HasValue &&
+                ((this.MothersLive.Value &&
+                    !string.IsNullOrEmpty(this.MothersKindOfDocument) &&
+                    this.MothersDocumentNumber.HasValue &&
+                    !string.IsNullOrEmpty(this.MothersAddressStreet) &&
+                    !string.IsNullOrEmpty(this.MothersAddressNumber) &&
+                    !string.IsNullOrEmpty(this.MothersPhone)
+                    ) || (!this.MothersLive.Value))
+                ;
+        }
+
+        private bool DatosAlumnoOK()
+        {
+            return !string.IsNullOrEmpty(this.Lastnames) &&
+                !string.IsNullOrEmpty(this.Firstnames) &&
+                this.Birthday.HasValue &&
+                !string.IsNullOrEmpty(this.Birthplace) &&
+                !string.IsNullOrEmpty(this.DNI) &&
+                !string.IsNullOrEmpty(this.Sex) &&
+                !string.IsNullOrEmpty(this.AdressStreet) &&
+                this.AdressNumber.HasValue &&
+                !string.IsNullOrEmpty(this.Localidad) &&
+                (!string.IsNullOrEmpty(this.CellPhone) || !string.IsNullOrEmpty(this.FamilyPhone))
+                ;
+            
+            
+        }
+        private bool DatosInscripcionOK()
+        {
+            return !string.IsNullOrEmpty(this.Level) &&
+                !string.IsNullOrEmpty(this.Year) &&
+                !string.IsNullOrEmpty(this.Turn);
+        }
+
+
+        public void setRechazada()
+        {
+            Status = cRechazada;
+        }
+
+        public bool EstaAprobada()
+        {
+            return Status.Equals(cAprobada);
+        }
+
+        public bool EstaRechazada()
+        {
+            return Status.Equals(cRechazada);
+        }
     }
     public class RegistrationRequestValidation
     {
@@ -49,7 +173,7 @@ namespace SchoolManager.Domain.Entities
         public string Firstnames { get; set; }
         [DisplayName("Fecha de nacimiento")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> Birthday { get; set; }
         [DisplayName("Lugar de nacimiento")]
         public string Birthplace { get; set; }
@@ -114,7 +238,6 @@ namespace SchoolManager.Domain.Entities
         public string MothersNationality { get; set; }
         [DisplayName("Nivel de instrucción de la Madre")]
         public string MothersLevelInstruction { get; set; }
-        
         public Nullable<bool> MothersLevelInstructionCompleted { get; set; }
         [DisplayName("Hasta el año/grado")]
         public string MothersUntilYearLevel { get; set; }

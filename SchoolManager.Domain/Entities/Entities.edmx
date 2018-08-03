@@ -5,6 +5,29 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SchoolManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="ASPStateTempApplications">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="int" Nullable="false" />
+          <Property Name="AppName" Type="char" MaxLength="280" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ASPStateTempSessions">
+          <Key>
+            <PropertyRef Name="SessionId" />
+          </Key>
+          <Property Name="SessionId" Type="nvarchar" MaxLength="88" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Expires" Type="datetime" Nullable="false" />
+          <Property Name="LockDate" Type="datetime" Nullable="false" />
+          <Property Name="LockDateLocal" Type="datetime" Nullable="false" />
+          <Property Name="LockCookie" Type="int" Nullable="false" />
+          <Property Name="Timeout" Type="int" Nullable="false" />
+          <Property Name="Locked" Type="bit" Nullable="false" />
+          <Property Name="SessionItemShort" Type="varbinary" MaxLength="7000" />
+          <Property Name="SessionItemLong" Type="image" />
+          <Property Name="Flags" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Books">
           <Key>
             <PropertyRef Name="Id" />
@@ -57,10 +80,8 @@
         <EntityType Name="RegistrationRequests">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="DNI" />
-            <PropertyRef Name="YearRequest" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Level" Type="varchar" MaxLength="50" />
           <Property Name="Year" Type="varchar" MaxLength="2" />
           <Property Name="Turn" Type="varchar" MaxLength="20" />
@@ -154,6 +175,7 @@
           <Property Name="Status" Type="varchar" MaxLength="50" />
           <Property Name="HealthCompleted" Type="bit" />
           <Property Name="HealthUpdated" Type="bit" />
+          <Property Name="OtherLevel" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Replies">
           <Key>
@@ -175,11 +197,24 @@
         </EntityType>
         <EntityType Name="RoleUsers">
           <Key>
-            <PropertyRef Name="Users_Id" />
-            <PropertyRef Name="Roles_Id" />
+            <PropertyRef Name="User_Id" />
+            <PropertyRef Name="Role_Id" />
           </Key>
-          <Property Name="Users_Id" Type="int" Nullable="false" />
-          <Property Name="Roles_Id" Type="smallint" Nullable="false" />
+          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="Role_Id" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemConfigurations">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="300" />
+          <Property Name="DefaultValue" Type="varchar" MaxLength="300" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="Group" Type="varchar" MaxLength="50" />
+          <Property Name="isInherited" Type="bit" />
+          <Property Name="customData" Type="varchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -236,7 +271,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="RoleUsers">
-              <PropertyRef Name="Roles_Id" />
+              <PropertyRef Name="Role_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -248,7 +283,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="RoleUsers">
-              <PropertyRef Name="Users_Id" />
+              <PropertyRef Name="User_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -289,6 +324,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SchoolManagerModelStoreContainer">
+          <EntitySet Name="ASPStateTempApplications" EntityType="Self.ASPStateTempApplications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ASPStateTempSessions" EntityType="Self.ASPStateTempSessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classrooms" EntityType="Self.Classrooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Galleries" EntityType="Self.Galleries" Schema="dbo" store:Type="Tables" />
@@ -297,6 +334,7 @@
           <EntitySet Name="Replies" EntityType="Self.Replies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleUsers" EntityType="Self.RoleUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemConfigurations" EntityType="Self.SystemConfigurations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ClassroomPost" Association="Self.FK_ClassroomPost">
             <End Role="Classrooms" EntitySet="Classrooms" />
@@ -360,14 +398,17 @@
             <End Role="Post" EntitySet="Posts" />
           </AssociationSet>
           <AssociationSet Name="RoleUsers" Association="SchoolManagerModel.RoleUsers">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Roles" EntitySet="Roles" />
+            <End EntitySet="Users" Role="Users" />
+            <End EntitySet="Roles" Role="Roles" />
           </AssociationSet>
           <AssociationSet Name="BookUser" Association="SchoolManagerModel.BookUser">
             <End Role="Book" EntitySet="Books" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="RegistrationRequest" EntityType="SchoolManagerModel.RegistrationRequest" />
+          <EntitySet Name="ASPStateTempApplications" EntityType="SchoolManagerModel.ASPStateTempApplications" />
+          <EntitySet Name="ASPStateTempSessions" EntityType="SchoolManagerModel.ASPStateTempSessions" />
+          <EntitySet Name="SystemConfigurations" EntityType="SchoolManagerModel.SystemConfigurations" />
         </EntityContainer>
         <EntityType Name="Role">
           <Key>
@@ -515,8 +556,8 @@
           <End Type="SchoolManagerModel.Post" Role="Post" Multiplicity="*" />
         </Association>
         <Association Name="RoleUsers">
-          <End Type="SchoolManagerModel.User" Role="Users" Multiplicity="*" ></End>
-          <End Type="SchoolManagerModel.Role" Role="Roles" Multiplicity="*" />
+          <End Type="SchoolManagerModel.User" Multiplicity="*" Role="Users"></End>
+          <End Type="SchoolManagerModel.Role" Multiplicity="*" Role="Roles" />
         </Association>
         <Association Name="BookUser">
           <End Type="SchoolManagerModel.Book" Role="Book" Multiplicity="*" />
@@ -525,8 +566,6 @@
         <EntityType Name="RegistrationRequest">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="DNI" />
-            <PropertyRef Name="YearRequest" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -622,7 +661,43 @@
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="HealthCompleted" Type="Boolean" />
           <Property Name="HealthUpdated" Type="Boolean" />
-          <Property Name="OtherLevel" Type="String" Nullable="true" />
+          <Property Name="OtherLevel" Type="String" Nullable="true" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ASPStateTempApplications">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="Int32" Nullable="false" />
+          <Property Name="AppName" Type="String" Nullable="false" MaxLength="280" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ASPStateTempSessions">
+          <Key>
+            <PropertyRef Name="SessionId" />
+          </Key>
+          <Property Name="SessionId" Type="String" Nullable="false" MaxLength="88" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Expires" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LockDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LockDateLocal" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LockCookie" Type="Int32" Nullable="false" />
+          <Property Name="Timeout" Type="Int32" Nullable="false" />
+          <Property Name="Locked" Type="Boolean" Nullable="false" />
+          <Property Name="SessionItemShort" Type="Binary" MaxLength="7000" FixedLength="false" />
+          <Property Name="SessionItemLong" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Flags" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemConfigurations">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultValue" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Group" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isInherited" Type="Boolean" />
+          <Property Name="customData" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -743,11 +818,11 @@
       <Condition ColumnName="Classroom_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="RoleUsers" TypeName="SchoolManagerModel.RoleUsers" StoreEntitySet="RoleUsers">
-      <EndProperty Name="Users">
-        <ScalarProperty Name="Id" ColumnName="Users_Id" />
+	  <EndProperty Name="Users">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
       </EndProperty>
       <EndProperty Name="Roles">
-        <ScalarProperty Name="Id" ColumnName="Roles_Id" />
+        <ScalarProperty Name="Id" ColumnName="Role_Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="BookUser" TypeName="SchoolManagerModel.BookUser" StoreEntitySet="Books">
@@ -762,6 +837,7 @@
           <EntitySetMapping Name="RegistrationRequest">
             <EntityTypeMapping TypeName="SchoolManagerModel.RegistrationRequest">
               <MappingFragment StoreEntitySet="RegistrationRequests">
+				<ScalarProperty Name="OtherLevel" ColumnName="OtherLevel" />
                 <ScalarProperty Name="HealthUpdated" ColumnName="HealthUpdated" />
                 <ScalarProperty Name="HealthCompleted" ColumnName="HealthCompleted" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -859,6 +935,45 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ASPStateTempApplications">
+            <EntityTypeMapping TypeName="SchoolManagerModel.ASPStateTempApplications">
+              <MappingFragment StoreEntitySet="ASPStateTempApplications">
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ASPStateTempSessions">
+            <EntityTypeMapping TypeName="SchoolManagerModel.ASPStateTempSessions">
+              <MappingFragment StoreEntitySet="ASPStateTempSessions">
+                <ScalarProperty Name="Flags" ColumnName="Flags" />
+                <ScalarProperty Name="SessionItemLong" ColumnName="SessionItemLong" />
+                <ScalarProperty Name="SessionItemShort" ColumnName="SessionItemShort" />
+                <ScalarProperty Name="Locked" ColumnName="Locked" />
+                <ScalarProperty Name="Timeout" ColumnName="Timeout" />
+                <ScalarProperty Name="LockCookie" ColumnName="LockCookie" />
+                <ScalarProperty Name="LockDateLocal" ColumnName="LockDateLocal" />
+                <ScalarProperty Name="LockDate" ColumnName="LockDate" />
+                <ScalarProperty Name="Expires" ColumnName="Expires" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemConfigurations">
+            <EntityTypeMapping TypeName="SchoolManagerModel.SystemConfigurations">
+              <MappingFragment StoreEntitySet="SystemConfigurations">
+                <ScalarProperty Name="customData" ColumnName="customData" />
+                <ScalarProperty Name="isInherited" ColumnName="isInherited" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -880,7 +995,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Entities" ZoomLevel="77">
+      <Diagram Name="Entities" ZoomLevel="94">
         <EntityTypeShape EntityType="SchoolManagerModel.Role" Width="1.5" PointX="0.75" PointY="1" Height="1.7879850260416668" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagerModel.User" Width="1.5" PointX="4" PointY="0.625" Height="5.2494108072916656" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagerModel.Book" Width="1.5" PointX="7" PointY="1" Height="2.364889322916667" />
@@ -918,6 +1033,9 @@
           <ConnectorPoint PointX="5.5" PointY="2.1824446614583337" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SchoolManagerModel.RegistrationRequest" Width="2.375" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="SchoolManagerModel.ASPStateTempApplications" Width="1.75" PointX="8.375" PointY="7.75" />
+        <EntityTypeShape EntityType="SchoolManagerModel.ASPStateTempSessions" Width="1.75" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="SchoolManagerModel.SystemConfigurations" Width="1.75" PointX="8.375" PointY="10.75" />
       </Diagram>
     </Diagrams>
   </Designer>

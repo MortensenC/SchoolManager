@@ -34,7 +34,6 @@
                     new SelectListItem{ Text="Otro", Value="Otro" },
                 }, "--- Seleccione un valor ---"
             )
-            @*@Html.DropDownListFor(model => model.Level, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevels))))*@
             @Html.ValidationMessageFor(model => model.Level)
 
             @Html.TextBoxFor(model => model.OtherLevel, new { style = (Model.Level.ToUpper().Equals("OTRO")) ? "display:inline" : "display:none" })
@@ -42,7 +41,6 @@
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Year)
-            @*@Html.DropDownListFor(model => model.Year, new SelectList(SchoolManager.WebUI.Controllers.RegistrationRequestController.eYears))*@
             @Html.DropDownListFor(model => model.Year,
                 new List<SelectListItem>{
                     new SelectListItem{ Text="1°", Value="1" },
@@ -60,7 +58,6 @@
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Turn)
-            @*@Html.DropDownListFor(model => model.Level, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eTurn))))*@
             @Html.DropDownListFor(model => model.Turn,
                 new List<SelectListItem>{
                     new SelectListItem{ Text="Mañana", Value="Mañana" },
@@ -252,7 +249,6 @@
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.MothersLevelInstruction, new { style = "width:240px;" })
-            @*@Html.DropDownListFor(model => model.MothersLevelInstruction, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevelInstruction))))*@
             @Html.DropDownListFor(model => model.MothersLevelInstruction,
                 new List<SelectListItem>{
                     new SelectListItem{ Text="Ninguno", Value="Ninguno" },
@@ -265,12 +261,12 @@
             )
             @Html.ValidationMessageFor(model => model.MothersLevelInstruction)
 
-            @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, "Completo", new { id = "MLIC" })@Html.Label("Completo", new { @for = "MLIC" })
-            @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, "Incompleto", new { id = "MLII" })@Html.Label("Incompleto", new { @for = "MLII" })
+            @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, true, new { id = "MLIC" })@Html.Label("Completo", new { @for = "MLIC" })
+            @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, false, new { id = "MLII" })@Html.Label("Incompleto", new { @for = "MLII" })
             @Html.ValidationMessageFor(model => model.MothersLevelInstructionCompleted)
 
-            @Html.LabelFor(model => model.MothersUntilYearLevel, new { id = "MUYL", style = "display: none;" })
-            @Html.TextBoxFor(model => model.MothersUntilYearLevel, new { style = "display: none;" })
+            @Html.LabelFor(model => model.MothersUntilYearLevel, new { id = "MUYL", style = ((Model.MothersLevelInstructionCompleted.HasValue && Model.MothersLevelInstructionCompleted.Value) || !Model.MothersLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
+            @Html.TextBoxFor(model => model.MothersUntilYearLevel, new { style = ((Model.MothersLevelInstructionCompleted.HasValue && Model.MothersLevelInstructionCompleted.Value) || !Model.MothersLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
             @Html.ValidationMessageFor(model => model.MothersUntilYearLevel)
         </div>
         <div class="editor-label">
@@ -355,7 +351,6 @@
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.FathersLevelInstruction, new { style = "width:240px;" })
-            @*@Html.DropDownListFor(model => model.FathersLevelInstruction, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevelInstruction))))*@
             @Html.DropDownListFor(model => model.FathersLevelInstruction,
                 new List<SelectListItem>{
                     new SelectListItem{ Text="Ninguno", Value="Ninguno" },
@@ -368,12 +363,12 @@
             )
             @Html.ValidationMessageFor(model => model.FathersLevelInstruction)
 
-            @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, "Completo", new { id = "FLIC" })@Html.Label("Completo", new { @for = "FLIC" })
-            @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, "Incompleto", new { id = "FLII" })@Html.Label("Incompleto", new { @for = "FLII" })
+            @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, true, new { id = "FLIC" })@Html.Label("Completo", new { @for = "FLIC" })
+            @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, false, new { id = "FLII" })@Html.Label("Incompleto", new { @for = "FLII" })
             @Html.ValidationMessageFor(model => model.FathersLevelInstructionCompleted)
 
-            @Html.LabelFor(model => model.FathersUntilYearLevel, new { id = "FUYL", style = "display: none;" })
-            @Html.TextBoxFor(model => model.FathersUntilYearLevel, new { style = "display: none;" })
+            @Html.LabelFor(model => model.FathersUntilYearLevel, new { id = "FUYL", style = ((Model.FathersLevelInstructionCompleted.HasValue && Model.FathersLevelInstructionCompleted.Value) || !Model.FathersLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
+            @Html.TextBoxFor(model => model.FathersUntilYearLevel, new { style = ((Model.FathersLevelInstructionCompleted.HasValue && Model.FathersLevelInstructionCompleted.Value) || !Model.FathersLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
             @Html.ValidationMessageFor(model => model.FathersUntilYearLevel)
         </div>
         <div class="editor-label">
@@ -470,12 +465,12 @@
             )
             @Html.ValidationMessageFor(model => model.TutorLevelInstruction)
 
-            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, "Completo", new { id = "TLIC" })@Html.Label("Completo", new { @for = "TLIC" })
-            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, "Incompleto", new { id = "TLII" })@Html.Label("Incompleto", new { @for = "TLII" })
+            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, true, new { id = "TLIC" })@Html.Label("Completo", new { @for = "TLIC" })
+            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, false, new { id = "TLII" })@Html.Label("Incompleto", new { @for = "TLII" })
             @Html.ValidationMessageFor(model => model.TutorLevelInstructionCompleted)<br />
 
-            @Html.LabelFor(model => model.TutorUntilYearLevel, new { id = "TUYL", style = "display: none;" })
-            @Html.TextBoxFor(model => model.TutorUntilYearLevel, new { style = "display: none;" })
+            @Html.LabelFor(model => model.TutorUntilYearLevel, new { id = "TUYL", style = ((Model.TutorLevelInstructionCompleted.HasValue && Model.TutorLevelInstructionCompleted.Value) || !Model.TutorLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
+            @Html.TextBoxFor(model => model.TutorUntilYearLevel, new { style = ((Model.TutorLevelInstructionCompleted.HasValue && Model.TutorLevelInstructionCompleted.Value) || !Model.TutorLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
             @Html.ValidationMessageFor(model => model.TutorUntilYearLevel)
         </div>
         <div class="editor-label">
@@ -580,7 +575,7 @@
             $("#OtherLevel").fadeOut("slow", "linear");
     });
     $("input[name=MothersLevelInstructionCompleted]:radio").change(function () {
-        if (this.value == "Completo") {
+        if (this.value == "True") {
             $('#MothersUntilYearLevel').fadeOut("slow", "linear");
             $('#MUYL').fadeOut("slow", "linear");
         }
@@ -590,7 +585,7 @@
         }
     })
     $("input[name=FathersLevelInstructionCompleted]:radio").change(function () {
-        if (this.value == "Completo") {
+        if (this.value == "True") {
             $('#FathersUntilYearLevel').fadeOut("slow", "linear");
             $('#FUYL').fadeOut("slow", "linear");
         }
@@ -600,7 +595,7 @@
         }
     })
     $("input[name=TutorLevelInstructionCompleted]:radio").change(function () {
-        if (this.value == "Completo") {
+        if (this.value == "True") {
             $('#TutorUntilYearLevel').fadeOut("slow", "linear");
             $('#TUYL').fadeOut("slow", "linear");
         }

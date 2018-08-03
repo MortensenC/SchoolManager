@@ -3,6 +3,7 @@ using SchoolManager.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -15,75 +16,20 @@ namespace SchoolManager.WebUI.Controllers
 
         private Context db = new Context();
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        //public enum eLevels { Inicial, EGB, Polimodal, CEF, CEC, Especial, Adultos, Artística, Otro };
-        //public static IEnumerable<String> eYears = new List<string>() { "1°", "2°", "3°", "4°", "5°", "6°", "7°", "8°", "9°" };
-        //public enum eTurn { Mañana, Tarde, Jornada_Completa, Vespertino, Noche };
-        //public enum eLevelInstruction { Ninguno, Primario, Secundario, Terciario, Universitario, Posgrado }
-        //public enum eConditional { Sí, No };
-
-        //private void SetViewBagLevel()
-        //{
-        //    IEnumerable<eLevels> values = Enum.GetValues(typeof(eLevels)).Cast<eLevels>();
-
-        //    IEnumerable<SelectListItem> items =  from value in values
-        //        select new SelectListItem
-        //        {
-        //            Text = value.ToString(),
-        //            Value = value.ToString()
-        //        };
-
-        //    ViewBag.Level = items;
-        //}
-
-        //private void SetViewBagYear()
-        //{
-        //    IEnumerable<SelectListItem> items = from value in eYears
-        //                                        select new SelectListItem
-        //                                        {
-        //                                            Text = value.ToString(),
-        //                                            Value = value.ToString()
-        //                                        };
-
-        //    ViewBag.Year = items;
-        //}
-
-        //private void SetViewBagTurn()
-        //{
-        //    IEnumerable<eTurn> values = Enum.GetValues(typeof(eTurn)).Cast<eTurn>();
-
-        //    IEnumerable<SelectListItem> items = from value in values
-        //                                        select new SelectListItem
-        //                                        {
-        //                                            Text = value.ToString().Replace("_"," "),
-        //                                            Value = value.ToString()
-        //                                        };
-
-        //    ViewBag.Turn = items;
-        //}
-
-        //private void SetViewBagLevelInstruction()
-        //{
-        //    IEnumerable<eLevelInstruction> values = Enum.GetValues(typeof(eLevelInstruction)).Cast<eLevelInstruction>();
-
-        //    IEnumerable<SelectListItem> items = from value in values
-        //                                        select new SelectListItem
-        //                                        {
-        //                                            Text = value.ToString(),
-        //                                            Value = value.ToString()
-        //                                        };
-
-        //    ViewBag.LevelInstruction = items;
-        //}
+        
 
         //
         // GET: /RegistrationRequest
         public ActionResult Index()
         {
-            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
-            this.GetPicture(user);
-            
-            return View(db.RegistrationRequests.ToList());
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+                this.GetPicture(user);
+            }
+            ViewBag.IsRegistrationRequestEnable = db.SystemConfigurations.Find("IsRegistrationRequestEnable").Value.ToUpper().Equals("TRUE");
+            //ViewBag.RegistrationRequests = new List() { };
+            return View(db.RegistrationRequests.Where(rr => rr.Status != "Aprobada" && rr.Status != "Rechazada").ToList());
         }
 
         private void GetPicture(User user)
@@ -116,21 +62,27 @@ namespace SchoolManager.WebUI.Controllers
 
         public ActionResult Details(int id)
         {
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             return View();
         }
 
         //
         // GET: /RegistrationRequest/Create
 
-        public ActionResult Create()
+        public ActionResult Create(string dni = "")
         {
-            //var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
-            //this.GetPicture(user);
-            //SetViewBagLevel();
-            //SetViewBagYear();
-            //SetViewBagTurn();
-            //SetViewBagLevelInstruction();
-            return View();
+            if (User.Identity.IsAuthenticated) {
+                var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+                this.GetPicture(user);
+            }
+            if (string.IsNullOrEmpty(dni))
+                return View();
+            else
+            {
+                ViewBag.DNI = dni;
+                return View();
+            }
         }
 
         //
@@ -152,7 +104,7 @@ namespace SchoolManager.WebUI.Controllers
         //}
 
         [HttpPost]
-        [Authorize(Roles = "SuperAdmin, Admin, Teacher")]
+        [Authorize(Roles = "SuperAdmin, Admin, Teacher, Father")]
         public ActionResult Create(RegistrationRequest RegistrationRequest)
         {
             log.Info("Trying to create a new RegistrationRequest entity.");
@@ -193,7 +145,10 @@ namespace SchoolManager.WebUI.Controllers
         /// <param name="RegistrationRequest"></param>
         private void AnalizarEstadoSolicitud(RegistrationRequest RegistrationRequest)
         {
-            RegistrationRequest.Status = "Faltan datos";
+            if (RegistrationRequest.EstaCompleta())
+                RegistrationRequest.setCompleto();
+            else
+                RegistrationRequest.setFaltanDatos();
         }
 
         //
@@ -201,9 +156,10 @@ namespace SchoolManager.WebUI.Controllers
 
         public ActionResult Edit(int id)
         {
+            var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+            this.GetPicture(user);
             var rr = db.RegistrationRequests.Find(id);
             return View("Edit",rr);
-            //return LoadAndCreate(rr);
         }
 
         //
@@ -222,12 +178,33 @@ namespace SchoolManager.WebUI.Controllers
             return View(rr);
         }
 
+        public ActionResult Aprove(int id)
+        {
+            var rr = db.RegistrationRequests.Find(id);
+
+            db.Entry(rr).State = EntityState.Modified;
+            rr.setAprobada();
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Decline(int id)
+        {
+            var rr = db.RegistrationRequests.Find(id);
+
+            db.Entry(rr).State = EntityState.Modified;
+            rr.setRechazada();
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         //
         // GET: /RegistrationRequest/Delete/5
 
         public ActionResult Delete(int id)
         {
-            //return View();
             var rr = db.RegistrationRequests.Find(id);
             db.RegistrationRequests.Remove(rr);
             db.SaveChanges();
@@ -268,8 +245,28 @@ namespace SchoolManager.WebUI.Controllers
             
         }
 
+        public ActionResult EnableRegistrationRequest()
+        {
+            var rr = db.SystemConfigurations.Find("IsRegistrationRequestEnable");
+
+            db.Entry(rr).State = EntityState.Modified;
+            rr.Value = "TRUE";
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DisableRegistrationRequest()
+        {
+            var rr = db.SystemConfigurations.Find("IsRegistrationRequestEnable");
+
+            db.Entry(rr).State = EntityState.Modified;
+            rr.Value = "FALSE";
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
-        public ActionResult Search(String dni)
+        public ActionResult SearchDNI(String dni)
         {
             log.Info("Trying to search for a RegistrationRequest entity.");
             try
@@ -278,25 +275,39 @@ namespace SchoolManager.WebUI.Controllers
                 var rr = db.RegistrationRequests.Where<RegistrationRequest>(r => r.DNI.ToUpper().Equals(dni.ToUpper())).FirstOrDefault<RegistrationRequest>();
                 if (rr == null)
                 {
-                    return RedirectToAction("Create");
+                    return RedirectToAction("Create", new { dni = dni });
                 }
                 else
-                    return RedirectToAction("Edit", new { id = rr.Id });
+                {
+                    if (rr.FaltanDatos() || rr.AControlar())
+                        return RedirectToAction("Edit", new { id = rr.Id });
+                    else
+                    {
+                        string _message = String.Empty;
+                        if (rr.EstaAprobada())
+                            _message = "La solicitud ya está aprobada.";
+                        else if(rr.EstaRechazada())
+                            _message = "La solicitud fue rechazada.";
+                        return RedirectToAction("Search", new { message = _message });
+                    }
+                    
+
+                }
             }
             catch(Exception ex)
             {
                 throw ex;
-                //return View();
             }
         }
 
-        //private ActionResult LoadAndCreate(RegistrationRequest rr)
-        //{
-        //    return View("Create",rr);
-        //}
-
-        public ActionResult Search()
+        public ActionResult Search(string message = "")
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+                this.GetPicture(user);
+            }
+            ViewBag.message = message;
             return View();
         }
     }

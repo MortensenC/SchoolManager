@@ -379,7 +379,7 @@ namespace SchoolManager.WebUI.Controllers
             user.UserType = user.Roles.Count > 0 ? user.Roles.FirstOrDefault().Name : string.Empty;
 
             this.GetPicture(user);
-
+            //ViewBag.IsRegistrationRequestEnable = db.SystemConfigurations.Find("IsRegistrationRequestEnable").Value.ToUpper().Equals("TRUE");
             return View(user);
         }
 
