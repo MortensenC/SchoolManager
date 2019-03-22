@@ -118,6 +118,7 @@ namespace SchoolManager.WebUI.Controllers
             userTable.Columns.Add("Teléfono", typeof(string));
             userTable.Columns.Add("Dirección", typeof(string));
             userTable.Columns.Add("DNI", typeof(string));
+            userTable.Columns.Add("Fecha de Nacimiento", typeof(string));
 
             foreach (var usersByClassroom in contacts.GroupBy(u => u.Classroom))
             {
@@ -132,7 +133,7 @@ namespace SchoolManager.WebUI.Controllers
 
                 foreach (var item in usersByClassroom)
                 {
-                    userTable.Rows.Add(item.FullName, item.Email, item.Phone, item.Address, item.Username);
+                    userTable.Rows.Add(item.FullName, item.Email, item.Phone, item.Address, item.Username, item.Birthdate);
 
                     if (item.Dad != null)
                     {
