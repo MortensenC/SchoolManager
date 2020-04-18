@@ -15,7 +15,7 @@ namespace SchoolManager.WebUI.Controllers
     public class BookController : Controller
     {
         private Context db = new Context();
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         //
         // GET: /Book/
@@ -57,10 +57,10 @@ namespace SchoolManager.WebUI.Controllers
         [AllowAnonymous]
         public ActionResult Biblioteca()
         {
-            var books = db.Books.Where(b => b.Highlighted).ToList();
+            List<Book> books = db.Books.Where(b => b.Highlighted.Value).ToList();
 
             ViewBag.PictureMaps = new Dictionary<int, string>();
-            foreach (var book in books)
+            foreach (Book book in books)
             {
                 var map = Server.MapPath("~/Uploads/Books") + "/" + book.Id;
 
@@ -85,14 +85,14 @@ namespace SchoolManager.WebUI.Controllers
             {
                 if (string.IsNullOrEmpty(text))
                 {
-                    books = db.Books.Where(b => !b.Highlighted).Take(20).ToList();
+                    books = db.Books.Where(b => !b.Highlighted.Value).Take(20).ToList();
                 }
                 else
                 {
                     books =
                         db.Books.Where(
                             b =>
-                            !b.Highlighted &&
+                            !b.Highlighted.Value &&
                             (b.Title.ToLower().Contains(text.ToLower()) ||
                              b.Description.ToLower().Contains(text.ToLower()) ||
                              b.Author.ToLower().Contains(text.ToLower()))).ToList();
@@ -139,7 +139,7 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin, Teacher")]
         public ActionResult Create(Book book, HttpPostedFileBase photo)
         {
-            log.Info("Trying to create a new Book entity.");
+           // log.Info("Trying to create a new Book entity.");
             try
             {
                 if (ModelState.IsValid)
@@ -159,7 +159,7 @@ namespace SchoolManager.WebUI.Controllers
             }
             catch (Exception e)
             {
-                log.Error("Error creating new Book", e);
+                //log.Error("Error creating new Book", e);
             }
 
             ViewBag.Users = db.Users.ToList();

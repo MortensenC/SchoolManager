@@ -1,0 +1,1903 @@
+﻿@model SchoolManager.Domain.Entities.RegistrationRequest
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>SOLICITUD DE INGRESO</title>
+	<style>
+		html {
+			/*margin: 0 0 0 0;*/
+            font-family: 'Times New Roman'; 
+		}
+        body {
+            margin: 30px 30px 20px 30px;
+        }
+		div {
+			float: left;
+			width:  100%;
+		}
+        p {
+            display: block;
+            /*display: inline-block;*/
+            margin: 0;
+        }
+		h3, h4, h5 {
+			margin-top: 0;
+			margin-bottom: 0;	
+			display: inline-block;
+		}
+        ul {
+            /*margin-top: 0;
+            margin-bottom: 0;*/
+            margin: 0px;
+            /*padding: 0px;*/
+            padding-left: 10px;
+            list-style-position: inside;
+        }
+		ol {
+			margin: 0;
+			padding: 10px;
+			list-style-position: inside;
+		}
+
+        ol li {
+            margin: 5px 0;
+        }
+
+		span {
+			margin: 5px 0;
+		}
+		
+		/*titulo-general*/
+        div.titulo-demarcado {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            vertical-align: middle;
+        }
+		div.titulo-demarcado h2 {
+			text-align:  center;
+            vertical-align: middle;
+		}
+        div.titulo-tema {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            font-size: 9pt;
+            border-collapse: collapse;
+        }
+
+        td.celda {
+            border: 1px solid black;
+            padding: 0 0 0 0.01in;
+        }
+
+        p.datos-alumno {
+            font-size: 16px;
+        }
+
+        div.mother p, div.father p, div.tutor p {
+            line-height: 140%;
+            font-size: 16px;
+            width: 100%;
+        }
+
+		br {
+            padding: 0;
+            margin: 0;
+            display: block;
+		}
+
+        div.inblock p {
+            display: inline-block;
+        }
+
+        div.lineaDivisoria {
+            border-bottom: 1px solid #000000;
+            height: 1px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+	</style>
+</head>
+<body>
+    <div style="text-align:right">
+        <img src="@Url.Content("http://localhost:49275/Content/Images/logo_pdf.png")" width="121" height="100">
+    </div>
+	<div style="text-align:  center; margin: 10px 0 0 0;">
+		<p style="margin: 10px 0 0 0; font-size:24px;">
+			PROVINCIA DE BUENOS AIRES
+		</p>
+	</div>
+	<div style="text-align:  center;">
+		<p style="margin: 10px 0; font-size:24px;">
+			DIRECCIÓN GENERAL DE CULTURA Y EDUCACIÓN
+		</p>
+	</div>
+	<div class="titulo-demarcado">
+		<h2>SOLICITUD DE INSCRIPCIÓN – AÑO LECTIVO 2018</h2>
+	</div>
+	<div class="titulo-tema">
+		<ul>
+			<li>
+				<h3>DATOS DEL ESTABLECIMIENTO EDUCATIVO:</h3>
+			</li>
+		</ul>
+	</div>
+	<div style="font-size:15px;">
+		<p>@*<p style="padding: 10px 0 10px 0;">*@
+			Nombre del Establecimiento : ESCUELA DE LA CIUDAD
+		</p>@*<br /><br />*@
+        <div class="inblock" style="margin: 5px 0;">
+            <p style="padding-right: 65px;">
+                Número de DIEGEP: 5295
+            </p>
+            <p style="padding-right:65px;">
+                Distrito: Bahía Blanca
+            </p>
+            <p>
+                Escuela Privada
+            </p>
+        </div>
+		<div class="titulo-tema">
+			<ul>
+				<li>
+					<h3>EL ALUMNO SE INSCRIBE EN:</h3><p style="display:inline-block;">(marque con una cruz lo que corresponda)</p>
+				</li>
+			</ul>
+		</div>
+		<h4>NIVEL/RAMA :</h4>
+		<table cellspacing="0" >
+			<tbody>
+				<tr valign="TOP">
+					<td width="53" class="celda">
+                        <p>
+                            <span>Inicial</span>
+						    @if (@Model.Level != null && @Model.Level.Equals("Inicial"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>E.G.B.</span>
+                            @if (@Model.Level != null && @Model.Level.Equals("EGB"))
+                            {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+                            }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>Polimodal</span>
+						    @if (@Model.Level != null && @Model.Level.Equals("Polimodal"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="48" class="celda">
+                        <p>
+                            <span>C.E.F.</span>
+						    @if (@Model.Level != null && @Model.Level.Equals("CEF"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="60" class="celda">
+                        <p>
+                            <span>C.E.C.</span>
+						    @if (@Model.Level != null && @Model.Level.Equals("CEC"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>Especial</span>
+						    @if (@Model.Level != null && @Model.Level.Equals("Especial"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>Adultos</span>
+						    @if (@Model.Level != null && @Model.Level.Equals("Adultos"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>Artística</span>
+						    @if (@Model.Level != null && @Model.Level.Equals("Artística"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>Otro:</span>
+						    @if (@Model.Level != null && @Model.Level.Equals("Otro"))
+                            {
+                                <span style="font-weight:bold">
+                                    @Model.OtherLevel
+                                </span>
+						    }
+                        </p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h4>AÑO:</h4>
+		<table cellspacing="0">
+			<tbody>
+				<tr valign="TOP">
+					<td width="53" class="celda">
+                        <p>
+                            <span>1º</span>
+						    @if (@Model.Year != null && @Model.Year.Equals("1"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>2º</span>
+						    @if (@Model.Year != null && @Model.Year.Equals("2"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>3º</span>
+						    @if (@Model.Year != null && @Model.Year.Equals("3"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>4º</span>
+						    @if (@Model.Year != null && @Model.Year.Equals("4"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>5º</span>
+						    @if (@Model.Year != null && @Model.Year.Equals("5"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>6º</span>
+						    @if (@Model.Year != null && @Model.Year.Equals("6"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>7º</span>
+						    @if (@Model.Year != null && @Model.Year.Equals("7"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>8º</span>
+						    @if (@Model.Year != null && @Model.Year.Equals("8"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+					<td width="54" class="celda">
+                        <p>
+                            <span>9º</span>
+						    @if (@Model.Year != null && @Model.Year.Equals("9"))
+						    {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+						    }
+                        </p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h4>TURNO SOLICITADO:</h4>
+		<table cellspacing="0">
+			<tbody>
+				<tr valign="TOP">
+                    <td width="97" class="celda">
+                        <p>
+                            <span>Mañana</span>
+                            @if (@Model.Turn != null && @Model.Turn.Equals("Mañana"))
+                            {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+                            }
+                        </p>
+                    </td>
+                    <td width="97" class="celda">
+                        <p>
+                            <span>Tarde</span>
+                            @if (@Model.Turn != null && @Model.Turn.Equals("Tarde"))
+                            {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+                            }
+                        </p>
+                    </td>
+                    <td width="97" class="celda">
+                        <p>
+                            <span>Jornada Completa</span>
+                            @if (@Model.Turn != null && @Model.Turn.Equals("Jornada Completa"))
+                            {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+                            }
+                        </p>
+                    </td>
+                    <td width="97" class="celda">
+                        <p>
+                            <span>Vespertino</span>
+                            @if (@Model.Turn != null && @Model.Turn.Equals("Vespertino"))
+                            {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+                            }
+                        </p>
+                    </td>
+                    <td width="97" class="celda">
+                        <p>
+                            <span>Noche</span>
+                            @if (@Model.Turn != null && @Model.Turn.Equals("Noche"))
+                            {
+                                <span style="font-weight:bold">
+                                    X
+                                </span>
+                            }
+                        </p>
+                    </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div><br />
+		<div class="titulo-demarcado">
+			<ul>
+				<li>
+					<h3>DATOS PERSONALES DEL ALUMNO/A</h3>
+				</li>
+			</ul>
+		</div>
+		<ol>
+			<li>
+				<p class="datos-alumno">
+					Nombre(s):
+					@if (@Model.Firstnames == null)
+					{
+						Write(" ......................................................................................................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.Firstnames
+						</span>
+					}
+				</p>
+			</li>
+			<li>
+				<p class="datos-alumno">
+					Apellido(s):
+					@if (@Model.Lastnames == null)
+					{
+						Write(" .....................................................................................................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.Lastnames
+						</span>
+					}
+				</p>
+			</li>
+			<li>
+				<p class="datos-alumno">
+					Fecha y lugar de nacimiento:
+					@if (@Model.Birthday == null && @Model.Birthplace == null)
+					{
+						Write(" ..........................................................................................................");
+					}
+					else if (@Model.Birthday == null)
+					{
+						<span style="font-weight:bold;">
+							@Model.Birthplace
+						</span>
+					}
+					else if (@Model.Birthplace == null)
+					{
+						<span style="font-weight:bold;">
+							@Model.Birthday
+						</span>
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.Birthday - @Model.Birthplace
+						</span>
+					}
+				</p>
+			</li>
+			<li>
+				<p class="datos-alumno">
+					D.N.I.:
+					@if (@Model.DNI == null)
+					{
+						WriteLiteral(" .....................................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold; width:200px; padding-right:200px;">
+							@Model.DNI
+						</span>
+					}
+					Sexo:
+					@if (@Model.Sex == null)
+					{
+						WriteLiteral(" .............................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@if (@Model.Sex.Equals("M"))
+							{
+								WriteLiteral("Masculino");
+							}
+							else
+							{
+								WriteLiteral("Femenino");
+							}
+						</span>
+					}
+				</p>
+			</li>
+			<li>
+				<p class="datos-alumno">
+					Domicilio familiar: Calle:
+					@if (@Model.AdressStreet == null)
+					{
+						WriteLiteral(" .........................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.AdressStreet
+						</span>
+					}
+					Nº:
+					@if (@Model.AdressNumber == null)
+					{
+						WriteLiteral(" .........");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.AdressNumber
+						</span>
+					}
+					Piso:
+					@if (@Model.AdressFloor == null)
+					{
+						WriteLiteral(" ........");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.AdressFloor
+						</span>
+					}
+					Dto.:
+					@if (@Model.AdressDpto == null)
+					{
+						WriteLiteral(" .........");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.AdressDpto
+						</span>
+					}
+				</p>
+			</li>
+			<li>
+				<p class="datos-alumno">
+					Localidad:
+					@if (@Model.Localidad == null)
+					{
+						WriteLiteral(" ......................................................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.Localidad
+						</span>
+					}
+					Código Postal:
+					@if (@Model.PostalCode == null)
+					{
+						WriteLiteral(" .......................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.PostalCode
+						</span>
+					}
+				</p>
+			</li>
+			<li>
+				<p class="datos-alumno">
+					Teléfono familiar:
+					@if (@Model.FamilyPhone == null)
+					{
+						WriteLiteral(" ....................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.FamilyPhone
+						</span>
+					}
+					Celular:
+					@if (@Model.CellPhone == null)
+					{
+						WriteLiteral(" ........................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.CellPhone
+						</span>
+					}
+				</p>
+			</li>
+			<li>
+				<p class="datos-alumno">
+					Otros teléfonos (abuela, etc.):
+					@if (@Model.OtherPhones == null)
+					{
+						WriteLiteral(" .........................................................................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.OtherPhones
+						</span>
+					}
+				</p>
+			</li>
+			<li>
+				<p class="datos-alumno">
+					Dirección de e-mail del padre:
+					@if (@Model.EmailFather == null)
+					{
+						WriteLiteral(" ........................................................................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.EmailFather
+						</span>
+					}
+				</p>
+			</li>
+			<li>
+				<p class="datos-alumno">
+					Dirección de e-mail de la madre:
+					@if (@Model.EmailMother == null)
+					{
+						WriteLiteral(" ....................................................................................................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.EmailMother
+						</span>
+					}
+				</p>
+			</li>
+		</ol><br />
+		<p class="datos-alumno">
+			¿Cuántos hermanos tiene?
+			@if (@Model.HMB == null)
+			{
+				WriteLiteral(" ........................");
+			}
+			else
+			{
+				<span style="font-weight:bold;">
+					@Model.HMB
+				</span>
+			}
+			¿Cuántos en este establecimiento?
+			@if (@Model.HMITS == null)
+			{
+				WriteLiteral(" ..................................");
+			}
+			else
+			{
+				<span style="font-weight:bold;">
+					@Model.HMITS
+				</span>
+			}
+		</p><br />
+		<p class="datos-alumno">
+			Fecha de nacimiento de los hermanos que quiere dejar inscriptos:
+			@if (@Model.BDB == null)
+			{
+				WriteLiteral(" ....................................................");
+			}
+			else
+			{
+				<span style="font-weight:bold;">
+					@Model.BDB
+				</span>
+			}
+		</p><br />
+		<p class="datos-alumno">
+			Si no habla español, lengua hablada en el hogar:
+			@if (@Model.Language == null)
+			{
+				WriteLiteral(" ...............................................................................");
+			}
+			else
+			{
+				<span style="font-weight:bold;">
+					@Model.Language
+				</span>
+			}
+		</p><br />
+		<table cellspacing="0" style="font-size:14px;">
+			<tbody>
+				<tr>
+                    <td colspan="2" class="celda" >
+                        <p>
+                            ESCUELA DE PROCEDENCIA (completar si el alumno proviene de  otro establecimiento)
+                        </p><br />
+                        <p>
+                            <span>
+                                Distrito:
+                                @if (@Model.Distrito == null)
+                                {
+                                    WriteLiteral(" ............................................................");
+                                }
+                                else
+                                {
+                                    <span style="font-weight:bold;">
+                                        @Model.Distrito
+                                    </span>
+                                }
+                            </span>
+                            <span>
+                                Nivel/Rama:
+                                @if (@Model.OtherSchoolLevel == null)
+                                {
+                                    WriteLiteral(" ............................................................");
+                                }
+                                else
+                                {
+                                    <span style="font-weight:bold;">
+                                        @Model.OtherSchoolLevel
+                                    </span>
+                                }
+                            </span>
+                        </p><br />
+                        <p>
+                            <span style="padding-right: 5px;">
+                                Nombre del Establecimiento:
+                                @if (@Model.NameSchool == null)
+                                {
+                                    WriteLiteral(" .................................................");
+                                }
+                                else
+                                {
+                                    <span style="font-weight:bold;">
+                                        @Model.NameSchool
+                                    </span>
+                                }
+                            </span>
+                            <span style="padding-right: 40px;">
+                                Nro:
+                                @if (@Model.NumberSchool == null)
+                                {
+                                    WriteLiteral("");
+                                }
+                                else
+                                {
+                                    <span style="font-weight:bold;">
+                                        @Model.NumberSchool
+                                    </span>
+                                }
+                            </span>
+                            <span style="padding-right: 10px;">
+                                Público
+                                @if (@Model.Private == null || (@Model.Private.HasValue && @Model.Private.Value))
+                                {
+                                    WriteLiteral("");
+                                }
+                                else
+                                {
+                                    <span style="font-weight:bold;">
+                                        X
+                                    </span>
+                                }
+                            </span>
+                            <span>
+                                Privado
+                                @if (@Model.Private == null || (@Model.Private.HasValue && !@Model.Private.Value))
+                                {
+                                    WriteLiteral("");
+                                }
+                                else
+                                {
+                                    <span style="font-weight:bold;">
+                                        X
+                                    </span>
+                                }
+                            </span>
+                        </p>
+                    </td>
+				</tr>
+				<tr>
+					<td width="55%" class="celda">
+						<p>
+						    INFORMACIÓN DE SALUD:
+                            <span style="padding-right: 10px;">
+                                completó
+                                @if (@Model.HealthUpdated != null)
+                                {
+                                    if (@Model.HealthCompleted.HasValue && !@Model.HealthCompleted.Value)
+                                    {
+                                        WriteLiteral("No");
+                                    }
+                                    else
+                                    {
+                                        <span style="font-weight:bold;">
+                                            Sí
+                                        </span>
+                                    }
+                                }
+                            </span>
+                            <span style="padding-right: 10px;">
+                                actualizó
+                                @if (@Model.HealthUpdated != null)
+                                {
+                                    if (@Model.HealthUpdated.HasValue && !@Model.HealthUpdated.Value)
+                                    {
+                                        WriteLiteral("No");
+                                    }
+                                    else
+                                    {
+                                        <span style="font-weight:bold;">
+                                            Sí
+                                        </span>
+                                    }
+                                }
+                            </span>
+						</p>
+					</td>
+					<td width="45%" class="celda" style="font-size:14px;">
+						<p>
+							Obra Social:
+                            <span>
+								@if (@Model.SocialName == null)
+								{
+									WriteLiteral(" ..................");
+								}
+								else
+								{
+									<span style="font-weight:bold;">
+										@Model.SocialName
+									</span>
+								}
+							</span>
+							<span>
+								Nº Afiliado
+								@if (@Model.AffiliateSocialNumber == null)
+								{
+									WriteLiteral(" ..................");
+								}
+								else
+								{
+									<span style="font-weight:bold;">
+										@Model.AffiliateSocialNumber
+									</span>
+								}
+							</span>
+						</p>
+					</td>
+				</tr>
+			</tbody>
+		</table><br /><br /><br />
+		<div class="titulo-demarcado" style="margin: 0 0 10px 0;">
+			<ul>
+				<li>
+					<h3>DATOS DE LA MADRE, PADRE Y/O RESPONSABLE DEL ALUMNO/A:</h3>
+				</li>
+			</ul>
+		</div>
+        <div class="mother">
+            <p>
+                Apellido/s y Nombres de la Madre
+                @if (@Model.MothersName == null)
+                {
+                    WriteLiteral("......................................................................................................");
+                }
+                else
+                {
+                    <span style="font-weight:bold;">
+                        @Model.MothersName
+                    </span>
+                }
+            </p>
+            <p>
+                Profesión u ocupación
+                @if (@Model.MothersProfession == null)
+                {
+                    WriteLiteral("..........................................................................................................................");
+                }
+                else
+                {
+                    <span style="font-weight:bold;">
+                        @Model.MothersProfession
+                    </span>
+                }
+            </p>
+            <p>
+                Nacionalidad
+                @if (@Model.MothersNationality == null)
+                {
+                    WriteLiteral("........................................................................................................................................");
+                }
+                else
+                {
+                    <span style="font-weight:bold;">
+                        @Model.MothersNationality
+                    </span>
+                }
+            </p>
+            <p style="margin-bottom:10px;">
+                Nivel de instrucción de la Madre: (marque el último nivel alcanzado)
+            </p>
+            <table style="margin-bottom:10px;" cellspacing="0">
+                <tbody>
+                    <tr valign="TOP">
+                        <td width="80" class="celda">
+                            <p>
+                                <span>Ninguno</span>
+                                @if (@Model.MothersLevelInstruction != null && @Model.MothersLevelInstruction.Equals("Ninguno"))
+                                {
+                                    <span style="font-weight:bold;">
+                                        X
+                                    </span>
+                                }
+                            </p>
+                        </td>
+                        <td width="81" class="celda">
+                            <p>
+                                <span>Primario</span>
+                                @if (@Model.MothersLevelInstruction != null && @Model.MothersLevelInstruction.Equals("Primario"))
+                                {
+                                    <span style="font-weight:bold;">
+                                        X
+                                    </span>
+                                }
+                            </p>
+                        </td>
+                        <td width="81" class="celda">
+                            <p>
+                                <span>Secundario</span>
+                                @if (@Model.MothersLevelInstruction != null && @Model.MothersLevelInstruction.Equals("Secundario"))
+                                {
+                                    <span style="font-weight:bold;">
+                                        X
+                                    </span>
+                                }
+                            </p>
+                        </td>
+                        <td width="80" class="celda">
+                            <p>
+                                <span>Terciario</span>
+                                @if (@Model.MothersLevelInstruction != null && @Model.MothersLevelInstruction.Equals("Terciario"))
+                                {
+                                    <span style="font-weight:bold;">
+                                        X
+                                    </span>
+                                }
+                            </p>
+                        </td>
+                        <td width="81" class="celda">
+                            <p>
+                                <span>Universitario</span>
+                                @if (@Model.MothersLevelInstruction != null && @Model.MothersLevelInstruction.Equals("Universitario"))
+                                {
+                                    <span style="font-weight:bold;">
+                                        X
+                                    </span>
+                                }
+                            </p>
+                        </td>
+                        <td width="80" class="celda">
+                            <p>
+                                <span>Posgrado</span>
+                                @if (@Model.MothersLevelInstruction != null && @Model.MothersLevelInstruction.Equals("Posgrado"))
+                                {
+                                    <span style="font-weight:bold;">
+                                        X
+                                    </span>
+                                }
+                            </p>
+                        </td>
+                    </tr>
+                    <tr valign="TOP">
+                        <td colspan="2" width="162" class="celda">
+                            <p>
+                                <span>Estudios completos</span>
+                                @if (@Model.MothersLevelInstructionCompleted != null && (@Model.MothersLevelInstructionCompleted.HasValue && @Model.MothersLevelInstructionCompleted.Value))
+                                {
+                                    <span style="font-weight:bold;">
+                                        X
+                                    </span>
+                                }
+                            </p>
+                        </td>
+                        <td colspan="2" width="162" class="celda">
+                            <p>
+                                <span>Estudios incompletos</span>
+                                @if (@Model.MothersLevelInstructionCompleted != null && (@Model.MothersLevelInstructionCompleted.HasValue && !@Model.MothersLevelInstructionCompleted.Value))
+                                {
+                                    <span style="font-weight:bold;">
+                                        X
+                                    </span>
+                                }
+                            </p>
+                        </td>
+                        <td colspan="2" width="162" class="celda">
+                            <p>
+                                <span>Hasta el año/grado:</span>
+                                @if (@Model.MothersUntilYearLevel == null)
+                                {
+                                    WriteLiteral("............");
+                                }
+                                else
+                                {
+                                    <span style="font-weight:bold;">
+                                        @Model.MothersUntilYearLevel
+                                    </span>
+                                }
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="inblock">
+                <p style="padding-right:10px;">
+                    ¿Vive?
+                <p>
+                <p style="padding-right: 20px;">
+                    Si
+                    @if (@Model.MothersLive != null && (@Model.MothersLive.HasValue && @Model.MothersLive.Value))
+            {
+                <span style="font-weight:bold;">
+                    X
+                </span>
+    }
+                <p>
+                <p style="padding-right: 20px;">
+                    No
+                    @if (@Model.MothersLive != null && (@Model.MothersLive.HasValue && !@Model.MothersLive.Value))
+            {
+                <span style="font-weight:bold;">
+                    X
+                </span>
+    }
+                <p>
+                <p style="padding-right: 10px;">
+                    Tipo de documento:
+                    @if (@Model.MothersKindOfDocument == null)
+            {
+                WriteLiteral("............");
+            }
+            else
+            {
+                <span style="font-weight:bold;">
+                    @Model.MothersKindOfDocument
+                </span>
+    }
+                <p>
+                <p>
+                    Nº Doc.
+                    @if (@Model.MothersDocumentNumber == null)
+            {
+                WriteLiteral("...............................................");
+            }
+            else
+            {
+                <span style="font-weight:bold;">
+                    @Model.MothersDocumentNumber
+                </span>
+    }
+                <p>
+            </div>
+            <div class="inblock">
+                <p>
+                    Domicilio – Calle:
+                    @if (@Model.MothersAddressStreet == null)
+        {
+            WriteLiteral(" .......................................");
+        }
+        else
+        {
+            <span style="font-weight:bold;">
+                @Model.MothersAddressStreet
+            </span>
+}
+                </p>
+                <p>
+                    Nº
+                    @if (@Model.MothersAddressNumber == null)
+        {
+            WriteLiteral(".................");
+        }
+        else
+        {
+            <span style="font-weight:bold;">
+                @Model.MothersAddressNumber
+            </span>
+}
+                </p>
+                <p>
+                    Piso
+                    @if (@Model.MothersAddressFloor == null)
+        {
+            WriteLiteral("........");
+        }
+        else
+        {
+            <span style="font-weight:bold;">
+                @Model.MothersAddressFloor
+            </span>
+}
+                </p>
+                <p>
+                    Torre
+                    @if (@Model.MothersAddressTower == null)
+        {
+            WriteLiteral("..............");
+        }
+        else
+        {
+            <span style="font-weight:bold;">
+                @Model.MothersAddressTower
+            </span>
+}
+                </p>
+                <p>
+                    Dto
+                    @if (@Model.MothersAddressDpto == null)
+        {
+            WriteLiteral(".......");
+        }
+        else
+        {
+            <span style="font-weight:bold;">
+                @Model.MothersAddressDpto
+            </span>
+}
+                </p>
+                </div>
+            <div class="inblock">   
+            <p>
+                    Localidad
+                    @if (@Model.MothersLocalidad == null)
+        {
+            WriteLiteral("...............................");
+        }
+        else
+        {
+            <span style="font-weight:bold;">
+                @Model.MothersLocalidad
+            </span>
+}
+                </p>
+                <p>
+                    Código Postal
+                    @if (@Model.MothersPostalCode == null)
+        {
+            WriteLiteral("........................");
+        }
+        else
+        {
+            <span style="font-weight:bold;">
+                @Model.MothersPostalCode
+            </span>
+}
+                </p>
+            </div>
+            <p>
+                Teléfono
+                @if (@Model.MothersPhone == null)
+                {
+                    WriteLiteral(".......................................");
+                }
+                else
+                {
+                    <span style="font-weight:bold;">
+                        @Model.MothersPhone
+                    </span>
+                }
+            </p>
+            <p>
+                Teléfonos del trabajo
+                @if (@Model.MothersWorkPhone == null)
+                {
+                    WriteLiteral("...............................................................................................................");
+                }
+                else
+                {
+                    <span style="font-weight:bold;">
+                        @Model.MothersWorkPhone
+                    </span>
+                }
+            </p>
+        </div>
+        <div class="lineaDivisoria"></div>
+		<div class="father">
+			<p>
+				Apellido/s y Nombres del Padre
+				@if (@Model.FathersName == null)
+				{
+					WriteLiteral("................................................................................................");
+				}
+				else
+				{
+					<span style="font-weight:bold;">
+						@Model.FathersName
+					</span>
+				}
+			</p>
+			<p>
+				Profesión u ocupación
+				@if (@Model.FathersProfession == null)
+				{
+					WriteLiteral("..............................................................................................................");
+				}
+				else
+				{
+					<span style="font-weight:bold;">
+						@Model.FathersProfession
+					</span>
+				}
+			</p>
+			<p>
+				Nacionalidad
+				@if (@Model.FathersNationality == null)
+				{
+					WriteLiteral("............................................................................................................................");
+				}
+				else
+				{
+					<span style="font-weight:bold;">
+						@Model.FathersNationality
+					</span>
+				}
+			</p>
+			<p style="margin-bottom:10px;">
+				Nivel de instrucción del Padre: (marque el último nivel alcanzado)
+			</p>
+			<table style="margin-bottom:10px;" cellspacing="0">
+				<tbody>
+					<tr valign="TOP">
+						<td width="80" class="celda">
+							Ninguno
+							@if (@Model.FathersLevelInstruction != null && @Model.FathersLevelInstruction.Equals("Ninguno"))
+							{
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+							}
+						</td>
+						<td width="81" class="celda">
+							Primario
+							@if (@Model.FathersLevelInstruction != null && @Model.FathersLevelInstruction.Equals("Primario"))
+							{
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+							}
+						</td>
+						<td width="81" class="celda">
+							Secundario
+							@if (@Model.FathersLevelInstruction != null && @Model.FathersLevelInstruction.Equals("Secundario"))
+							{
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+							}
+						</td>
+						<td width="80" class="celda">
+							Terciario
+							@if (@Model.FathersLevelInstruction != null && @Model.FathersLevelInstruction.Equals("Terciario"))
+							{
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+							}
+						</td>
+						<td width="81" class="celda">
+							Universitario
+							@if (@Model.FathersLevelInstruction != null && @Model.FathersLevelInstruction.Equals("Universitario"))
+							{
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+							}
+						</td>
+						<td width="80" class="celda">
+							Posgrado
+							@if (@Model.FathersLevelInstruction != null && @Model.FathersLevelInstruction.Equals("Posgrado"))
+							{
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+							}
+						</td>
+					</tr>
+					<tr valign="TOP">
+						<td colspan="2" width="162" class="celda">
+							Estudios completos
+							@if (@Model.FathersLevelInstructionCompleted != null && @Model.FathersLevelInstructionCompleted.HasValue && @Model.FathersLevelInstructionCompleted.Value)
+							{
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+							}
+						</td>
+						<td colspan="2" width="162" class="celda">
+							Estudios incompletos
+							@if (@Model.FathersLevelInstructionCompleted != null && @Model.FathersLevelInstructionCompleted.HasValue && !@Model.FathersLevelInstructionCompleted.Value)
+							{
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+							}
+						</td>
+						<td colspan="2" width="162" class="celda">
+							Hasta el año/grado:
+							@if (@Model.MothersUntilYearLevel == null)
+							{
+								WriteLiteral("............");
+							}
+							else
+							{
+								<span style="font-weight:bold;">
+									@Model.MothersUntilYearLevel
+								</span>
+							}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+            <div class="inblock">
+			    <p style="padding-right:10px;">
+				    ¿Vive?
+			    <p>
+			    <p style="padding-right: 20px;">
+				    Si
+				    @if (@Model.MothersLive != null && (@Model.MothersLive.HasValue && @Model.MothersLive.Value))
+				    {
+                        <span style="font-weight:bold;">
+                            X
+                        </span>
+				    }
+			    <p>
+			    <p style="padding-right: 20px;">
+				    No
+				    @if (@Model.MothersLive != null && (@Model.MothersLive.HasValue && !@Model.MothersLive.Value))
+				    {
+                        <span style="font-weight:bold;">
+                            X
+                        </span>
+				    }
+			    <p>
+			    <p style="padding-right: 10px;">
+				    Tipo de documento:
+				    @if (@Model.FathersKindofDocument == null)
+				    {
+					    WriteLiteral(" ............");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.FathersKindofDocument
+					    </span>
+				    }
+			    <p>
+			    <p>
+				    Nº Doc.
+				    @if (@Model.FathersDocumentNumber == null)
+				    {
+					    WriteLiteral(" ...............................................");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.FathersDocumentNumber
+					    </span>
+				    }
+			    <p>
+            </div>
+            <div class="inblock">
+			    <p>
+				    Domicilio – Calle:
+				    @if (@Model.FathersAddressStreet == null)
+				    {
+					    WriteLiteral(" .......................................");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.FathersAddressStreet
+					    </span>
+				    }
+			    </p>
+			    <p>
+				    Nº
+				    @if (@Model.FathersAddressNumber == null)
+				    {
+					    WriteLiteral(" .................");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.FathersAddressNumber
+					    </span>
+				    }
+			    </p>
+			    <p>
+				    Piso
+				    @if (@Model.FathersAddressFloor == null)
+				    {
+					    WriteLiteral(" ........");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.FathersAddressFloor
+					    </span>
+				    }
+			    </p>
+			    <p>
+				    Torre
+				    @if (@Model.FathersAddressTower == null)
+				    {
+					    WriteLiteral(" ..............");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.FathersAddressTower
+					    </span>
+				    }
+			    </p>
+			    <p>
+				    Dto
+				    @if (@Model.FathersAddressDpto == null)
+				    {
+					    WriteLiteral(" .......");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.FathersAddressDpto
+					    </span>
+				    }
+			    </p>
+            </div>
+			<div class="inblock">
+				<p>
+					Localidad
+					@if (@Model.FathersLocalidad == null)
+					{
+						WriteLiteral(" ...............................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.FathersLocalidad
+						</span>
+					}
+				</p>
+				<p>
+					Código Postal
+					@if (@Model.FathersPostalCode == null)
+					{
+						WriteLiteral(" ........................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.FathersPostalCode
+						</span>
+					}
+				</p>
+			</div>
+			<p>
+				Teléfono
+				@if (@Model.FathersPhone == null)
+				{
+					WriteLiteral(" .......................................");
+				}
+				else
+				{
+					<span style="font-weight:bold;">
+						@Model.FathersPhone
+					</span>
+				}
+			</p>
+			<p>
+				Teléfonos del trabajo
+				@if (@Model.FathersWorkPhone == null)
+				{
+					WriteLiteral(" ...............................................................................................................");
+				}
+				else
+				{
+					<span style="font-weight:bold;">
+						@Model.FathersWorkPhone
+					</span>
+				}
+			</p>
+		</div>
+		<div class="lineaDivisoria"></div>
+		<div class="tutor">
+			<p>
+				Apellido/s y Nombres del Tutor/responsable
+				@if (@Model.TutorName == null)
+				{
+					WriteLiteral(" ...............................................................................");
+				}
+				else
+				{
+					<span style="font-weight:bold;">
+						@Model.TutorName
+					</span>
+				}
+			</p>
+			<p>
+				Profesión u ocupación
+				@if (@Model.TutorProfession == null)
+				{
+					WriteLiteral(" ..............................................................................................................");
+				}
+				else
+				{
+					<span style="font-weight:bold;">
+						@Model.TutorProfession
+					</span>
+				}
+			</p>
+			<p>
+				Nacionalidad
+				@if (@Model.TutorNationality == null)
+				{
+					WriteLiteral(" ............................................................................................................................");
+				}
+				else
+				{
+					<span style="font-weight:bold;">
+						@Model.TutorNationality
+					</span>
+				}
+			</p>
+			<p style="margin-bottom:10px;">
+				Nivel de instrucción del Tutor/responsable: (marque el último nivel alcanzado)
+			</p>
+			<table style="margin-bottom:10px;" cellspacing="0">
+				<tbody>
+					<tr valign="TOP">
+						<td width="80" class="celda">
+							Ninguno
+								@if (@Model.TutorLevelInstruction != null && @Model.TutorLevelInstruction.Equals("Ninguno"))
+								{
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+								}
+						</td>
+						<td width="81" class="celda">
+							Primario
+								@if (@Model.TutorLevelInstruction != null && @Model.TutorLevelInstruction.Equals("Primario"))
+								{
+                            <span style="font-weight:bold;">
+                                X
+                            </span>
+								}
+						</td>
+						<td width="81" class="celda">
+							<h5 style="font-weight: normal; font-size:11pt;">Secundario</h5>
+							<span style="font-weight:bold;">
+								@if (@Model.TutorLevelInstruction != null && @Model.TutorLevelInstruction.Equals("Secundario"))
+                                {
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+                                }
+							</span>
+						</td>
+						<td width="80" class="celda">
+							Terciario
+								@if (@Model.TutorLevelInstruction != null && @Model.TutorLevelInstruction.Equals("Terciario"))
+								{
+									<span style="font-weight:bold;">
+                                    X
+                                </span>
+								}
+						</td>
+                        <td width="81" class="celda">
+                            Universitario
+                            @if (@Model.TutorLevelInstruction != null && @Model.TutorLevelInstruction.Equals("Universitario"))
+                            {
+                                <span style="font-weight:bold;">
+                                    X
+                                </span>
+                            }
+                        </td>
+						<td width="80" class="celda">
+							Posgrado
+								@if (@Model.TutorLevelInstruction != null && @Model.TutorLevelInstruction.Equals("Posgrado"))
+								{
+                            <span style="font-weight:bold;">
+                                X
+                            </span>
+								}
+						</td>
+					</tr>
+					<tr valign="TOP">
+						<td colspan="2" width="161" class="celda">
+							Estudios completos
+								@if (@Model.TutorLevelInstructionCompleted != null && @Model.TutorLevelInstructionCompleted.HasValue && @Model.TutorLevelInstructionCompleted.Value)
+								{
+                            <span style="font-weight:bold;">
+                                X
+                            </span>
+								}
+						</td>
+						<td colspan="2" width="161" class="celda">
+							Estudios incompletos
+								@if (@Model.TutorLevelInstructionCompleted != null && @Model.TutorLevelInstructionCompleted.HasValue && !@Model.TutorLevelInstructionCompleted.Value)
+								{
+                            <span style="font-weight:bold;">
+                                X
+                            </span>
+								}
+						</td>
+						<td colspan="2" width="161" class="celda">
+							Hasta el año/grado:
+							@if (@Model.TutorUntilYearLevel == null)
+							{
+								WriteLiteral("............");
+							}
+							else
+							{
+								<span style="font-weight:bold;">
+									@Model.TutorUntilYearLevel
+								</span>
+							}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+            <div class="inblock">
+			    <p style="padding-right:10px;">
+				    ¿Vive?
+			    <p>
+			    <p style="padding-right: 20px;">
+				    Si
+					    @if (@Model.TutorLive != null && (@Model.TutorLive.HasValue && @Model.TutorLive.Value))
+					    {
+                    <span style="font-weight:bold;">
+                        X
+                    </span>
+					    }
+			    <p>
+			    <p style="padding-right: 20px;">
+				    No
+					    @if (@Model.TutorLive != null && (@Model.TutorLive.HasValue && !@Model.TutorLive.Value))
+					    {
+                    <span style="font-weight:bold;">
+                        X
+                    </span>
+					    }
+			    <p>
+
+			    <p style="padding-right: 10px;">
+				    Tipo de documento:
+				    @if (@Model.TutorKindOfDocument == null)
+				    {
+					    WriteLiteral(" ............");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.TutorKindOfDocument
+					    </span>
+				    }
+			    <p>
+			    <p>
+				    Nº Doc.
+				    @if (@Model.TutorDocumentNumber == null)
+				    {
+					    WriteLiteral(" ...............................................");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.TutorDocumentNumber
+					    </span>
+				    }
+			    <p>
+            </div>
+            <div class="inblock">
+			    <p>
+				    Domicilio – Calle:
+				    @if (@Model.TutorAddressStreet == null)
+				    {
+					    WriteLiteral(" .......................................");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.TutorAddressStreet
+					    </span>
+				    }
+			    </p>
+			    <p>
+				    Nº
+				    @if (@Model.TutorAddressNumber == null)
+				    {
+					    WriteLiteral(" .................");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.TutorAddressNumber
+					    </span>
+				    }
+			    </p>
+			    <p>
+				    Piso
+				    @if (@Model.TutorAddressFloor == null)
+				    {
+					    WriteLiteral(" ........");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.TutorAddressFloor
+					    </span>
+				    }
+			    </p>
+			    <p>
+				    Torre
+				    @if (@Model.TutorAddressTower == null)
+				    {
+					    WriteLiteral(" ..............");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.TutorAddressTower
+					    </span>
+				    }
+			    </p>
+			    <p>
+				    Dto
+				    @if (@Model.TutorAddressDpto == null)
+				    {
+					    WriteLiteral(" .......");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.TutorAddressDpto
+					    </span>
+				    }
+			    </p>
+            </div>
+			<div class="inblock">
+				<p>
+					Localidad
+					@if (@Model.TutorLocalidad == null)
+					{
+						WriteLiteral(" ...............................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.TutorLocalidad
+						</span>
+					}
+				</p>
+				<p>
+					Código Postal
+					@if (@Model.TutorPostalCode == null)
+					{
+						WriteLiteral(" ........................");
+					}
+					else
+					{
+						<span style="font-weight:bold;">
+							@Model.TutorPostalCode
+						</span>
+					}
+				</p>
+			</div>
+			<p>
+				Teléfono
+				@if (@Model.TutorPhone == null)
+				{
+					WriteLiteral(".......................................");
+				}
+				else
+				{
+					<span style="font-weight:bold;">
+						@Model.TutorPhone
+					</span>
+				}
+			</p>
+			<p>
+				Teléfonos del trabajo
+				@if (@Model.TutorWorkPhone == null)
+				{
+					WriteLiteral(" ...............................................................................................................");
+				}
+				else
+				{
+					<span style="font-weight:bold;">
+						@Model.TutorWorkPhone
+					</span>
+				}
+			</p>
+	    </div>
+		<div style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; margin-top:10px; margin-bottom: 30px;">
+			<p>
+				OTRA PERSONA AUTORIZADA A RETIRAR AL ALUMNO DEL ESTABLECIMIENTO:
+			</p>
+            <div class="inblock">
+			    <p>
+				    Apellido/s y Nombre:
+				    @if (@Model.OtherPersonsName == null)
+				    {
+					    WriteLiteral(" .......................................................");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.OtherPersonsName
+					    </span>
+				    }
+			    </p>
+			    <p>
+				    Tipo doc
+				    @if (@Model.PersonKindDocument == null)
+				    {
+					    WriteLiteral(" ............");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.PersonKindDocument
+					    </span>
+				    }
+			    </p>
+			    <p>
+				    Nº Doc
+				    @if (@Model.PersonDocumentNumber == null)
+				    {
+					    WriteLiteral(" .................................");
+				    }
+				    else
+				    {
+					    <span style="font-weight:bold;">
+						    @Model.PersonDocumentNumber
+					    </span>
+				    }
+			    </p>
+		    </div>
+        </div>
+        <div class="firma">
+            <div class="firmaElement" style="width:25%; text-align:left; display:inline-block;">
+                <p>Fecha de inscripción ..../...../.....</p>
+            </div>
+            <div class="firmaElement" style="width:25%; text-align:center; display:inline-block;">
+                <p>
+                    ...............................
+                </p>
+                <p>
+                    Firma del responsable
+                </p>
+            </div>
+            <div class="firmaElement" style="width:25%; text-align:right; display:inline-block;">
+                <p>
+                    ..............................
+                </p>
+                <p>
+                    Aclaración
+                </p>
+            </div>
+        </div>
+	</div>
+</body>
+</html>

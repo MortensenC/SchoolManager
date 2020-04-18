@@ -12,13 +12,12 @@ namespace SchoolManager.WebUI.Controllers
         private Context db = new Context();
 
         //
-        // GET: /Classroom/
         [Authorize(Roles = "SuperAdmin, Admin, Teacher")]
         public ActionResult Index()
         {
             var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
             this.GetPicture(user);
-            return View(db.Classrooms.ToList());
+            return View(Json(db.Classrooms.ToList()));
         }
 
         private void GetPicture(User user)
@@ -138,6 +137,8 @@ namespace SchoolManager.WebUI.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        
 
         protected override void Dispose(bool disposing)
         {

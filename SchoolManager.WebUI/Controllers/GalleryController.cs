@@ -2,6 +2,7 @@
 using SchoolManager.Domain.Entities;
 using System;
 using System.Data;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -49,7 +50,6 @@ namespace SchoolManager.WebUI.Controllers
 
         //
         // GET: /Galerias/
-
         public ActionResult Galerias()
         {
             return View(db.Galleries.ToList());

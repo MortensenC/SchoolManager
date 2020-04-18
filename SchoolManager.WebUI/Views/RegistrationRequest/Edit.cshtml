@@ -1,0 +1,608 @@
+﻿@model SchoolManager.Domain.Entities.RegistrationRequest
+
+@{
+    ViewBag.Title = "Nueva inscripción";
+}
+
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>Estás aquí: <span>Admin</span> > <span>Inscripciones</span> > <span class="hlited">Nueva</span></p>
+    </div>
+</div>
+<div class="content-wrapper _novedades seccion">
+    <h1 class="header-seccion">Nueva inscripción</h1>
+    @using (Html.BeginForm("Edit", "RegistrationRequest", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+
+    <fieldset class="regularform editform">
+        <div class="editor-title-section">
+            <h2>EL ALUMNO SE INSCRIBE EN:</h2>
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Level)
+            @Html.DropDownListFor(model => model.Level,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Inicial", Value="Inicial" },
+                    new SelectListItem{ Text="E.G.B.", Value="EGB" },
+                    new SelectListItem{ Text="Polimodal", Value="Polimodal" },
+                    new SelectListItem{ Text="C.E.F.", Value="CEF" },
+                    new SelectListItem{ Text="C.E.C.", Value="CEC" },
+                    new SelectListItem{ Text="Especial", Value="Especial" },
+                    new SelectListItem{ Text="Adultos", Value="Adultos" },
+                    new SelectListItem{ Text="Artística", Value="Artística" },
+                    new SelectListItem{ Text="Otro", Value="Otro" },
+                }, "--- Seleccione un valor ---"
+            )
+            @Html.ValidationMessageFor(model => model.Level)
+
+            @Html.TextBoxFor(model => model.OtherLevel, new { style = (Model.Level.ToUpper().Equals("OTRO")) ? "display:inline" : "display:none" })
+            @Html.ValidationMessageFor(model => model.OtherLevel)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Year)
+            @Html.DropDownListFor(model => model.Year,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="1°", Value="1" },
+                    new SelectListItem{ Text="2°", Value="2" },
+                    new SelectListItem{ Text="3°", Value="3" },
+                    new SelectListItem{ Text="4°", Value="4" },
+                    new SelectListItem{ Text="5°", Value="5" },
+                    new SelectListItem{ Text="6°", Value="6" },
+                    new SelectListItem{ Text="7°", Value="7" },
+                    new SelectListItem{ Text="8°", Value="8" },
+                    new SelectListItem{ Text="9°", Value="9" },
+                }, "--- Seleccione un valor ---"
+            )
+            @Html.ValidationMessageFor(model => model.Year)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Turn)
+            @Html.DropDownListFor(model => model.Turn,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Mañana", Value="Mañana" },
+                    new SelectListItem{ Text="Tarde", Value="Tarde" },
+                    new SelectListItem{ Text="Jornada Completa", Value="Jornada Completa" },
+                    new SelectListItem{ Text="Vespertino", Value="Vespertino" },
+                    new SelectListItem{ Text="Noche", Value="Noche" },
+                }, "--- Seleccione un valor ---"
+            )
+            @Html.ValidationMessageFor(model => model.Turn)
+        </div>
+        <div class="editor-title-end"></div>
+        <div class="editor-title-section"><h2>DATOS PERSONALES DEL ALUMNO</h2></div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Lastnames)
+            @Html.TextBoxFor(model => model.Lastnames, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.Lastnames)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Firstnames)
+            @Html.TextBoxFor(model => model.Firstnames, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.Firstnames)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Birthday)
+            @Html.EditorFor(model => model.Birthday, new { type = "date" })
+            @Html.ValidationMessageFor(model => model.Birthday)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Birthplace)
+            @Html.TextBoxFor(model => model.Birthplace, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.Birthplace)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DNI)
+            @Html.TextBoxFor(model => model.DNI)
+            @Html.ValidationMessageFor(model => model.DNI)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sex)
+            @Html.RadioButtonFor(model => model.Sex, "M", new { id = "M" })@Html.Label("Másculino", new { @for = "M" })
+            @Html.RadioButtonFor(model => model.Sex, "F", new { id = "F" })@Html.Label("Femenino", new { @for = "F" })
+        </div>
+        <div class="editor-label">
+            <div class="editor-title-section">DOMICILIO FAMILIAR</div>
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdressStreet)
+            @Html.TextBoxFor(model => model.AdressStreet, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.AdressStreet)
+
+            @Html.LabelFor(model => model.AdressNumber)
+            @Html.EditorFor(model => model.AdressNumber, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.AdressNumber)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdressFloor)
+            @Html.TextBoxFor(model => model.AdressFloor)
+            @Html.ValidationMessageFor(model => model.AdressFloor)
+
+            @Html.LabelFor(model => model.AdressDpto)
+            @Html.TextBoxFor(model => model.AdressDpto)
+            @Html.ValidationMessageFor(model => model.AdressDpto)<br />
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Localidad)
+            @Html.TextBoxFor(model => model.Localidad, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.Localidad)
+
+            @Html.LabelFor(model => model.PostalCode)
+            @Html.TextBoxFor(model => model.PostalCode)
+            @Html.ValidationMessageFor(model => model.PostalCode)
+        </div>
+        <div class="editor-title-end"></div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FamilyPhone)
+            @Html.TextBoxFor(model => model.FamilyPhone)
+            @Html.ValidationMessageFor(model => model.FamilyPhone)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CellPhone)
+            @Html.TextBoxFor(model => model.CellPhone)
+            @Html.ValidationMessageFor(model => model.CellPhone)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OtherPhones, new { @class = "extended" })
+            @Html.TextBoxFor(model => model.OtherPhones, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.OtherPhones)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmailFather, new { @class = "extended" })
+            @Html.TextBoxFor(model => model.EmailFather, new { @class = "extendedInput", type = "email" })
+            @Html.ValidationMessageFor(model => model.EmailFather)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmailMother, new { @class = "extended" })
+            @Html.TextBoxFor(model => model.EmailMother, new { @class = "extendedInput", type = "email" })
+            @Html.ValidationMessageFor(model => model.EmailMother)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HMB, new { style = "width: 100%;" })<br />
+            @Html.EditorFor(model => model.HMB, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.HMB)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HMITS, new { style = "width: 100%;" })<br />
+            @Html.EditorFor(model => model.HMITS, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.HMITS)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BDB, new { style = "width: 100%;" })<br />
+            @Html.TextBoxFor(model => model.BDB, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.BDB)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Language, new { style = "width: 100%;" })
+            @Html.TextBoxFor(model => model.Language, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.Language)
+        </div>
+        <div class="editor-title-end"></div>
+        <div class="editor-label">
+            @Html.CheckBoxFor(model => model.OtherSchoolNoNullExclusive)
+            @Html.LabelFor(model => model.OtherSchoolNoNullExclusive, new { @class = "extended", style = "width: 30%;" })
+        </div>
+        <div id="escuelaProcedencia" style="@(Model.OtherSchool.HasValue && Model.OtherSchool.Value) ? display:none : display:inline">
+            <div class="editor-title-section">
+                <h2>ESCUELA DE PROCEDENCIA</h2>
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Distrito)
+                @Html.TextBoxFor(model => model.Distrito, new { @class = "extendedInput" })
+                @Html.ValidationMessageFor(model => model.Distrito)
+
+                @Html.LabelFor(model => model.OtherSchoolLevel)
+                @Html.TextBoxFor(model => model.OtherSchoolLevel)
+                @Html.ValidationMessageFor(model => model.OtherSchoolLevel)<br />
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.NameSchool, new { @class = "extended" })
+                @Html.TextBoxFor(model => model.NameSchool)
+                @Html.ValidationMessageFor(model => model.NameSchool)
+
+                @Html.LabelFor(model => model.NumberSchool)
+                @Html.EditorFor(model => model.NumberSchool, new { type = "number" })
+                @Html.ValidationMessageFor(model => model.NumberSchool)
+
+                @Html.CheckBoxFor(model => model.PrivateNoNullExclusive)
+                @Html.LabelFor(model => model.PrivateNoNullExclusive)
+            </div>
+            <div class="editor-label">
+                <div>
+                    INFORMACIÓN DE SALUD:
+                    @Html.CheckBoxFor(model => model.HealthCompletedNoNullExclusive)
+                    @Html.LabelFor(model => model.HealthCompletedNoNullExclusive)
+
+                    @Html.CheckBoxFor(model => model.HealthUpdatedNoNullExclusive)
+                    @Html.LabelFor(model => model.HealthUpdatedNoNullExclusive)
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.SocialName)
+                    @Html.TextBoxFor(model => model.SocialName)
+                    @Html.ValidationMessageFor(model => model.SocialName)
+
+                    @Html.LabelFor(model => model.AffiliateSocialNumber)
+                    @Html.EditorFor(model => model.AffiliateSocialNumber, new { type = "number" })
+                    @Html.ValidationMessageFor(model => model.AffiliateSocialNumber)
+                </div>
+
+            </div>
+            <div class="editor-title-end"></div>
+        </div>
+        <div class="editor-title-section">
+            <h2>DATOS DE LA MADRE</h2>
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersName, new { style = "width:280px;" })
+            @Html.TextBoxFor(model => model.MothersName, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.MothersName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersProfession)
+            @Html.TextBoxFor(model => model.MothersProfession, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.MothersProfession)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersNationality)
+            @Html.TextBoxFor(model => model.MothersNationality)
+            @Html.ValidationMessageFor(model => model.MothersNationality)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersLevelInstruction, new { style = "width:240px;" })
+            @Html.DropDownListFor(model => model.MothersLevelInstruction,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Ninguno", Value="Ninguno" },
+                    new SelectListItem{ Text="Primario", Value="Primario" },
+                    new SelectListItem{ Text="Secundario", Value="Secundario" },
+                    new SelectListItem{ Text="Terciario", Value="Terciario" },
+                    new SelectListItem{ Text="Universitario", Value="Universitario" },
+                    new SelectListItem{ Text="Posgrado", Value="Posgrado" },
+                }, "--- Seleccione un valor ---"
+            )
+            @Html.ValidationMessageFor(model => model.MothersLevelInstruction)
+
+            @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, true, new { id = "MLIC" })@Html.Label("Completo", new { @for = "MLIC" })
+            @Html.RadioButtonFor(model => model.MothersLevelInstructionCompleted, false, new { id = "MLII" })@Html.Label("Incompleto", new { @for = "MLII" })
+            @Html.ValidationMessageFor(model => model.MothersLevelInstructionCompleted)
+
+            @Html.LabelFor(model => model.MothersUntilYearLevel, new { id = "MUYL", style = ((Model.MothersLevelInstructionCompleted.HasValue && Model.MothersLevelInstructionCompleted.Value) || !Model.MothersLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
+            @Html.TextBoxFor(model => model.MothersUntilYearLevel, new { style = ((Model.MothersLevelInstructionCompleted.HasValue && Model.MothersLevelInstructionCompleted.Value) || !Model.MothersLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
+            @Html.ValidationMessageFor(model => model.MothersUntilYearLevel)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersLive)
+            @Html.DropDownListFor(model => model.MothersLive,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Sí", Value="true"},
+                    new SelectListItem{ Text="No", Value="false"}
+                }, "--- Seleccione un valor ---"
+            )
+            @Html.ValidationMessageFor(model => model.MothersLive)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersKindOfDocument)
+            @Html.TextBoxFor(model => model.MothersKindOfDocument)
+            @Html.ValidationMessageFor(model => model.MothersKindOfDocument)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersDocumentNumber)
+            @Html.EditorFor(model => model.MothersDocumentNumber, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.MothersDocumentNumber)
+        </div>
+        DOMICILIO<br>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersAddressStreet)
+            @Html.TextBoxFor(model => model.MothersAddressStreet, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.MothersAddressStreet)
+
+
+            @Html.LabelFor(model => model.MothersAddressNumber)
+            @Html.EditorFor(model => model.MothersAddressNumber, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.MothersAddressNumber)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersAddressFloor)
+            @Html.TextBoxFor(model => model.MothersAddressFloor)
+            @Html.ValidationMessageFor(model => model.MothersAddressFloor)
+
+            @Html.LabelFor(model => model.MothersAddressTower)
+            @Html.TextBoxFor(model => model.MothersAddressTower)
+            @Html.ValidationMessageFor(model => model.MothersAddressTower)
+
+            @Html.LabelFor(model => model.MothersAddressDpto)
+            @Html.TextBoxFor(model => model.MothersAddressDpto)
+            @Html.ValidationMessageFor(model => model.MothersAddressDpto)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersLocalidad)
+            @Html.TextBoxFor(model => model.MothersLocalidad, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.MothersLocalidad)
+
+            @Html.LabelFor(model => model.MothersPostalCode)
+            @Html.EditorFor(model => model.MothersPostalCode, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.MothersPostalCode)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersPhone)
+            @Html.TextBoxFor(model => model.MothersPhone)
+            @Html.ValidationMessageFor(model => model.MothersPhone)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MothersWorkPhone)
+            @Html.TextBoxFor(model => model.MothersWorkPhone, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.MothersWorkPhone)
+        </div>
+        <div class="editor-title-end"></div>
+        <div class="editor-title-section"><h2>DATOS DEL PADRE</h2></div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersName, new { @class = "extended" })
+            @Html.TextBoxFor(model => model.FathersName, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.FathersName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersProfession)
+            @Html.TextBoxFor(model => model.FathersProfession, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.FathersProfession)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersNationality)
+            @Html.TextBoxFor(model => model.FathersNationality)
+            @Html.ValidationMessageFor(model => model.FathersNationality)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersLevelInstruction, new { style = "width:240px;" })
+            @Html.DropDownListFor(model => model.FathersLevelInstruction,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Ninguno", Value="Ninguno" },
+                    new SelectListItem{ Text="Primario", Value="Primario" },
+                    new SelectListItem{ Text="Secundario", Value="Secundario" },
+                    new SelectListItem{ Text="Terciario", Value="Terciario" },
+                    new SelectListItem{ Text="Universitario", Value="Universitario" },
+                    new SelectListItem{ Text="Posgrado", Value="Posgrado" },
+                }, "--- Seleccione un valor ---"
+            )
+            @Html.ValidationMessageFor(model => model.FathersLevelInstruction)
+
+            @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, true, new { id = "FLIC" })@Html.Label("Completo", new { @for = "FLIC" })
+            @Html.RadioButtonFor(model => model.FathersLevelInstructionCompleted, false, new { id = "FLII" })@Html.Label("Incompleto", new { @for = "FLII" })
+            @Html.ValidationMessageFor(model => model.FathersLevelInstructionCompleted)
+
+            @Html.LabelFor(model => model.FathersUntilYearLevel, new { id = "FUYL", style = ((Model.FathersLevelInstructionCompleted.HasValue && Model.FathersLevelInstructionCompleted.Value) || !Model.FathersLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
+            @Html.TextBoxFor(model => model.FathersUntilYearLevel, new { style = ((Model.FathersLevelInstructionCompleted.HasValue && Model.FathersLevelInstructionCompleted.Value) || !Model.FathersLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
+            @Html.ValidationMessageFor(model => model.FathersUntilYearLevel)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersLive)
+            @Html.DropDownListFor(model => model.FathersLive,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Sí", Value="true"},
+                    new SelectListItem{ Text="No", Value="false"}
+                }, "--- Seleccione un valor ---"
+            )
+            @Html.ValidationMessageFor(model => model.FathersLive)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersKindofDocument)
+            @Html.TextBoxFor(model => model.FathersKindofDocument)
+            @Html.ValidationMessageFor(model => model.FathersKindofDocument)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersDocumentNumber)
+            @Html.EditorFor(model => model.FathersDocumentNumber, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.FathersDocumentNumber)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersAddressStreet)
+            @Html.TextBoxFor(model => model.FathersAddressStreet, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.FathersAddressStreet)
+
+
+            @Html.LabelFor(model => model.FathersAddressNumber)
+            @Html.EditorFor(model => model.FathersAddressNumber, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.FathersAddressNumber)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersAddressFloor)
+            @Html.TextBoxFor(model => model.FathersAddressFloor)
+            @Html.ValidationMessageFor(model => model.FathersAddressFloor)
+
+            @Html.LabelFor(model => model.FathersAddressTower)
+            @Html.TextBoxFor(model => model.FathersAddressTower)
+            @Html.ValidationMessageFor(model => model.FathersAddressTower)
+
+            @Html.LabelFor(model => model.FathersAddressDpto)
+            @Html.TextBoxFor(model => model.FathersAddressDpto)
+            @Html.ValidationMessageFor(model => model.FathersAddressDpto)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersLocalidad)
+            @Html.TextBoxFor(model => model.FathersLocalidad, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.FathersLocalidad)
+
+            @Html.LabelFor(model => model.FathersPostalCode)
+            @Html.EditorFor(model => model.FathersPostalCode, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.FathersPostalCode)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersPhone)
+            @Html.TextBoxFor(model => model.FathersPhone)
+            @Html.ValidationMessageFor(model => model.FathersPhone)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FathersWorkPhone)
+            @Html.TextBoxFor(model => model.FathersWorkPhone, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.FathersWorkPhone)
+        </div>
+        <div class="editor-title-end"></div>
+        <div class="editor-title-section"><h2>DATOS DEL TUTOR/RESPONSABLE</h2></div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorName, new { style = "width: 310px;" })
+            @Html.TextBoxFor(model => model.TutorName, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.TutorName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorProfession)
+            @Html.TextBoxFor(model => model.TutorProfession, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.TutorProfession)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorNationality)
+            @Html.TextBoxFor(model => model.TutorNationality)
+            @Html.ValidationMessageFor(model => model.TutorNationality)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorLevelInstruction, new { style = "width:300px;" })
+            @*@Html.DropDownListFor(model => model.TutorLevelInstruction, new SelectList(Enum.GetValues(typeof(SchoolManager.WebUI.Controllers.RegistrationRequestController.eLevelInstruction))))*@
+            @Html.DropDownListFor(model => model.TutorLevelInstruction,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Ninguno", Value="Ninguno" },
+                    new SelectListItem{ Text="Primario", Value="Primario" },
+                    new SelectListItem{ Text="Secundario", Value="Secundario" },
+                    new SelectListItem{ Text="Terciario", Value="Terciario" },
+                    new SelectListItem{ Text="Universitario", Value="Universitario" },
+                    new SelectListItem{ Text="Posgrado", Value="Posgrado" },
+                }, "--- Seleccione un valor ---"
+            )
+            @Html.ValidationMessageFor(model => model.TutorLevelInstruction)
+
+            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, true, new { id = "TLIC" })@Html.Label("Completo", new { @for = "TLIC" })
+            @Html.RadioButtonFor(model => model.TutorLevelInstructionCompleted, false, new { id = "TLII" })@Html.Label("Incompleto", new { @for = "TLII" })
+            @Html.ValidationMessageFor(model => model.TutorLevelInstructionCompleted)<br />
+
+            @Html.LabelFor(model => model.TutorUntilYearLevel, new { id = "TUYL", style = ((Model.TutorLevelInstructionCompleted.HasValue && Model.TutorLevelInstructionCompleted.Value) || !Model.TutorLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
+            @Html.TextBoxFor(model => model.TutorUntilYearLevel, new { style = ((Model.TutorLevelInstructionCompleted.HasValue && Model.TutorLevelInstructionCompleted.Value) || !Model.TutorLevelInstructionCompleted.HasValue) ? "display:none" : "display:inline" })
+            @Html.ValidationMessageFor(model => model.TutorUntilYearLevel)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorLive)
+            @Html.DropDownListFor(model => model.TutorLive,
+                new List<SelectListItem>{
+                    new SelectListItem{ Text="Sí", Value="true"},
+                    new SelectListItem{ Text="No", Value="false"}
+                }, "--- Seleccione un valor ---"
+            )
+            @Html.ValidationMessageFor(model => model.TutorLive)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorKindOfDocument)
+            @Html.TextBoxFor(model => model.TutorKindOfDocument)
+            @Html.ValidationMessageFor(model => model.TutorKindOfDocument)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorDocumentNumber)
+            @Html.EditorFor(model => model.TutorDocumentNumber, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.TutorDocumentNumber)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorAddressStreet)
+            @Html.TextBoxFor(model => model.TutorAddressStreet, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.TutorAddressStreet)
+
+
+            @Html.LabelFor(model => model.TutorAddressNumber)
+            @Html.EditorFor(model => model.TutorAddressNumber, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.TutorAddressNumber)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorAddressFloor)
+            @Html.TextBoxFor(model => model.TutorAddressFloor)
+            @Html.ValidationMessageFor(model => model.TutorAddressFloor)
+
+            @Html.LabelFor(model => model.TutorAddressTower)
+            @Html.TextBoxFor(model => model.TutorAddressTower)
+            @Html.ValidationMessageFor(model => model.TutorAddressTower)
+
+            @Html.LabelFor(model => model.TutorAddressDpto)
+            @Html.TextBoxFor(model => model.TutorAddressDpto)
+            @Html.ValidationMessageFor(model => model.TutorAddressDpto)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorLocalidad)
+            @Html.TextBoxFor(model => model.TutorLocalidad, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.TutorLocalidad)
+
+            @Html.LabelFor(model => model.TutorPostalCode)
+            @Html.EditorFor(model => model.TutorPostalCode, new { type = "number" })
+            @Html.ValidationMessageFor(model => model.TutorPostalCode)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorPhone)
+            @Html.TextBoxFor(model => model.TutorPhone)
+            @Html.ValidationMessageFor(model => model.TutorPhone)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TutorWorkPhone)
+            @Html.TextBoxFor(model => model.TutorWorkPhone, new { @class = "extendedInput" })
+            @Html.ValidationMessageFor(model => model.TutorWorkPhone)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OtherPersonsName, new { @class = "extended" })
+            @Html.TextBoxFor(model => model.OtherPersonsName)
+            @Html.ValidationMessageFor(model => model.OtherPersonsName)
+
+            @Html.LabelFor(model => model.PersonKindDocument)
+            @Html.TextBoxFor(model => model.PersonKindDocument)
+            @Html.ValidationMessageFor(model => model.PersonKindDocument)
+
+            @Html.LabelFor(model => model.PersonDocumentNumber)
+            @Html.TextBoxFor(model => model.PersonDocumentNumber)
+            @Html.ValidationMessageFor(model => model.PersonDocumentNumber)
+        </div>
+
+
+        <div class="editor-title-end"></div>
+        <input class="regularbtn float-left" type="submit" value="Inscribir" />
+        <div class="secbtn">@Html.ActionLink("Imprimir Inscripción", "printEmptyRegistrationRequest", "RegistrationRequest", new { id = @Model.Id }, null)</div>
+        <div class="secbtn">@Html.ActionLink("Volver", "Index")</div>
+    </fieldset>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $('#OtherSchoolNoNullExclusive').change(function () {
+        if (this.checked)
+            $("#escuelaProcedencia").fadeIn("slow", "linear");
+        else
+            $("#escuelaProcedencia").fadeOut("slow", "linear");
+    });
+    $('#Level').on('change', function (e) {
+        var optionSelected = $("option:selected", this);
+        var valueSelected = this.value;
+        if (valueSelected == "Otro")
+            $("#OtherLevel").fadeIn("slow", "linear");
+        else
+            $("#OtherLevel").fadeOut("slow", "linear");
+    });
+    $("input[name=MothersLevelInstructionCompleted]:radio").change(function () {
+        if (this.value == "True") {
+            $('#MothersUntilYearLevel').fadeOut("slow", "linear");
+            $('#MUYL').fadeOut("slow", "linear");
+        }
+        else {
+            $("#MothersUntilYearLevel").fadeIn("slow", "linear");
+            $('#MUYL').fadeIn("slow", "linear");
+        }
+    })
+    $("input[name=FathersLevelInstructionCompleted]:radio").change(function () {
+        if (this.value == "True") {
+            $('#FathersUntilYearLevel').fadeOut("slow", "linear");
+            $('#FUYL').fadeOut("slow", "linear");
+        }
+        else {
+            $("#FathersUntilYearLevel").fadeIn("slow", "linear");
+            $('#FUYL').fadeIn("slow", "linear");
+        }
+    })
+    $("input[name=TutorLevelInstructionCompleted]:radio").change(function () {
+        if (this.value == "True") {
+            $('#TutorUntilYearLevel').fadeOut("slow", "linear");
+            $('#TUYL').fadeOut("slow", "linear");
+        }
+        else {
+            $("#TutorUntilYearLevel").fadeIn("slow", "linear");
+            $('#TUYL').fadeIn("slow", "linear");
+        }
+    })
+</script>
+}

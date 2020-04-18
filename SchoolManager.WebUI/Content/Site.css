@@ -25,7 +25,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 /* general */
 html { font-weight:400; background-color: #fff; margin: 0; padding: 0; }
 html body { font-family:'lato'; background-color: #fff; color: #7A8889; margin: 0; padding: 0; }
-.content-wrapper { margin: 0 auto; max-width: 1050px; padding:0 25px; position:relative; }
+.content-wrapper { margin: 0 auto; max-width: 1200px; padding:0 25px; position:relative; }
 .float-left { float: left; }
 .float-right { float: right; }
 .clear-fix:after { content: "."; clear: both; display: block; height: 0; visibility: hidden; }
@@ -46,7 +46,7 @@ a { text-decoration:none; color:inherit; transition:0.3s ease; }
 header { background-color:#fff; position:fixed; width:100%; top:0; left:0; z-index:999; }
 header .content-wrapper:after { content:""; display:block; clear:both; }
 header nav { background-color: #EC7522; font-size: 15px;}
-header nav .content-wrapper { max-width:1100px; padding:0; }
+header nav .content-wrapper { max-width:1200px; padding:0; }
 nav .mobile-menu-trigger { display:none; }
 nav #menu { display:table; width:100%; color:#fff; text-align:center; table-layout: fixed; }
 nav #menu li { display:table-cell; }
@@ -179,7 +179,6 @@ p.cargo { font-weight: bold; line-height: 2;}
 ._lacasa .cell-2 { width:70%; padding-right:20px; }
 ._lacasa .cell-1 { width:30%; }
 ._lacasa .cell-1 img { max-width:100%; }
-._lacasa .ficha-tecnica { }
 ._lacasa .ficha-tecnica p.high, ._contacto .box-contacto p.high, .listado_publicidades p.high, .busqueda_libros p.high { color:#EC7522; padding-bottom:9px; margin-bottom:9px; border-bottom:1px solid #BDC3C7; font-size:24px; }
 ._lacasa .ficha-tecnica p.regular { margin-bottom:12px; }
 ._lacasa ul { float:left; width:33%; color: #7A8889; font-size:13px; margin-bottom:28px; line-height:20px; }
@@ -241,6 +240,141 @@ article.bookresult:nth-child(even), article.galeria:nth-child(even), .postsearch
 ._posts .buscador .mixedinput { max-width:285px; float:left; }
 /* */
 
+/* calendar */
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+	position: relative;
+	background-color: #fefefe;
+	margin: 150px auto;
+	padding: 0;
+	border: 1px solid #888;
+	width: 40%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+.modal-content input {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+/* Add Animation */
+@-webkit-keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+/* The Close Button */
+.close {
+	color: white;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	padding: 7px 14px;
+}
+
+	.close:hover,
+	.close:focus {
+		color: #000;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+.modal-header {
+	background-color: #EC7522;
+	color: white;
+	font-weight: bold;
+}
+
+#eventTitle {
+	padding: 16px;
+	font-size: 20px;
+}
+
+.modal-body {
+	padding: 16px;
+}
+
+.modal-description-bold {
+	font-weight: bold;
+}
+
+.modal-footer {
+	padding: 16px;
+	color: white;
+}
+
+.modal-footer button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px;
+	border: none;
+	cursor: pointer;
+	width: 100px;
+	opacity: 0.9;
+}
+
+.modal-footer button:hover {
+	opacity: 1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.modal-footer .cancelbtn, .deletebtn {
+	float: right;
+	width: 100px;
+}
+
+/* Add a color to the cancel button */
+	.modal-footer .cancelbtn {
+		background-color: #ccc;
+		color: black;
+	}
+
+/* Add a color to the delete button */
+	.modal-footer .deletebtn {
+		background-color: #f44336;
+	}
+
 /* galeria */
 article.galeria object { width:100%; height:360px; }
 
@@ -266,7 +400,10 @@ article.galeria object { width:100%; height:360px; }
 .box-contacto p.regular.c1 { background-position: 4px -3px; }
 .box-contacto p.regular.c2 { background-position: 4px -54px; }
 .box-contacto p.regular.c3 { background-position: 4px -104px; }
-/* */
+
+/* sección inscripción */
+div.editor-title-section { border-bottom: 1px solid #BDC3C7; margin-bottom: 6px;font-weight: bold; }
+div.editor-title-end { border-bottom: 1px solid #BDC3C7; margin-bottom: 40px; }
 
 /* sección panel admin */
 .regularbtn, .divrb a, .options a, .rb-cont a { margin:0; display: inline-block; text-transform: uppercase; border: 1px solid #00609A; padding: 6px 9px; font-weight: 700; font-size: 15px; color: #00609A; line-height: 17px; background-color: transparent; cursor: pointer; transition:0.3s; float:left;}
@@ -286,7 +423,7 @@ article.galeria object { width:100%; height:360px; }
 .editform, .profile-content { display:table; table-layout: fixed; }
 .editform .image-upload, .profile-content .imgcell { display:table-cell; vertical-align:top; width:300px; }
 .editform .form-right-side, .profile-content .rightside { display:table-cell; vertical-align:top; padding-left:22px; }
-.editform label, .editform .trigger_display span { width:160px; display: inline-table; }
+.editform label, .editform .trigger_display span { display: inline-table; } /*width:140px;*/
 .editform .editor-label { margin-bottom:6px; }
 .editform .trigger_display { margin-bottom: 10px; padding-top: 3px; }
 .editform .trigger_display label { width:auto; margin-right:14px; }

@@ -1,4 +1,6 @@
-﻿using System.Web.Optimization;
+﻿
+using System.Web.Optimization;
+using System.Web.Optimization.HashCache;
 
 namespace SchoolManager.WebUI
 {
@@ -22,9 +24,16 @@ namespace SchoolManager.WebUI
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/Site19022018.css",
-                "~/Content/royalslider.css"));
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //    "~/Content/royalslider.css"));
+
+            var cssBundle = new StyleBundle("~/Content/css").Include(
+                "~/Content/Site.css");
+            cssBundle.Transforms.Add(new HashCacheTransform());
+            cssBundle.Include(
+                "~/Content/royalslider.css");
+            bundles.Add(cssBundle);
+
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
@@ -41,4 +50,5 @@ namespace SchoolManager.WebUI
                         "~/Content/themes/base/jquery.ui.theme.css"));
         }
     }
+
 }

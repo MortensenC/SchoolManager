@@ -21,7 +21,7 @@ namespace SchoolManager.Domain.Entities
         }
 
         [NotMapped]
-        public string ClassroomId { get; set; }
+        public int? ClassroomId { get; set; }
 
         [NotMapped]
         public string ClassroomText

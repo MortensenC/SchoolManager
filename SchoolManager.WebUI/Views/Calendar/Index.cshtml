@@ -1,0 +1,285 @@
+﻿@model IEnumerable<SchoolManager.Domain.Entities.Event>
+@{
+    ViewBag.Title = "Calendario";
+    var selectable = (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Teacher")).ToString().ToLower();
+}
+
+<div id='calendar'></div>
+
+<div id="eventInfoModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span id="closeInfoModal" class="close">&times;</span>
+            <h2 id="eventTitle"></h2>
+        </div>
+        <div id="pDetails" class="modal-body">
+        </div>
+        <div class="modal-footer">
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Teacher"))
+            {
+                <button id="btnEdit" type="button" class="editbtn">Editar</button>
+                <button id="btnDelete" type="button" class="deletebtn">Eliminar</button>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="eventSaveModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span id="closeSaveModal" class="close">&times;</span>
+            <h2 id="eventTitle">Editar Evento</h2>
+        </div>
+        <form>
+            <div id="pDetails" class="modal-body">
+                <input type="hidden" id="hdEventId" value="0" />
+                <input type="hidden" id="hdStart" />
+                <input type="hidden" id="hdEnd" />
+                <div class="container">
+                    <label for="txtTitle"><b>Titulo</b></label>
+                    <input id="txtTitle" type="text" placeholder="Ingrese un titulo" name="txtTitle" required>
+                    <label for="txtStudents"><b>Alumnos</b></label>
+                    <input id="txtStudents" type="text" placeholder="Alumnos" name="txtStudents" required>
+                    <label for="txtDescription"><b>Descripcion</b></label>
+                    <input id="txtDescription" type="text" placeholder="Ingrese una descripcion del evento" name="txtDescription">
+                    <label for="txtUrl"><b>Link</b></label>
+                    <input id="txtUrl" type="text" placeholder="https://ejemplo.com" name="txtUrl">
+                    <label for="classroomId"><b>Clase</b></label>
+                    <select id="classroomId" name="classroomId">
+                        <option value="1">Primer grado</option>
+                        <option value="2">Segundo grado</option>
+                        <option value="3">Tercer grado</option>
+                        <option value="4">Cuarto grado</option>
+                        <option value="5">Quinto grado</option>
+                        <option value="6">Sexto grado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSave" type="button" class="savebtn">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            try {
+                GetCalendar();
+            } catch ({ responseText }){
+                console.log(responseText);
+                alert(responseText);
+            }
+        });
+
+        function GetCalendar() {
+            var events = [];
+            var selectedEvent = null;
+            var selectable = @selectable;
+
+            FetchEventAndRenderCalendar();
+            function FetchEventAndRenderCalendar() {
+                events = [];
+                $.get('/Event/GetEventsCalendar')
+                    .done(function (data) {
+                        $.each(data, function (i, event) {
+                            events.push({
+                                id: event.id,
+                                title: event.title,
+
+                                start: moment(event.start).format(),
+                                end: moment(event.end).format(),
+                                editable: event.editable,
+                                url: event.url,
+                                extendedProps: {
+                                    classroomId: event.classroomId,
+                                    classroomName: event.classroomName,
+                                    description: event.description,
+                                    students: event.students
+                                }
+                            });
+                        });
+                        GenerateCalendar(events);
+                    })
+                    .fail(function (error) {
+                        console.log(error);
+                    });
+            }
+
+            function GenerateCalendar(_events) {
+                var calendarEl = document.getElementById('calendar');
+
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    locale: 'es',
+                    buttonText: {
+                        prev: "Ant",
+                        next: "Sig",
+                        today: "Hoy",
+                        month: "Mes",
+                        week: "Semana",
+                        day: "Día",
+                        list: "Agenda"
+                    },
+                    weekLabel: "Sm",
+                    allDayHtml: "Todo<br/>el día",
+                    eventLimitText: "más",
+                    noEventsMessage: "No hay eventos para mostrar",
+                    plugins: ['interaction', 'dayGrid', 'timeGrid'],
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'timeGridWeek,timeGridDay,dayGridMonth'
+                    },
+                    defaultView: 'timeGridWeek',
+                    minTime: "08:00:00",
+                    maxTime: "20:00:00",
+                    hiddenDays: [0, 6],
+                    defaultDate: Date.now(),
+                    navLinks: true, // can click day/week names to navigate views
+                    selectable: selectable,
+                    selectMirror: true,
+                    select: function ({ start, end }) {
+                        selectedEvent = { id: null, title: '', url: null, start, end };
+                        openEditForm();
+                        calendar.unselect();
+                    },
+                    editable: true,
+                    eventLimit: true, // allow "more" link when too many events
+                    events: _events,
+                    eventClick: function (info) {
+                        info.jsEvent.preventDefault(); // don't let the browser navigate
+                        selectedEvent = info.event;
+                        $('#eventInfoModal #eventTitle').text(info.event.title);
+                        let $description = $('<div/>');
+                        if (info.event.extendedProps.students !== 'null') {
+                            $description.append($('<p/>').html('<span class="modal-description-bold">Alumnos: </span> ' + info.event.extendedProps.students));
+                        }
+                        $description.append($('<p/>').html('<span class="modal-description-bold">Inicio: </span>' + moment(info.event.start).format("DD/MM/YYYY HH:mm a")));
+                        $description.append($('<p/>').html('<span class="modal-description-bold">Fin: </span>' + moment(info.event.end).format("DD/MM/YYYY HH:mm a")));
+                        if (info.event.extendedProps.description !== 'null') {
+                            $description.append($('<p/>').html('<span class="modal-description-bold">Descripcion: </span> ' + info.event.extendedProps.description));
+                        }
+                        if (info.event.url !== 'null') {
+                            $description.append($('<p/>').html('<span class="modal-description-bold">Link: </span><a href="' + info.event.url + '">' + info.event.url + '</a> '));
+                        }
+                        if (info.event.extendedProps.classroomId > 0) {
+                            $description.append($('<p/>').html('<span class="modal-description-bold">Grado: </span>' + info.event.extendedProps.classroomName));
+                        }
+                        $('#eventInfoModal #pDetails').empty().html($description);
+                        var modal = document.getElementById("eventInfoModal");
+                        var span = document.getElementById("closeInfoModal");
+                        span.onclick = function () {
+                            modal.style.display = "none";
+                        }
+                        window.onclick = function (event) {
+                            if (event.target == modal) {
+                                modal.style.display = "none";
+                            }
+                        }
+                        modal.style.display = "block";
+                    }
+                });
+
+                calendar.render();
+            }
+
+            $('#btnEdit').click(function () {
+                openEditForm();
+            });
+            $('#btnDelete').click(function () {
+                if (selectedEvent != null && confirm('Esta seguro que desea eliminarlo?')) {
+                    $.post('/Event/DeleteEvent?eventId=' + selectedEvent.id)
+                        .done(function (data) {
+                            if (data.status) {
+                                FetchEventAndRenderCalendar();
+                                var modal = document.getElementById("eventInfoModal");
+                                modal.style.display = "none";
+                            }
+                        })
+                        .fail(function () {
+                            alert('Ocurrio un error al intentar eliminar el evento.')
+                        });
+                }
+            });
+            $('#btnSave').click(function () {
+                if ($('#txtTitle').val().trim() == "") {
+                    alert('Tiene que ingresar algo en el titulo');
+                    return;
+                }
+
+                var data = {
+                    id: $('#hdEventId').val(),
+                    title: $('#txtTitle').val(),
+                    students: $('#txtStudents').val(),
+                    description: $('#txtDescription').val(),
+                    url: $('#txtUrl').val(),
+                    start: moment($('#hdStart').val(), 'MM/DD/YYYY HH:mm A').format("YYYY-MM-DD HH:mm:ss"),
+                    end: moment($('#hdEnd').val(), 'MM/DD/YYYY HH:mm A').format("YYYY-MM-DD HH:mm:ss"),
+                    classroomId: $('#classroomId').val()
+                }
+
+                let httpPresent = $('#txtUrl').val().toLowerCase().substr(0, 7);
+                if (httpPresent.trim() !== '' && httpPresent !== 'https:/' && httpPresent !== 'http://') {
+                    data.url = 'https://' + data.url;
+                }
+
+                SaveEvent(data);
+            });
+
+            function openEditForm() {
+                if (selectedEvent != null) {
+                    $('#hdEventId').val(selectedEvent.id);
+                    if (selectedEvent.title !== 'null') {
+                        $('#txtTitle').val(selectedEvent.title);
+                    }
+                    if (selectedEvent.extendedProps && selectedEvent.extendedProps.students !== 'null') {
+                        $('#txtStudents').val(selectedEvent.extendedProps.students);
+                    }
+                    if (selectedEvent.extendedProps && selectedEvent.extendedProps.description !== 'null') {
+                        $('#txtDescription').val(selectedEvent.extendedProps.description);
+                    }
+                    if (selectedEvent.url !== 'null') {
+                        $('#txtUrl').val(selectedEvent.url);
+                    }
+                    $('#hdStart').val(moment(selectedEvent.start).format('MM/DD/YYYY HH:mm A'));
+                    $('#hdEnd').val(moment(selectedEvent.end).format('MM/DD/YYYY HH:mm A'));
+
+                    if (selectedEvent.extendedProps && selectedEvent.extendedProps.classroomId !== 'null') {
+                        setSelectBoxByText('classroomId', selectedEvent.extendedProps.classroomName);
+                    }
+                }
+
+                var modalInfo = document.getElementById("eventInfoModal");
+                modalInfo.style.display = "none";
+
+                var modalSave = document.getElementById("eventSaveModal");
+                var span = document.getElementById("closeSaveModal");
+                span.onclick = function () {
+                    modalSave.style.display = "none";
+                }
+                modalSave.style.display = "block";
+            }
+            function SaveEvent(data) {
+                $.post('/Event/SaveEvent', data)
+                    .done(function (data) {
+                        if (data.status) {
+                            FetchEventAndRenderCalendar();
+                            var modal = document.getElementById("eventSaveModal");
+                            modal.style.display = "none";
+                        }
+                    })
+                    .fail(function () {
+                        alert('Ocurrio un error al intentar guardar el evento.')
+                    });
+            }
+            function setSelectBoxByText(eid, etxt) {
+                var eid = document.getElementById(eid);
+                for (var i = 0; i < eid.options.length; ++i) {
+                    if (eid.options[i].text === etxt)
+                        eid.options[i].selected = true;
+                }
+            }
+        }
+    </script>
+}

@@ -17,12 +17,14 @@ namespace SchoolManager.Domain.Entities
     [DataContract(IsReference = true)]
     [KnownType(typeof(User))]
     [KnownType(typeof(Post))]
+    [KnownType(typeof(Event))]
     public partial class Classroom
     {
         public Classroom()
         {
             this.Users = new HashSet<User>();
             this.Posts = new HashSet<Post>();
+            this.Events = new HashSet<Event>();
         }
     
         [DataMember]
@@ -34,6 +36,8 @@ namespace SchoolManager.Domain.Entities
         public virtual ICollection<User> Users { get; set; }
         [DataMember]
         public virtual ICollection<Post> Posts { get; set; }
+        [DataMember]
+        public virtual ICollection<Event> Events { get; set; }
     }
     
 }

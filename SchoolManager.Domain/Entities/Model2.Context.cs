@@ -51,5 +51,10 @@ namespace SchoolManager.Domain.Entities
         public DbSet<Post> Posts { get; set; }
         public DbSet<Reply> Replies { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
+        public DbSet<RegistrationRequest> RegistrationRequest { get; set; }
+        public DbSet<ASPStateTempApplications> ASPStateTempApplications { get; set; }
+        public DbSet<ASPStateTempSessions> ASPStateTempSessions { get; set; }
+        public DbSet<SystemConfigurations> SystemConfigurations { get; set; }
+        public DbSet<Event> Events { get; set; }
     }
 }

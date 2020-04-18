@@ -132,4 +132,7 @@
   <data name="MEN003" xml:space="preserve">
     <value>Introduzca el título del libro</value>
   </data>
+  <data name="MEN004" xml:space="preserve">
+    <value>Introduzca el DNI del alumno</value>
+  </data>
 </root>

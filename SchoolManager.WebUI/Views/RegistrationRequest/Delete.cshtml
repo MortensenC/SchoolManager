@@ -1,0 +1,25 @@
+﻿@model SchoolManager.Domain.Entities.RegistrationRequest
+@{
+    ViewBag.Title = "Eliminar";
+}
+@*<div class="banner-seccion">
+        <img src="@Url.Content("~/Content/Images/banner_talleres.jpg")" />
+    </div>*@
+<div class="row-donde">
+    <div class="content-wrapper">
+        <p>Estás aquí: <span>Admin</span> > <span>Inscripciones</span> > <span class="hlited">Eliminar</span></p>
+    </div>
+</div>
+<div class="content-wrapper seccion clear-fix">
+    <h1 class="header-seccion">Eliminar Inscripción</h1>
+    @using (Html.BeginForm())
+    {
+        @:¿Está seguro que desea eliminar la inscripción del alumno <b>@Model.Lastnames, @Model.Firstnames</b> con DNI @Model.DNI?
+        <br />
+        <br />
+        <p>
+            <input class="regularbtn float-left" type="submit" value="Eliminar" />
+            <div class="secbtn padfix">@Html.ActionLink("Volver a la lista", "Index")</div>
+        </p>
+    }
+</div>
