@@ -290,9 +290,9 @@ namespace SchoolManager.WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(user.ClassroomId))
+                if (user.ClassroomId.HasValue)
                 {
-                    user.Classroom = this.db.Classrooms.Find(int.Parse(user.ClassroomId));
+                    user.Classroom = this.db.Classrooms.Find(user.ClassroomId.Value);
                 }
 
                 this.UpdateRole(user);
@@ -435,7 +435,7 @@ namespace SchoolManager.WebUI.Controllers
 
         private void SetEditViewBag(User user)
         {
-            user.ClassroomId = user.Classroom != null ? user.Classroom.Id.ToString() : string.Empty;
+            user.ClassroomId = user.Classroom?.Id;
 
             ViewBag.Classrooms = db.Classrooms.ToList();
             ViewBag.Users = db.Users.OrderBy(u => u.Surname).ToList().Where(u => u.IsInRole("Father")).ToList();
@@ -464,9 +464,9 @@ namespace SchoolManager.WebUI.Controllers
 
                 var newUser = db.Users.Find(user.Id);
 
-                if (!string.IsNullOrEmpty(user.ClassroomId))
+                if (user.ClassroomId.HasValue)
                 {
-                    newUser.Classroom = this.db.Classrooms.Find(int.Parse(user.ClassroomId));
+                    newUser.Classroom = this.db.Classrooms.Find(user.ClassroomId.Value);
                 }
                 else
                 {

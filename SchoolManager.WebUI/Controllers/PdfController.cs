@@ -1,16 +1,16 @@
 ﻿
-using PdfSharp;
-using PdfSharp.Pdf;
+//using PdfSharp;
+//using PdfSharp.Pdf;
 using System;
 using System.IO;
 using System.Web.Mvc;
-using TheArtOfDev.HtmlRenderer.PdfSharp;
+//using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 namespace SchoolManager.WebUI.Controllers
 {
     public class PdfController : Controller
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
         public ActionResult DemoPage()
         {
@@ -39,37 +39,24 @@ namespace SchoolManager.WebUI.Controllers
 
         public ActionResult DescargarPDF(Controller controller, string viewName, object model = null)
         {
-            string html = ViewToString(controller, viewName, model);
-            PdfGenerateConfig pdfConfig = new PdfGenerateConfig()
-            {
-                MarginLeft = 27,
-                MarginRight = 27,
-                MarginTop = 10,
-                MarginBottom = 10,
+            //string html = ViewToString(controller, viewName, model);
+            //PdfGenerateConfig pdfConfig = new PdfGenerateConfig()
+            //{
+            //    MarginLeft = 27,
+            //    MarginRight = 27,
+            //    MarginTop = 10,
+            //    MarginBottom = 10,
                 
-                PageSize = PageSize.A4,
-                PageOrientation = PageOrientation.Portrait
-            };
-            PdfDocument pdf = PdfGenerator.GeneratePdf(html, pdfConfig);
-            //pdf.Save("document.pdf");
+            //    PageSize = PageSize.A4,
+            //    PageOrientation = PageOrientation.Portrait
+            //};
+            //PdfDocument pdf = PdfGenerator.GeneratePdf(html, pdfConfig);
 
-            //// Render any HTML fragment or document to HTML
-            //var Renderer = new IronPdf.HtmlToPdf();
-            ////Renderer.PrintOptions.DPI = 300;
-            //Renderer.PrintOptions.PaperSize = PdfPrintOptions.PdfPaperSize.A4;
-            //Renderer.PrintOptions.MarginLeft = 27;
-            //Renderer.PrintOptions.MarginRight = 27;
-            //Renderer.PrintOptions.MarginTop = 10;
-            //Renderer.PrintOptions.MarginBottom = 10;
-            //Renderer.PrintOptions.EnableJavaScript = true;
-            //Renderer.PrintOptions.CssMediaType = PdfPrintOptions.PdfCssMediaType.Screen;
-
-            //var PDF = Renderer.RenderHtmlAsPdf(ViewToString(controller, viewName, model)).BinaryData;
             //Creates a new Memory stream
             MemoryStream stream = new MemoryStream();
             // Saves the document as stream
-            pdf.Save(stream);
-            pdf.Close();
+            //pdf.Save(stream);
+            //pdf.Close();
             // Converts the PdfDocument object to byte form.
             byte[] docBytes = stream.ToArray();
 

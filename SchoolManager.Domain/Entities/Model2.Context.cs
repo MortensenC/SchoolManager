@@ -55,5 +55,6 @@ namespace SchoolManager.Domain.Entities
         public DbSet<ASPStateTempApplications> ASPStateTempApplications { get; set; }
         public DbSet<ASPStateTempSessions> ASPStateTempSessions { get; set; }
         public DbSet<SystemConfigurations> SystemConfigurations { get; set; }
+        public DbSet<Event> Events { get; set; }
     }
 }

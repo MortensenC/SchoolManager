@@ -3,7 +3,6 @@ using SchoolManager.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -16,7 +15,7 @@ namespace SchoolManager.WebUI.Controllers
     public class BookController : Controller
     {
         private Context db = new Context();
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         //
         // GET: /Book/
@@ -140,7 +139,7 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin, Teacher")]
         public ActionResult Create(Book book, HttpPostedFileBase photo)
         {
-            log.Info("Trying to create a new Book entity.");
+           // log.Info("Trying to create a new Book entity.");
             try
             {
                 if (ModelState.IsValid)
@@ -160,7 +159,7 @@ namespace SchoolManager.WebUI.Controllers
             }
             catch (Exception e)
             {
-                log.Error("Error creating new Book", e);
+                //log.Error("Error creating new Book", e);
             }
 
             ViewBag.Users = db.Users.ToList();

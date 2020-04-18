@@ -20,6 +20,7 @@ namespace SchoolManager.Domain.Entities
     [KnownType(typeof(Classroom))]
     [KnownType(typeof(Role))]
     [KnownType(typeof(Book))]
+    [KnownType(typeof(Event))]
     public partial class User
     {
         public User()
@@ -31,6 +32,7 @@ namespace SchoolManager.Domain.Entities
             this.Replies = new HashSet<Reply>();
             this.Roles = new HashSet<Role>();
             this.Book = new HashSet<Book>();
+            this.Event = new HashSet<Event>();
         }
     
         [DataMember]
@@ -78,6 +80,8 @@ namespace SchoolManager.Domain.Entities
         public virtual ICollection<Role> Roles { get; set; }
         [DataMember]
         public virtual ICollection<Book> Book { get; set; }
+        [DataMember]
+        public virtual ICollection<Event> Event { get; set; }
     }
     
 }

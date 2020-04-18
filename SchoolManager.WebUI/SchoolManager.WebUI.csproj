@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -15,7 +16,7 @@
     <AssemblyName>SchoolManager.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <IISExpressSSLPort />
@@ -26,6 +27,7 @@
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,7 +65,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -145,7 +148,8 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +160,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\ClassroomController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PdfController.cs" />
@@ -173,6 +179,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Security\CustomRoleProvider.cs" />
+    <Compile Include="ViewModels\EventVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\book.jpg" />
@@ -283,7 +290,208 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bootstrap\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bootstrap\main.css" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bootstrap\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bootstrap\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bootstrap\main.min.css" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bootstrap\main.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\google-calendar.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\google-calendar.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales-all.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales-all.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\af.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ar-dz.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ar-kw.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ar-ly.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ar-ma.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ar-sa.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ar-tn.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ar.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\bg.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\bs.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ca.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\cs.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\da.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\de.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\el.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\en-au.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\en-gb.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\en-nz.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\es-us.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\es.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\et.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\eu.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\fa.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\fi.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\fr-ca.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\fr-ch.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\fr.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\gl.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\he.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\hi.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\hr.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\hu.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\id.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\is.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\it.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ja.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ka.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\kk.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ko.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\lb.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\lt.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\lv.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\mk.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ms.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\nb.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\nl.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\nn.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\pl.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\pt-br.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\pt.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ro.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\ru.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\sk.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\sl.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\sq.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\sr-cyrl.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\sr.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\sv.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\th.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\tr.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\uk.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\vi.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\zh-cn.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\locales\zh-tw.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\luxon.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\luxon.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\moment-timezone.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\moment-timezone.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\moment.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\moment.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\rrule.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\rrule.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales-all.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales-all.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\af.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ar-dz.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ar-kw.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ar-ly.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ar-ma.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ar-sa.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ar-tn.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ar.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\az.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\bg.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\bs.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ca.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\cs.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\da.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\de.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\el.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\en-au.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\en-gb.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\en-nz.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\es-us.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\es.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\et.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\eu.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\fa.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\fi.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\fr-ca.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\fr-ch.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\fr.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\gl.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\he.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\hi.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\hr.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\hu.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\id.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\is.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\it.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ja.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ka.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\kk.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ko.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\lb.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\lt.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\lv.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\mk.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ms.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\nb.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\nl.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\nn.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\pl.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\pt-br.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\pt.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ro.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ru.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\sk.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\sl.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\sq.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\sr-cyrl.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\sr.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\sv.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\th.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\tr.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\ug.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\uk.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\uz.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\vi.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\zh-cn.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\locales\zh-tw.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\main.css" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\main.min.css" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\main.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\daygrid\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\daygrid\main.css" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\daygrid\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\daygrid\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\daygrid\main.min.css" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\daygrid\main.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\google-calendar\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\google-calendar\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\google-calendar\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\google-calendar\main.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\interaction\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\interaction\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\interaction\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\interaction\main.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\list\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\list\main.css" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\list\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\list\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\list\main.min.css" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\list\main.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\luxon\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\luxon\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\luxon\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\luxon\main.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment-timezone\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment-timezone\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment-timezone\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment-timezone\main.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment\main.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\rrule\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\rrule\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\rrule\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\rrule\main.min.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\LICENSE.txt" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\main.css" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\main.esm.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\main.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\main.min.css" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\main.min.js" />
     <Content Include="SchoolManager.WebUI.Publish.xml" />
+    <Content Include="Scripts\fullcalendar.helper.js" />
+    <Content Include="Scripts\fullcalendar.helper.min.js" />
     <Content Include="Scripts\jHtmlArea-0.8.js" />
     <Content Include="Scripts\jHtmlArea-0.8.min.js" />
     <Content Include="Scripts\jHtmlArea.ColorPickerMenu-0.8.js" />
@@ -292,6 +500,45 @@
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bootstrap\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bootstrap\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bootstrap\README.md" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\google-calendar.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\luxon.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\moment-timezone.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\moment.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\bundle\rrule.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\core\README.md" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\daygrid\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\daygrid\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\daygrid\README.md" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\google-calendar\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\google-calendar\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\google-calendar\README.md" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\interaction\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\interaction\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\interaction\README.md" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\list\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\list\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\list\README.md" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\luxon\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\luxon\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\luxon\README.md" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment-timezone\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment-timezone\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment-timezone\README.md" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\moment\README.md" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\rrule\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\rrule\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\rrule\README.md" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\main.js.map" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\package.json" />
+    <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\README.md" />
+    <Content Include="config.json" />
     <None Include="Scripts\jquery-2.1.1-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -329,12 +576,15 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Calendar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -544,22 +794,6 @@
     <Content Include="Views\RegistrationRequest\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\3.5.0\PDFsharp\src\PdfSharp.Charting\PdfSharp.Charting.csproj">
-      <Project>{6f98a822-41b0-4c7a-85a6-e95c1d3e88ef}</Project>
-      <Name>PdfSharp.Charting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\3.5.0\PDFsharp\src\PdfSharp\PdfSharp.csproj">
-      <Project>{5a6055bc-bf86-4fdd-9f62-0109db7a303b}</Project>
-      <Name>PdfSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\HTML-Renderer-master\Source\HtmlRenderer.PdfSharp\HtmlRenderer.PdfSharp.csproj">
-      <Project>{ca249f5d-9285-40a6-b217-5889ef79fd7e}</Project>
-      <Name>HtmlRenderer.PdfSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\HTML-Renderer-master\Source\HtmlRenderer\HtmlRenderer.csproj">
-      <Project>{fe611685-391f-4e3e-b27e-d3150e51e49b}</Project>
-      <Name>HtmlRenderer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SchoolManager.Domain\SchoolManager.Domain.csproj">
       <Project>{8b7b9610-61a2-4602-9a96-0ad0af9faeeb}</Project>
       <Name>SchoolManager.Domain</Name>
@@ -575,11 +809,15 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

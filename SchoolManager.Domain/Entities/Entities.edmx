@@ -4,368 +4,437 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SchoolManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityType Name="ASPStateTempApplications">
-          <Key>
-            <PropertyRef Name="AppId" />
-          </Key>
-          <Property Name="AppId" Type="int" Nullable="false" />
-          <Property Name="AppName" Type="char" MaxLength="280" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ASPStateTempSessions">
-          <Key>
-            <PropertyRef Name="SessionId" />
-          </Key>
-          <Property Name="SessionId" Type="nvarchar" MaxLength="88" Nullable="false" />
-          <Property Name="Created" Type="datetime" Nullable="false" />
-          <Property Name="Expires" Type="datetime" Nullable="false" />
-          <Property Name="LockDate" Type="datetime" Nullable="false" />
-          <Property Name="LockDateLocal" Type="datetime" Nullable="false" />
-          <Property Name="LockCookie" Type="int" Nullable="false" />
-          <Property Name="Timeout" Type="int" Nullable="false" />
-          <Property Name="Locked" Type="bit" Nullable="false" />
-          <Property Name="SessionItemShort" Type="varbinary" MaxLength="7000" />
-          <Property Name="SessionItemLong" Type="image" />
-          <Property Name="Flags" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Books">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar(max)" />
-          <Property Name="Link" Type="ntext" />
-          <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="Author" Type="nvarchar(max)" />
-          <Property Name="User_Id" Type="int" />
-          <Property Name="Highlighted" Type="bit" />
-          <Property Name="Year" Type="ntext" />
-          <Property Name="Origin" Type="ntext" />
-          <Property Name="Editorial" Type="ntext" />
-        </EntityType>
-        <EntityType Name="Classrooms">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Galleries">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="ntext" Nullable="false" />
-          <Property Name="Description" Type="ntext" />
-          <Property Name="CreationDate" Type="datetime" />
-          <Property Name="UpdateDate" Type="datetime" />
-          <Property Name="FlickrAlbum" Type="ntext" />
-        </EntityType>
-        <EntityType Name="Posts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Category" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="FlickrAlbum" Type="nvarchar(max)" />
-          <Property Name="Public" Type="bit" Nullable="false" />
-          <Property Name="Subject" Type="int" />
-          <Property Name="YouTubeVideo" Type="ntext" />
-          <Property Name="Classroom_Id" Type="int" />
-        </EntityType>
-        <EntityType Name="RegistrationRequests">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Level" Type="varchar" MaxLength="50" />
-          <Property Name="Year" Type="varchar" MaxLength="2" />
-          <Property Name="Turn" Type="varchar" MaxLength="20" />
-          <Property Name="Lastnames" Type="varchar" MaxLength="50" />
-          <Property Name="Firstnames" Type="varchar" MaxLength="50" />
-          <Property Name="Birthday" Type="date" />
-          <Property Name="Birthplace" Type="varchar" MaxLength="50" />
-          <Property Name="DNI" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="Sex" Type="varchar" MaxLength="1" />
-          <Property Name="AdressStreet" Type="varchar" MaxLength="50" />
-          <Property Name="AdressNumber" Type="int" />
-          <Property Name="AdressFloor" Type="varchar" MaxLength="10" />
-          <Property Name="AdressDpto" Type="varchar" MaxLength="10" />
-          <Property Name="Localidad" Type="varchar" MaxLength="50" />
-          <Property Name="PostalCode" Type="int" />
-          <Property Name="FamilyPhone" Type="varchar" MaxLength="50" />
-          <Property Name="CellPhone" Type="varchar" MaxLength="50" />
-          <Property Name="OtherPhones" Type="varchar" MaxLength="100" />
-          <Property Name="EmailFather" Type="varchar" MaxLength="100" />
-          <Property Name="EmailMother" Type="varchar" MaxLength="100" />
-          <Property Name="HMB" Type="tinyint" />
-          <Property Name="HMITS" Type="tinyint" />
-          <Property Name="BDB" Type="varchar" MaxLength="50" />
-          <Property Name="Language" Type="varchar" MaxLength="50" />
-          <Property Name="OtherSchool" Type="bit" />
-          <Property Name="Distrito" Type="varchar" MaxLength="50" />
-          <Property Name="OtherSchoolLevel" Type="varchar" MaxLength="50" />
-          <Property Name="NameSchool" Type="varchar" MaxLength="50" />
-          <Property Name="NumberSchool" Type="bigint" />
-          <Property Name="Private" Type="bit" />
-          <Property Name="SocialName" Type="varchar" MaxLength="50" />
-          <Property Name="AffiliateSocialNumber" Type="varchar" MaxLength="50" />
-          <Property Name="MothersName" Type="varchar" MaxLength="50" />
-          <Property Name="MothersProfession" Type="varchar" MaxLength="100" />
-          <Property Name="MothersNationality" Type="varchar" MaxLength="50" />
-          <Property Name="MothersLevelInstruction" Type="varchar" MaxLength="50" />
-          <Property Name="MothersLevelInstructionCompleted" Type="bit" />
-          <Property Name="MothersUntilYearLevel" Type="varchar" MaxLength="20" />
-          <Property Name="MothersLive" Type="bit" />
-          <Property Name="MothersKindOfDocument" Type="varchar" MaxLength="10" />
-          <Property Name="MothersDocumentNumber" Type="bigint" />
-          <Property Name="MothersAddressStreet" Type="varchar" MaxLength="100" />
-          <Property Name="MothersAddressNumber" Type="varchar" MaxLength="10" />
-          <Property Name="MothersAddressFloor" Type="varchar" MaxLength="10" />
-          <Property Name="MothersAddressTower" Type="varchar" MaxLength="10" />
-          <Property Name="MothersAddressDpto" Type="varchar" MaxLength="5" />
-          <Property Name="MothersLocalidad" Type="varchar" MaxLength="50" />
-          <Property Name="MothersPostalCode" Type="bigint" />
-          <Property Name="MothersPhone" Type="varchar" MaxLength="50" />
-          <Property Name="MothersWorkPhone" Type="varchar" MaxLength="50" />
-          <Property Name="FathersName" Type="varchar" MaxLength="50" />
-          <Property Name="FathersProfession" Type="varchar" MaxLength="100" />
-          <Property Name="FathersNationality" Type="varchar" MaxLength="50" />
-          <Property Name="FathersLevelInstruction" Type="varchar" MaxLength="50" />
-          <Property Name="FathersLevelInstructionCompleted" Type="bit" />
-          <Property Name="FathersUntilYearLevel" Type="varchar" MaxLength="20" />
-          <Property Name="FathersLive" Type="bit" />
-          <Property Name="FathersKindofDocument" Type="varchar" MaxLength="10" />
-          <Property Name="FathersDocumentNumber" Type="bigint" />
-          <Property Name="FathersAddressStreet" Type="varchar" MaxLength="100" />
-          <Property Name="FathersAddressNumber" Type="varchar" MaxLength="10" />
-          <Property Name="FathersAddressFloor" Type="varchar" MaxLength="10" />
-          <Property Name="FathersAddressTower" Type="varchar" MaxLength="10" />
-          <Property Name="FathersAddressDpto" Type="varchar" MaxLength="5" />
-          <Property Name="FathersLocalidad" Type="varchar" MaxLength="50" />
-          <Property Name="FathersPostalCode" Type="bigint" />
-          <Property Name="FathersPhone" Type="varchar" MaxLength="50" />
-          <Property Name="FathersWorkPhone" Type="varchar" MaxLength="50" />
-          <Property Name="TutorName" Type="varchar" MaxLength="50" />
-          <Property Name="TutorProfession" Type="varchar" MaxLength="100" />
-          <Property Name="TutorNationality" Type="varchar" MaxLength="50" />
-          <Property Name="TutorLevelInstruction" Type="varchar" MaxLength="50" />
-          <Property Name="TutorLevelInstructionCompleted" Type="bit" />
-          <Property Name="TutorUntilYearLevel" Type="varchar" MaxLength="20" />
-          <Property Name="TutorLive" Type="bit" />
-          <Property Name="TutorKindOfDocument" Type="varchar" MaxLength="10" />
-          <Property Name="TutorDocumentNumber" Type="bigint" />
-          <Property Name="TutorAddressStreet" Type="varchar" MaxLength="100" />
-          <Property Name="TutorAddressNumber" Type="varchar" MaxLength="10" />
-          <Property Name="TutorAddressFloor" Type="varchar" MaxLength="10" />
-          <Property Name="TutorAddressTower" Type="varchar" MaxLength="10" />
-          <Property Name="TutorAddressDpto" Type="varchar" MaxLength="5" />
-          <Property Name="TutorLocalidad" Type="varchar" MaxLength="50" />
-          <Property Name="TutorPostalCode" Type="bigint" />
-          <Property Name="TutorPhone" Type="varchar" MaxLength="50" />
-          <Property Name="TutorWorkPhone" Type="varchar" MaxLength="50" />
-          <Property Name="OtherPersonsName" Type="varchar" MaxLength="100" />
-          <Property Name="PersonKindDocument" Type="varchar" MaxLength="10" />
-          <Property Name="PersonDocumentNumber" Type="bigint" />
-          <Property Name="YearRequest" Type="int" Nullable="false" />
-          <Property Name="Status" Type="varchar" MaxLength="50" />
-          <Property Name="HealthCompleted" Type="bit" />
-          <Property Name="HealthUpdated" Type="bit" />
-          <Property Name="OtherLevel" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Replies">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="PostId" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Roles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" />
-          <Property Name="Description" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="RoleUsers">
-          <Key>
-            <PropertyRef Name="User_Id" />
-            <PropertyRef Name="Role_Id" />
-          </Key>
-          <Property Name="User_Id" Type="int" Nullable="false" />
-          <Property Name="Role_Id" Type="smallint" Nullable="false" />
-        </EntityType>
-        <EntityType Name="SystemConfigurations">
-          <Key>
-            <PropertyRef Name="Key" />
-          </Key>
-          <Property Name="Key" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Value" Type="varchar" MaxLength="300" />
-          <Property Name="DefaultValue" Type="varchar" MaxLength="300" />
-          <Property Name="DisplayName" Type="varchar" MaxLength="100" />
-          <Property Name="Description" Type="varchar" MaxLength="300" />
-          <Property Name="Group" Type="varchar" MaxLength="50" />
-          <Property Name="isInherited" Type="bit" />
-          <Property Name="customData" Type="varchar" MaxLength="300" />
-        </EntityType>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar(max)" />
-          <Property Name="Address" Type="nvarchar(max)" />
-          <Property Name="Email" Type="nvarchar(max)" />
-          <Property Name="Notes" Type="nvarchar(max)" />
-          <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="SharePhone" Type="bit" Nullable="false" />
-          <Property Name="ShareEmail" Type="bit" Nullable="false" />
-          <Property Name="DadId" Type="int" />
-          <Property Name="MomId" Type="int" />
-          <Property Name="Birthdate" Type="nvarchar(max)" />
-          <Property Name="Teaches" Type="nvarchar(max)" />
-          <Property Name="Subject" Type="int" />
-          <Property Name="YearOfPromotion" Type="int" />
-          <Property Name="Classroom_Id" Type="int" />
-        </EntityType>
-        <Association Name="FK_ClassroomPost">
-          <End Role="Classrooms" Type="Self.Classrooms" Multiplicity="0..1" />
-          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Classrooms">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Posts">
-              <PropertyRef Name="Classroom_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PostReply">
-          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
-          <End Role="Replies" Type="Self.Replies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Posts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Replies">
-              <PropertyRef Name="PostId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RoleUsers_Role">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="RoleUsers" Type="Self.RoleUsers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RoleUsers">
-              <PropertyRef Name="Role_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RoleUsers_User">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="RoleUsers" Type="Self.RoleUsers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RoleUsers">
-              <PropertyRef Name="User_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserClassroom">
-          <End Role="Classrooms" Type="Self.Classrooms" Multiplicity="0..1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Classrooms">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="Classroom_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserPost">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Posts">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserReply">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Replies" Type="Self.Replies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Replies">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="SchoolManagerModelStoreContainer">
-          <EntitySet Name="ASPStateTempApplications" EntityType="Self.ASPStateTempApplications" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ASPStateTempSessions" EntityType="Self.ASPStateTempSessions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Classrooms" EntityType="Self.Classrooms" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Galleries" EntityType="Self.Galleries" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RegistrationRequests" EntityType="Self.RegistrationRequests" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Replies" EntityType="Self.Replies" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RoleUsers" EntityType="Self.RoleUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SystemConfigurations" EntityType="Self.SystemConfigurations" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ClassroomPost" Association="Self.FK_ClassroomPost">
-            <End Role="Classrooms" EntitySet="Classrooms" />
-            <End Role="Posts" EntitySet="Posts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PostReply" Association="Self.FK_PostReply">
-            <End Role="Posts" EntitySet="Posts" />
-            <End Role="Replies" EntitySet="Replies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RoleUsers_Role" Association="Self.FK_RoleUsers_Role">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="RoleUsers" EntitySet="RoleUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RoleUsers_User" Association="Self.FK_RoleUsers_User">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="RoleUsers" EntitySet="RoleUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserClassroom" Association="Self.FK_UserClassroom">
-            <End Role="Classrooms" EntitySet="Classrooms" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserPost" Association="Self.FK_UserPost">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Posts" EntitySet="Posts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserReply" Association="Self.FK_UserReply">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Replies" EntitySet="Replies" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="SchoolManagerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="SchoolManagerModelStoreContainer">
+    <EntitySet Name="Roles" EntityType="SchoolManagerModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="SchoolManagerModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Books" EntityType="SchoolManagerModel.Store.Books" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Galleries" EntityType="SchoolManagerModel.Store.Galleries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Posts" EntityType="SchoolManagerModel.Store.Posts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Replies" EntityType="SchoolManagerModel.Store.Replies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Classrooms" EntityType="SchoolManagerModel.Store.Classrooms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RegistrationRequest" EntityType="SchoolManagerModel.Store.RegistrationRequest" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ASPStateTempApplications" EntityType="SchoolManagerModel.Store.ASPStateTempApplications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ASPStateTempSessions" EntityType="SchoolManagerModel.Store.ASPStateTempSessions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SystemConfigurations" EntityType="SchoolManagerModel.Store.SystemConfigurations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Events" EntityType="SchoolManagerModel.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RoleUsers" EntityType="SchoolManagerModel.Store.RoleUsers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserPost" Association="SchoolManagerModel.Store.UserPost">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="PostReply" Association="SchoolManagerModel.Store.PostReply">
+      <End Role="Post" EntitySet="Posts" />
+      <End Role="Reply" EntitySet="Replies" />
+    </AssociationSet>
+    <AssociationSet Name="UserReply" Association="SchoolManagerModel.Store.UserReply">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Reply" EntitySet="Replies" />
+    </AssociationSet>
+    <AssociationSet Name="UserClassroom" Association="SchoolManagerModel.Store.UserClassroom">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Classroom" EntitySet="Classrooms" />
+    </AssociationSet>
+    <AssociationSet Name="ClassroomPost" Association="SchoolManagerModel.Store.ClassroomPost">
+      <End Role="Classroom" EntitySet="Classrooms" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleUsers_Users" Association="SchoolManagerModel.Store.FK_RoleUsers_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="RoleUsers" EntitySet="RoleUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleUsers_Roles" Association="SchoolManagerModel.Store.FK_RoleUsers_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="RoleUsers" EntitySet="RoleUsers" />
+    </AssociationSet>
+    <AssociationSet Name="BookUser" Association="SchoolManagerModel.Store.BookUser">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="EventUser" Association="SchoolManagerModel.Store.EventUser">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="ClassroomEvent" Association="SchoolManagerModel.Store.ClassroomEvent">
+      <End Role="Classroom" EntitySet="Classrooms" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SharePhone" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="ShareEmail" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="DadId" Type="int" Nullable="true" />
+    <Property Name="MomId" Type="int" Nullable="true" />
+    <Property Name="Birthdate" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Teaches" Type="nvarchar(max)" Nullable="true" DefaultValue="null" />
+    <Property Name="Subject" Type="int" Nullable="true" />
+    <Property Name="YearOfPromotion" Type="int" Nullable="true" />
+    <Property Name="Classroom_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Books">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Link" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Author" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Highlighted" Type="bit" Nullable="true" />
+    <Property Name="Year" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Origin" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Editorial" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="User_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Galleries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreationDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+    <Property Name="FlickrAlbum" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Posts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Category" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="FlickrAlbum" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Public" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="Subject" Type="int" Nullable="true" />
+    <Property Name="YouTubeVideo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Classroom_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Replies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="PostId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Classrooms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RegistrationRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Level" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Year" Type="varchar" Nullable="true" MaxLength="2" />
+    <Property Name="Turn" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Lastnames" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Firstnames" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Birthday" Type="datetime" Nullable="true" />
+    <Property Name="Birthplace" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="DNI" Type="varchar" Nullable="false" MaxLength="12" />
+    <Property Name="Sex" Type="varchar" Nullable="true" MaxLength="1" />
+    <Property Name="AdressStreet" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="AdressNumber" Type="int" Nullable="true" />
+    <Property Name="AdressFloor" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="AdressDpto" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Localidad" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="PostalCode" Type="int" Nullable="true" />
+    <Property Name="FamilyPhone" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="CellPhone" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="OtherPhones" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="EmailFather" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="EmailMother" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="HMB" Type="tinyint" Nullable="true" />
+    <Property Name="HMITS" Type="tinyint" Nullable="true" />
+    <Property Name="BDB" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Language" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="OtherSchool" Type="bit" Nullable="true" />
+    <Property Name="Distrito" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="OtherSchoolLevel" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="NameSchool" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="NumberSchool" Type="bigint" Nullable="true" />
+    <Property Name="Private" Type="bit" Nullable="true" />
+    <Property Name="SocialName" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="AffiliateSocialNumber" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="MothersName" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="MothersProfession" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="MothersNationality" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="MothersLevelInstruction" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="MothersLevelInstructionCompleted" Type="bit" Nullable="true" />
+    <Property Name="MothersUntilYearLevel" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="MothersLive" Type="bit" Nullable="true" />
+    <Property Name="MothersKindOfDocument" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="MothersDocumentNumber" Type="bigint" Nullable="true" />
+    <Property Name="MothersAddressStreet" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="MothersAddressNumber" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="MothersAddressFloor" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="MothersAddressTower" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="MothersAddressDpto" Type="varchar" Nullable="true" MaxLength="5" />
+    <Property Name="MothersLocalidad" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="MothersPostalCode" Type="bigint" Nullable="true" />
+    <Property Name="MothersPhone" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="MothersWorkPhone" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="FathersName" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="FathersProfession" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="FathersNationality" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="FathersLevelInstruction" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="FathersLevelInstructionCompleted" Type="bit" Nullable="true" />
+    <Property Name="FathersUntilYearLevel" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="FathersLive" Type="bit" Nullable="true" />
+    <Property Name="FathersKindofDocument" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="FathersDocumentNumber" Type="bigint" Nullable="true" />
+    <Property Name="FathersAddressStreet" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="FathersAddressNumber" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="FathersAddressFloor" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="FathersAddressTower" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="FathersAddressDpto" Type="varchar" Nullable="true" MaxLength="5" />
+    <Property Name="FathersLocalidad" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="FathersPostalCode" Type="bigint" Nullable="true" />
+    <Property Name="FathersPhone" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="FathersWorkPhone" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="TutorName" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="TutorProfession" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="TutorNationality" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="TutorLevelInstruction" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="TutorLevelInstructionCompleted" Type="bit" Nullable="true" />
+    <Property Name="TutorUntilYearLevel" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="TutorLive" Type="bit" Nullable="true" />
+    <Property Name="TutorKindOfDocument" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="TutorDocumentNumber" Type="bigint" Nullable="true" />
+    <Property Name="TutorAddressStreet" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="TutorAddressNumber" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="TutorAddressFloor" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="TutorAddressTower" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="TutorAddressDpto" Type="varchar" Nullable="true" MaxLength="5" />
+    <Property Name="TutorLocalidad" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="TutorPostalCode" Type="bigint" Nullable="true" />
+    <Property Name="TutorPhone" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="TutorWorkPhone" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="OtherPersonsName" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="PersonKindDocument" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="PersonDocumentNumber" Type="bigint" Nullable="true" />
+    <Property Name="YearRequest" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="HealthCompleted" Type="bit" Nullable="true" />
+    <Property Name="HealthUpdated" Type="bit" Nullable="true" />
+    <Property Name="OtherLevel" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ASPStateTempApplications">
+    <Key>
+      <PropertyRef Name="AppId" />
+    </Key>
+    <Property Name="AppId" Type="int" Nullable="false" />
+    <Property Name="AppName" Type="char" Nullable="false" MaxLength="280" />
+  </EntityType>
+  <EntityType Name="ASPStateTempSessions">
+    <Key>
+      <PropertyRef Name="SessionId" />
+    </Key>
+    <Property Name="SessionId" Type="nvarchar" Nullable="false" MaxLength="88" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="Expires" Type="datetime" Nullable="false" />
+    <Property Name="LockDate" Type="datetime" Nullable="false" />
+    <Property Name="LockDateLocal" Type="datetime" Nullable="false" />
+    <Property Name="LockCookie" Type="int" Nullable="false" />
+    <Property Name="Timeout" Type="int" Nullable="false" />
+    <Property Name="Locked" Type="bit" Nullable="false" />
+    <Property Name="SessionItemShort" Type="varbinary" Nullable="true" MaxLength="7000" />
+    <Property Name="SessionItemLong" Type="varbinary(max)" Nullable="true" />
+    <Property Name="Flags" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SystemConfigurations">
+    <Key>
+      <PropertyRef Name="Key" />
+    </Key>
+    <Property Name="Key" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Value" Type="varchar" Nullable="true" MaxLength="300" />
+    <Property Name="DefaultValue" Type="varchar" Nullable="true" MaxLength="300" />
+    <Property Name="DisplayName" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="Description" Type="varchar" Nullable="true" MaxLength="300" />
+    <Property Name="Group" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="isInherited" Type="bit" Nullable="true" />
+    <Property Name="customData" Type="varchar" Nullable="true" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="start" Type="datetime" Nullable="false" />
+    <Property Name="end" Type="datetime" Nullable="false" />
+    <Property Name="title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="url" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="backgroundColor" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="borderColor" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="textColor" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="extendedProps" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="classroomId" Type="int" Nullable="true" />
+    <Property Name="students" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="RoleUsers">
+    <Key>
+      <PropertyRef Name="Users_Id" />
+      <PropertyRef Name="Roles_Id" />
+    </Key>
+    <Property Name="Users_Id" Type="int" Nullable="false" />
+    <Property Name="Roles_Id" Type="smallint" Nullable="false" />
+  </EntityType>
+  <Association Name="UserPost">
+    <End Role="User" Type="SchoolManagerModel.Store.Users" Multiplicity="1" />
+    <End Role="Post" Type="SchoolManagerModel.Store.Posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PostReply">
+    <End Role="Post" Type="SchoolManagerModel.Store.Posts" Multiplicity="1" />
+    <End Role="Reply" Type="SchoolManagerModel.Store.Replies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reply">
+        <PropertyRef Name="PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserReply">
+    <End Role="User" Type="SchoolManagerModel.Store.Users" Multiplicity="1" />
+    <End Role="Reply" Type="SchoolManagerModel.Store.Replies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reply">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserClassroom">
+    <End Role="User" Type="SchoolManagerModel.Store.Users" Multiplicity="*" />
+    <End Role="Classroom" Type="SchoolManagerModel.Store.Classrooms" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Classroom">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Classroom_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClassroomPost">
+    <End Role="Classroom" Type="SchoolManagerModel.Store.Classrooms" Multiplicity="0..1" />
+    <End Role="Post" Type="SchoolManagerModel.Store.Posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classroom">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="Classroom_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BookUser">
+    <End Role="Book" Type="SchoolManagerModel.Store.Books" Multiplicity="*" />
+    <End Role="User" Type="SchoolManagerModel.Store.Users" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EventUser">
+    <End Role="Event" Type="SchoolManagerModel.Store.Events" Multiplicity="*" />
+    <End Role="User" Type="SchoolManagerModel.Store.Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClassroomEvent">
+    <End Role="Classroom" Type="SchoolManagerModel.Store.Classrooms" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Event" Type="SchoolManagerModel.Store.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classroom">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="classroomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleUsers_Users">
+    <End Role="Users" Type="SchoolManagerModel.Store.Users" Multiplicity="1" />
+    <End Role="RoleUsers" Type="SchoolManagerModel.Store.RoleUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoleUsers">
+        <PropertyRef Name="Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleUsers_Roles">
+    <End Role="RoleUsers" Type="SchoolManagerModel.Store.RoleUsers" Multiplicity="*" />
+    <End Role="Roles" Type="SchoolManagerModel.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoleUsers">
+        <PropertyRef Name="Roles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SchoolManagerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -409,6 +478,15 @@
           <EntitySet Name="ASPStateTempApplications" EntityType="SchoolManagerModel.ASPStateTempApplications" />
           <EntitySet Name="ASPStateTempSessions" EntityType="SchoolManagerModel.ASPStateTempSessions" />
           <EntitySet Name="SystemConfigurations" EntityType="SchoolManagerModel.SystemConfigurations" />
+          <EntitySet Name="Events" EntityType="SchoolManagerModel.Event" />
+          <AssociationSet Name="EventUser" Association="SchoolManagerModel.EventUser">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="ClassroomEvent" Association="SchoolManagerModel.ClassroomEvent">
+            <End Role="Classroom" EntitySet="Classrooms" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Role">
           <Key>
@@ -445,6 +523,7 @@
           <Property Type="String" Name="Teaches" Nullable="true" DefaultValue="null" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="Int32" Name="Subject" Nullable="true" />
           <Property Type="Int32" Name="YearOfPromotion" Nullable="true" />
+          <NavigationProperty Name="Event" Relationship="SchoolManagerModel.EventUser" FromRole="User" ToRole="Event" />
           </EntityType>
         <EntityType Name="Book">
           <Key>
@@ -546,6 +625,7 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Users" Relationship="SchoolManagerModel.UserClassroom" FromRole="Classroom" ToRole="User" />
           <NavigationProperty Name="Posts" Relationship="SchoolManagerModel.ClassroomPost" FromRole="Classroom" ToRole="Post" />
+          <NavigationProperty Name="Events" Relationship="SchoolManagerModel.ClassroomEvent" FromRole="Classroom" ToRole="Event" />
         </EntityType>
         <Association Name="UserClassroom">
           <End Type="SchoolManagerModel.User" Role="User" Multiplicity="*" />
@@ -699,6 +779,52 @@
           <Property Name="isInherited" Type="Boolean" />
           <Property Name="customData" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="start" Type="DateTime" Nullable="false" />
+          <Property Name="end" Type="DateTime" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="true" />
+          <Property Name="url" Type="String" Nullable="true" />
+          <NavigationProperty Name="User" Relationship="SchoolManagerModel.EventUser" FromRole="Event" ToRole="User" />
+          <NavigationProperty Name="Classroom" Relationship="SchoolManagerModel.ClassroomEvent" FromRole="Event" ToRole="Classroom" />
+          <Property Name="backgroundColor" Type="String" Nullable="true" />
+          <Property Name="borderColor" Type="String" Nullable="true" />
+          <Property Name="textColor" Type="String" Nullable="true" />
+          <Property Name="extendedProps" Type="String" Nullable="true" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="classroomId" Type="Int32" Nullable="true" />
+          <Property Name="students" Type="String" Nullable="true" />
+        </EntityType>
+        <Association Name="EventUser">
+          <End Type="SchoolManagerModel.Event" Role="Event" Multiplicity="*" />
+          <End Type="SchoolManagerModel.User" Role="User" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClassroomEvent">
+          <End Type="SchoolManagerModel.Classroom" Role="Classroom" Multiplicity="0..1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SchoolManagerModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classroom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="classroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -740,15 +866,15 @@
     <EntitySetMapping Name="Books">
       <EntityTypeMapping TypeName="IsTypeOf(SchoolManagerModel.Book)">
         <MappingFragment StoreEntitySet="Books">
-          <ScalarProperty Name="Editorial" ColumnName="Editorial" />
-                <ScalarProperty Name="Origin" ColumnName="Origin" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Link" ColumnName="Link" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Author" ColumnName="Author" />
           <ScalarProperty Name="Highlighted" ColumnName="Highlighted" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Origin" ColumnName="Origin" />
+          <ScalarProperty Name="Editorial" ColumnName="Editorial" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -799,6 +925,165 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="RegistrationRequest">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolManagerModel.RegistrationRequest)">
+        <MappingFragment StoreEntitySet="RegistrationRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Turn" ColumnName="Turn" />
+          <ScalarProperty Name="Lastnames" ColumnName="Lastnames" />
+          <ScalarProperty Name="Firstnames" ColumnName="Firstnames" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="AdressStreet" ColumnName="AdressStreet" />
+          <ScalarProperty Name="AdressNumber" ColumnName="AdressNumber" />
+          <ScalarProperty Name="AdressFloor" ColumnName="AdressFloor" />
+          <ScalarProperty Name="AdressDpto" ColumnName="AdressDpto" />
+          <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="FamilyPhone" ColumnName="FamilyPhone" />
+          <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+          <ScalarProperty Name="OtherPhones" ColumnName="OtherPhones" />
+          <ScalarProperty Name="EmailFather" ColumnName="EmailFather" />
+          <ScalarProperty Name="EmailMother" ColumnName="EmailMother" />
+          <ScalarProperty Name="HMB" ColumnName="HMB" />
+          <ScalarProperty Name="HMITS" ColumnName="HMITS" />
+          <ScalarProperty Name="BDB" ColumnName="BDB" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="OtherSchool" ColumnName="OtherSchool" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="OtherSchoolLevel" ColumnName="OtherSchoolLevel" />
+          <ScalarProperty Name="NameSchool" ColumnName="NameSchool" />
+          <ScalarProperty Name="NumberSchool" ColumnName="NumberSchool" />
+          <ScalarProperty Name="Private" ColumnName="Private" />
+          <ScalarProperty Name="SocialName" ColumnName="SocialName" />
+          <ScalarProperty Name="AffiliateSocialNumber" ColumnName="AffiliateSocialNumber" />
+          <ScalarProperty Name="MothersName" ColumnName="MothersName" />
+          <ScalarProperty Name="MothersProfession" ColumnName="MothersProfession" />
+          <ScalarProperty Name="MothersNationality" ColumnName="MothersNationality" />
+          <ScalarProperty Name="MothersLevelInstruction" ColumnName="MothersLevelInstruction" />
+          <ScalarProperty Name="MothersLevelInstructionCompleted" ColumnName="MothersLevelInstructionCompleted" />
+          <ScalarProperty Name="MothersUntilYearLevel" ColumnName="MothersUntilYearLevel" />
+          <ScalarProperty Name="MothersLive" ColumnName="MothersLive" />
+          <ScalarProperty Name="MothersKindOfDocument" ColumnName="MothersKindOfDocument" />
+          <ScalarProperty Name="MothersDocumentNumber" ColumnName="MothersDocumentNumber" />
+          <ScalarProperty Name="MothersAddressStreet" ColumnName="MothersAddressStreet" />
+          <ScalarProperty Name="MothersAddressNumber" ColumnName="MothersAddressNumber" />
+          <ScalarProperty Name="MothersAddressFloor" ColumnName="MothersAddressFloor" />
+          <ScalarProperty Name="MothersAddressTower" ColumnName="MothersAddressTower" />
+          <ScalarProperty Name="MothersAddressDpto" ColumnName="MothersAddressDpto" />
+          <ScalarProperty Name="MothersLocalidad" ColumnName="MothersLocalidad" />
+          <ScalarProperty Name="MothersPostalCode" ColumnName="MothersPostalCode" />
+          <ScalarProperty Name="MothersPhone" ColumnName="MothersPhone" />
+          <ScalarProperty Name="MothersWorkPhone" ColumnName="MothersWorkPhone" />
+          <ScalarProperty Name="FathersName" ColumnName="FathersName" />
+          <ScalarProperty Name="FathersProfession" ColumnName="FathersProfession" />
+          <ScalarProperty Name="FathersNationality" ColumnName="FathersNationality" />
+          <ScalarProperty Name="FathersLevelInstruction" ColumnName="FathersLevelInstruction" />
+          <ScalarProperty Name="FathersLevelInstructionCompleted" ColumnName="FathersLevelInstructionCompleted" />
+          <ScalarProperty Name="FathersUntilYearLevel" ColumnName="FathersUntilYearLevel" />
+          <ScalarProperty Name="FathersLive" ColumnName="FathersLive" />
+          <ScalarProperty Name="FathersKindofDocument" ColumnName="FathersKindofDocument" />
+          <ScalarProperty Name="FathersDocumentNumber" ColumnName="FathersDocumentNumber" />
+          <ScalarProperty Name="FathersAddressStreet" ColumnName="FathersAddressStreet" />
+          <ScalarProperty Name="FathersAddressNumber" ColumnName="FathersAddressNumber" />
+          <ScalarProperty Name="FathersAddressFloor" ColumnName="FathersAddressFloor" />
+          <ScalarProperty Name="FathersAddressTower" ColumnName="FathersAddressTower" />
+          <ScalarProperty Name="FathersAddressDpto" ColumnName="FathersAddressDpto" />
+          <ScalarProperty Name="FathersLocalidad" ColumnName="FathersLocalidad" />
+          <ScalarProperty Name="FathersPostalCode" ColumnName="FathersPostalCode" />
+          <ScalarProperty Name="FathersPhone" ColumnName="FathersPhone" />
+          <ScalarProperty Name="FathersWorkPhone" ColumnName="FathersWorkPhone" />
+          <ScalarProperty Name="TutorName" ColumnName="TutorName" />
+          <ScalarProperty Name="TutorProfession" ColumnName="TutorProfession" />
+          <ScalarProperty Name="TutorNationality" ColumnName="TutorNationality" />
+          <ScalarProperty Name="TutorLevelInstruction" ColumnName="TutorLevelInstruction" />
+          <ScalarProperty Name="TutorLevelInstructionCompleted" ColumnName="TutorLevelInstructionCompleted" />
+          <ScalarProperty Name="TutorUntilYearLevel" ColumnName="TutorUntilYearLevel" />
+          <ScalarProperty Name="TutorLive" ColumnName="TutorLive" />
+          <ScalarProperty Name="TutorKindOfDocument" ColumnName="TutorKindOfDocument" />
+          <ScalarProperty Name="TutorDocumentNumber" ColumnName="TutorDocumentNumber" />
+          <ScalarProperty Name="TutorAddressStreet" ColumnName="TutorAddressStreet" />
+          <ScalarProperty Name="TutorAddressNumber" ColumnName="TutorAddressNumber" />
+          <ScalarProperty Name="TutorAddressFloor" ColumnName="TutorAddressFloor" />
+          <ScalarProperty Name="TutorAddressTower" ColumnName="TutorAddressTower" />
+          <ScalarProperty Name="TutorAddressDpto" ColumnName="TutorAddressDpto" />
+          <ScalarProperty Name="TutorLocalidad" ColumnName="TutorLocalidad" />
+          <ScalarProperty Name="TutorPostalCode" ColumnName="TutorPostalCode" />
+          <ScalarProperty Name="TutorPhone" ColumnName="TutorPhone" />
+          <ScalarProperty Name="TutorWorkPhone" ColumnName="TutorWorkPhone" />
+          <ScalarProperty Name="OtherPersonsName" ColumnName="OtherPersonsName" />
+          <ScalarProperty Name="PersonKindDocument" ColumnName="PersonKindDocument" />
+          <ScalarProperty Name="PersonDocumentNumber" ColumnName="PersonDocumentNumber" />
+          <ScalarProperty Name="YearRequest" ColumnName="YearRequest" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="HealthCompleted" ColumnName="HealthCompleted" />
+          <ScalarProperty Name="HealthUpdated" ColumnName="HealthUpdated" />
+          <ScalarProperty Name="OtherLevel" ColumnName="OtherLevel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ASPStateTempApplications">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolManagerModel.ASPStateTempApplications)">
+        <MappingFragment StoreEntitySet="ASPStateTempApplications">
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="AppName" ColumnName="AppName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ASPStateTempSessions">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolManagerModel.ASPStateTempSessions)">
+        <MappingFragment StoreEntitySet="ASPStateTempSessions">
+          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Expires" ColumnName="Expires" />
+          <ScalarProperty Name="LockDate" ColumnName="LockDate" />
+          <ScalarProperty Name="LockDateLocal" ColumnName="LockDateLocal" />
+          <ScalarProperty Name="LockCookie" ColumnName="LockCookie" />
+          <ScalarProperty Name="Timeout" ColumnName="Timeout" />
+          <ScalarProperty Name="Locked" ColumnName="Locked" />
+          <ScalarProperty Name="SessionItemShort" ColumnName="SessionItemShort" />
+          <ScalarProperty Name="SessionItemLong" ColumnName="SessionItemLong" />
+          <ScalarProperty Name="Flags" ColumnName="Flags" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemConfigurations">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolManagerModel.SystemConfigurations)">
+        <MappingFragment StoreEntitySet="SystemConfigurations">
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Group" ColumnName="Group" />
+          <ScalarProperty Name="isInherited" ColumnName="isInherited" />
+          <ScalarProperty Name="customData" ColumnName="customData" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolManagerModel.Event)">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="start" ColumnName="start" />
+          <ScalarProperty Name="end" ColumnName="end" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="backgroundColor" ColumnName="backgroundColor" />
+          <ScalarProperty Name="borderColor" ColumnName="borderColor" />
+          <ScalarProperty Name="textColor" ColumnName="textColor" />
+          <ScalarProperty Name="extendedProps" ColumnName="extendedProps" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="classroomId" ColumnName="classroomId" />
+          <ScalarProperty Name="students" ColumnName="students" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="UserClassroom" TypeName="SchoolManagerModel.UserClassroom" StoreEntitySet="Users">
       <EndProperty Name="Classroom">
         <ScalarProperty Name="Id" ColumnName="Classroom_Id" />
@@ -818,11 +1103,11 @@
       <Condition ColumnName="Classroom_Id" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="RoleUsers" TypeName="SchoolManagerModel.RoleUsers" StoreEntitySet="RoleUsers">
-	  <EndProperty Name="Users">
-        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      <EndProperty Name="Users">
+        <ScalarProperty Name="Id" ColumnName="Users_Id" />
       </EndProperty>
       <EndProperty Name="Roles">
-        <ScalarProperty Name="Id" ColumnName="Role_Id" />
+        <ScalarProperty Name="Id" ColumnName="Roles_Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="BookUser" TypeName="SchoolManagerModel.BookUser" StoreEntitySet="Books">
@@ -834,146 +1119,6 @@
       </EndProperty>
       <Condition ColumnName="User_Id" IsNull="false" />
     </AssociationSetMapping>
-          <EntitySetMapping Name="RegistrationRequest">
-            <EntityTypeMapping TypeName="SchoolManagerModel.RegistrationRequest">
-              <MappingFragment StoreEntitySet="RegistrationRequests">
-				<ScalarProperty Name="OtherLevel" ColumnName="OtherLevel" />
-                <ScalarProperty Name="HealthUpdated" ColumnName="HealthUpdated" />
-                <ScalarProperty Name="HealthCompleted" ColumnName="HealthCompleted" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="YearRequest" ColumnName="YearRequest" />
-                <ScalarProperty Name="PersonDocumentNumber" ColumnName="PersonDocumentNumber" />
-                <ScalarProperty Name="PersonKindDocument" ColumnName="PersonKindDocument" />
-                <ScalarProperty Name="OtherPersonsName" ColumnName="OtherPersonsName" />
-                <ScalarProperty Name="TutorWorkPhone" ColumnName="TutorWorkPhone" />
-                <ScalarProperty Name="TutorPhone" ColumnName="TutorPhone" />
-                <ScalarProperty Name="TutorPostalCode" ColumnName="TutorPostalCode" />
-                <ScalarProperty Name="TutorLocalidad" ColumnName="TutorLocalidad" />
-                <ScalarProperty Name="TutorAddressDpto" ColumnName="TutorAddressDpto" />
-                <ScalarProperty Name="TutorAddressTower" ColumnName="TutorAddressTower" />
-                <ScalarProperty Name="TutorAddressFloor" ColumnName="TutorAddressFloor" />
-                <ScalarProperty Name="TutorAddressNumber" ColumnName="TutorAddressNumber" />
-                <ScalarProperty Name="TutorAddressStreet" ColumnName="TutorAddressStreet" />
-                <ScalarProperty Name="TutorDocumentNumber" ColumnName="TutorDocumentNumber" />
-                <ScalarProperty Name="TutorKindOfDocument" ColumnName="TutorKindOfDocument" />
-                <ScalarProperty Name="TutorLive" ColumnName="TutorLive" />
-                <ScalarProperty Name="TutorUntilYearLevel" ColumnName="TutorUntilYearLevel" />
-                <ScalarProperty Name="TutorLevelInstructionCompleted" ColumnName="TutorLevelInstructionCompleted" />
-                <ScalarProperty Name="TutorLevelInstruction" ColumnName="TutorLevelInstruction" />
-                <ScalarProperty Name="TutorNationality" ColumnName="TutorNationality" />
-                <ScalarProperty Name="TutorProfession" ColumnName="TutorProfession" />
-                <ScalarProperty Name="TutorName" ColumnName="TutorName" />
-                <ScalarProperty Name="FathersWorkPhone" ColumnName="FathersWorkPhone" />
-                <ScalarProperty Name="FathersPhone" ColumnName="FathersPhone" />
-                <ScalarProperty Name="FathersPostalCode" ColumnName="FathersPostalCode" />
-                <ScalarProperty Name="FathersLocalidad" ColumnName="FathersLocalidad" />
-                <ScalarProperty Name="FathersAddressDpto" ColumnName="FathersAddressDpto" />
-                <ScalarProperty Name="FathersAddressTower" ColumnName="FathersAddressTower" />
-                <ScalarProperty Name="FathersAddressFloor" ColumnName="FathersAddressFloor" />
-                <ScalarProperty Name="FathersAddressNumber" ColumnName="FathersAddressNumber" />
-                <ScalarProperty Name="FathersAddressStreet" ColumnName="FathersAddressStreet" />
-                <ScalarProperty Name="FathersDocumentNumber" ColumnName="FathersDocumentNumber" />
-                <ScalarProperty Name="FathersKindofDocument" ColumnName="FathersKindofDocument" />
-                <ScalarProperty Name="FathersLive" ColumnName="FathersLive" />
-                <ScalarProperty Name="FathersUntilYearLevel" ColumnName="FathersUntilYearLevel" />
-                <ScalarProperty Name="FathersLevelInstructionCompleted" ColumnName="FathersLevelInstructionCompleted" />
-                <ScalarProperty Name="FathersLevelInstruction" ColumnName="FathersLevelInstruction" />
-                <ScalarProperty Name="FathersNationality" ColumnName="FathersNationality" />
-                <ScalarProperty Name="FathersProfession" ColumnName="FathersProfession" />
-                <ScalarProperty Name="FathersName" ColumnName="FathersName" />
-                <ScalarProperty Name="MothersWorkPhone" ColumnName="MothersWorkPhone" />
-                <ScalarProperty Name="MothersPhone" ColumnName="MothersPhone" />
-                <ScalarProperty Name="MothersPostalCode" ColumnName="MothersPostalCode" />
-                <ScalarProperty Name="MothersLocalidad" ColumnName="MothersLocalidad" />
-                <ScalarProperty Name="MothersAddressDpto" ColumnName="MothersAddressDpto" />
-                <ScalarProperty Name="MothersAddressTower" ColumnName="MothersAddressTower" />
-                <ScalarProperty Name="MothersAddressFloor" ColumnName="MothersAddressFloor" />
-                <ScalarProperty Name="MothersAddressNumber" ColumnName="MothersAddressNumber" />
-                <ScalarProperty Name="MothersAddressStreet" ColumnName="MothersAddressStreet" />
-                <ScalarProperty Name="MothersDocumentNumber" ColumnName="MothersDocumentNumber" />
-                <ScalarProperty Name="MothersKindOfDocument" ColumnName="MothersKindOfDocument" />
-                <ScalarProperty Name="MothersLive" ColumnName="MothersLive" />
-                <ScalarProperty Name="MothersUntilYearLevel" ColumnName="MothersUntilYearLevel" />
-                <ScalarProperty Name="MothersLevelInstructionCompleted" ColumnName="MothersLevelInstructionCompleted" />
-                <ScalarProperty Name="MothersLevelInstruction" ColumnName="MothersLevelInstruction" />
-                <ScalarProperty Name="MothersNationality" ColumnName="MothersNationality" />
-                <ScalarProperty Name="MothersProfession" ColumnName="MothersProfession" />
-                <ScalarProperty Name="MothersName" ColumnName="MothersName" />
-                <ScalarProperty Name="AffiliateSocialNumber" ColumnName="AffiliateSocialNumber" />
-                <ScalarProperty Name="SocialName" ColumnName="SocialName" />
-                <ScalarProperty Name="Private" ColumnName="Private" />
-                <ScalarProperty Name="NumberSchool" ColumnName="NumberSchool" />
-                <ScalarProperty Name="NameSchool" ColumnName="NameSchool" />
-                <ScalarProperty Name="OtherSchoolLevel" ColumnName="OtherSchoolLevel" />
-                <ScalarProperty Name="Distrito" ColumnName="Distrito" />
-                <ScalarProperty Name="OtherSchool" ColumnName="OtherSchool" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="BDB" ColumnName="BDB" />
-                <ScalarProperty Name="HMITS" ColumnName="HMITS" />
-                <ScalarProperty Name="HMB" ColumnName="HMB" />
-                <ScalarProperty Name="EmailMother" ColumnName="EmailMother" />
-                <ScalarProperty Name="EmailFather" ColumnName="EmailFather" />
-                <ScalarProperty Name="OtherPhones" ColumnName="OtherPhones" />
-                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
-                <ScalarProperty Name="FamilyPhone" ColumnName="FamilyPhone" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
-                <ScalarProperty Name="AdressDpto" ColumnName="AdressDpto" />
-                <ScalarProperty Name="AdressFloor" ColumnName="AdressFloor" />
-                <ScalarProperty Name="AdressNumber" ColumnName="AdressNumber" />
-                <ScalarProperty Name="AdressStreet" ColumnName="AdressStreet" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="DNI" ColumnName="DNI" />
-                <ScalarProperty Name="Birthplace" ColumnName="Birthplace" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="Firstnames" ColumnName="Firstnames" />
-                <ScalarProperty Name="Lastnames" ColumnName="Lastnames" />
-                <ScalarProperty Name="Turn" ColumnName="Turn" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Level" ColumnName="Level" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ASPStateTempApplications">
-            <EntityTypeMapping TypeName="SchoolManagerModel.ASPStateTempApplications">
-              <MappingFragment StoreEntitySet="ASPStateTempApplications">
-                <ScalarProperty Name="AppName" ColumnName="AppName" />
-                <ScalarProperty Name="AppId" ColumnName="AppId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ASPStateTempSessions">
-            <EntityTypeMapping TypeName="SchoolManagerModel.ASPStateTempSessions">
-              <MappingFragment StoreEntitySet="ASPStateTempSessions">
-                <ScalarProperty Name="Flags" ColumnName="Flags" />
-                <ScalarProperty Name="SessionItemLong" ColumnName="SessionItemLong" />
-                <ScalarProperty Name="SessionItemShort" ColumnName="SessionItemShort" />
-                <ScalarProperty Name="Locked" ColumnName="Locked" />
-                <ScalarProperty Name="Timeout" ColumnName="Timeout" />
-                <ScalarProperty Name="LockCookie" ColumnName="LockCookie" />
-                <ScalarProperty Name="LockDateLocal" ColumnName="LockDateLocal" />
-                <ScalarProperty Name="LockDate" ColumnName="LockDate" />
-                <ScalarProperty Name="Expires" ColumnName="Expires" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SystemConfigurations">
-            <EntityTypeMapping TypeName="SchoolManagerModel.SystemConfigurations">
-              <MappingFragment StoreEntitySet="SystemConfigurations">
-                <ScalarProperty Name="customData" ColumnName="customData" />
-                <ScalarProperty Name="isInherited" ColumnName="isInherited" />
-                <ScalarProperty Name="Group" ColumnName="Group" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Key" ColumnName="Key" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -995,7 +1140,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Entities" ZoomLevel="94">
+      <Diagram Name="Entities" ZoomLevel="82">
         <EntityTypeShape EntityType="SchoolManagerModel.Role" Width="1.5" PointX="0.75" PointY="1" Height="1.7879850260416668" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagerModel.User" Width="1.5" PointX="4" PointY="0.625" Height="5.2494108072916656" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagerModel.Book" Width="1.5" PointX="7" PointY="1" Height="2.364889322916667" />
@@ -1036,6 +1181,9 @@
         <EntityTypeShape EntityType="SchoolManagerModel.ASPStateTempApplications" Width="1.75" PointX="8.375" PointY="7.75" />
         <EntityTypeShape EntityType="SchoolManagerModel.ASPStateTempSessions" Width="1.75" PointX="10.375" PointY="4.75" />
         <EntityTypeShape EntityType="SchoolManagerModel.SystemConfigurations" Width="1.75" PointX="8.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SchoolManagerModel.Event" Width="1.5" PointX="10.875" PointY="8.75" />
+        <AssociationConnector Association="SchoolManagerModel.EventUser" />
+        <AssociationConnector Association="SchoolManagerModel.ClassroomEvent" />
       </Diagram>
     </Diagrams>
   </Designer>

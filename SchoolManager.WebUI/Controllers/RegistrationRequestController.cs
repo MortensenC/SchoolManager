@@ -1,12 +1,9 @@
 ﻿using SchoolManager.Domain;
 using SchoolManager.Domain.Entities;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SchoolManager.WebUI.Controllers
@@ -15,7 +12,7 @@ namespace SchoolManager.WebUI.Controllers
     {
 
         private Context db = new Context();
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
 
         //
@@ -107,7 +104,7 @@ namespace SchoolManager.WebUI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin, Teacher, Father")]
         public ActionResult Create(RegistrationRequest RegistrationRequest)
         {
-            log.Info("Trying to create a new RegistrationRequest entity.");
+            //log.Info("Trying to create a new RegistrationRequest entity.");
             try
             {
 
@@ -120,7 +117,7 @@ namespace SchoolManager.WebUI.Controllers
 
                     if (rr != null)
                     {
-                        log.Error("Ya existe una solicitud de inscripción con el mismo DNI");
+                        //log.Error("Ya existe una solicitud de inscripción con el mismo DNI");
                         return View(RegistrationRequest);
                     }
 
@@ -134,7 +131,7 @@ namespace SchoolManager.WebUI.Controllers
             }
             catch (Exception e)
             {
-                log.Error("Ah ocurrido un error intentando guardar la solicitud inscripción", e);
+                //log.Error("Ah ocurrido un error intentando guardar la solicitud inscripción", e);
             }
 
             return View(RegistrationRequest);
@@ -268,7 +265,7 @@ namespace SchoolManager.WebUI.Controllers
         [HttpPost]
         public ActionResult SearchDNI(String dni)
         {
-            log.Info("Trying to search for a RegistrationRequest entity.");
+            //log.Info("Trying to search for a RegistrationRequest entity.");
             try
             {
                 // TODO: Add insert logic here

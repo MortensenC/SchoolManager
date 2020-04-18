@@ -50,7 +50,6 @@ namespace SchoolManager.WebUI.Controllers
 
         //
         // GET: /Galerias/
-
         public ActionResult Galerias()
         {
             return View(db.Galleries.ToList());
