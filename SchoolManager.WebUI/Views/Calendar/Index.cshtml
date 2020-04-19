@@ -34,13 +34,13 @@
             <div id="pDetails" class="modal-body">
                 <input type="hidden" id="hdEventId" value="0" />
                 <div class="container">
-                    <label for="txtTitle"><b>Titulo</b></label>
+                    <label for="txtTitle"><b>Título</b></label>
                     <input id="txtTitle" type="text" placeholder="Ingrese un titulo" name="txtTitle" required>
                     <label for="txtStudents"><b>Alumnos</b></label>
                     <input id="txtStudents" type="text" placeholder="Alumnos" name="txtStudents" required>
-                    <label for="txtDescription"><b>Descripcion</b></label>
+                    <label for="txtDescription"><b>Descripción</b></label>
                     <input id="txtDescription" type="text" placeholder="Ingrese una descripcion del evento" name="txtDescription">
-                    <label for="txtDate"><b>Dia</b></label>
+                    <label for="txtDate"><b>Día</b></label>
                     <span id="txtDate" class="date-input"></span>
                     <label for="txtStart"><b>Inicio</b></label>
                     <input id="txtStart" type="text" class="time-input" name="time">
@@ -242,12 +242,12 @@
                         if (info.event.extendedProps.students !== null) {
                             $description.append($('<p/>').html('<span class="modal-description-bold">Alumnos: </span> ' + info.event.extendedProps.students));
                         }
-                        $description.append($('<p/>').html('<span class="modal-description-bold">Dia: </span>' + moment(info.event.start).format("DD/MM/YYYY")));
+                        $description.append($('<p/>').html('<span class="modal-description-bold">Día: </span>' + moment(info.event.start).format("DD/MM/YYYY")));
                         $description.append($('<p/>').html('<span class="modal-description-bold">Inicio: </span>' + moment(info.event.start).format("HH:mm")));
                         $description.append($('<p/>').html('<span class="modal-description-bold">Fin: </span>' + moment(info.event.end).format("HH:mm")));
 
                         if (info.event.extendedProps.description !== null) {
-                            $description.append($('<p/>').html('<span class="modal-description-bold">Descripcion: </span> ' + info.event.extendedProps.description));
+                            $description.append($('<p/>').html('<span class="modal-description-bold">Descripción: </span> ' + info.event.extendedProps.description));
                         }
                         if (info.event.url !== 'null') {
                             $description.append($('<p/>').html('<span class="modal-description-bold">Link: </span><a href="' + info.event.url + '" target="_blank">' + info.event.url + '</a> '));
@@ -296,13 +296,17 @@
             });
             $('#btnSave').click(function () {
                 if ($('#txtTitle').val().trim() == "") {
-                    alert('Tiene que ingresar algo en el titulo');
+                    alert('Debe ingresar un título');
                     return;
                 }
 
-                var startDate = document.getElementById("txtDate").innerText + ' ' + $('#txtStart').val();
-                var endDate = document.getElementById("txtDate").innerText + ' ' + $('#txtEnd').val();
+                var startDate = moment(document.getElementById("txtDate").innerText + ' ' + $('#txtStart').val(), 'DD/MM/YYYY HH:mm').format("YYYY-MM-DD HH:mm:ss");
+                var endDate = moment(document.getElementById("txtDate").innerText + ' ' + $('#txtEnd').val(), 'DD/MM/YYYY HH:mm').format("YYYY-MM-DD HH:mm:ss");
 
+                if (startDate >= endDate) {
+                    alert('La fecha de inicio debe ser menor a la fecha de finalización');
+                    return;
+                }
 
                 var data = {
                     id: $('#hdEventId').val(),
@@ -310,8 +314,8 @@
                     students: $('#txtStudents').val(),
                     description: $('#txtDescription').val(),
                     url: $('#txtUrl').val(),
-                    start: moment(startDate, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DD HH:mm:ss"),
-                    end: moment(endDate, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DD HH:mm:ss"),
+                    start: startDate,
+                    end: endDate,
                     classroomId: $('#classroomId').val()
                 }
 
@@ -368,7 +372,7 @@
                         }
                     })
                     .fail(function () {
-                        alert('Ocurrio un error al intentar guardar el evento.')
+                        alert('Ocurrió un error al intentar guardar el evento.')
                     });
             }
             function setSelectBoxByText(eid, etxt) {
