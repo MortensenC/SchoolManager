@@ -194,6 +194,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MultipleButtonAttribute\MultipleButtonAttribute.cs" />
+    <Content Include="Libs\custom-select\custom-select.css" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -511,9 +512,9 @@
     <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\main.js" />
     <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\main.min.css" />
     <Content Include="Libs\fullcalendar-4.4.0\packages\timegrid\main.min.js" />
+    <Content Include="Libs\time-picker\jquery.timeselector.js" />
+    <Content Include="Libs\time-picker\theme\jquery.timeselector.css" />
     <Content Include="SchoolManager.WebUI.Publish.xml" />
-    <Content Include="Scripts\fullcalendar.helper.js" />
-    <Content Include="Scripts\fullcalendar.helper.min.js" />
     <Content Include="Scripts\jHtmlArea-0.8.js" />
     <Content Include="Scripts\jHtmlArea-0.8.min.js" />
     <Content Include="Scripts\jHtmlArea.ColorPickerMenu-0.8.js" />
