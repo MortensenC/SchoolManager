@@ -257,6 +257,12 @@ article.bookresult:nth-child(even), article.galeria:nth-child(even), .postsearch
 }
 
 /* Modal Content */
+#calendar {
+    height: 725px;
+    overflow: hidden;
+    padding: 20px;
+}
+
 .modal-content {
 	position: relative;
 	background-color: #fefefe;
@@ -271,6 +277,18 @@ article.bookresult:nth-child(even), article.galeria:nth-child(even), .postsearch
 	animation-duration: 0.4s
 }
 
+.modal-content input.time-input {
+	width: 80px;
+}
+
+.modal-content input.time-input {
+    width: 80px;
+}
+
+.modal-content input.date-input {
+    width: 80px;
+}
+
 .modal-content input {
 	width: 100%;
 	padding: 12px 20px;
@@ -279,6 +297,8 @@ article.bookresult:nth-child(even), article.galeria:nth-child(even), .postsearch
 	border: 1px solid #ccc;
 	box-sizing: border-box;
 }
+
+
 /* Add Animation */
 @-webkit-keyframes animatetop {
 	from {
