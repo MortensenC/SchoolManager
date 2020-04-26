@@ -20,25 +20,26 @@ namespace SchoolManager.WebUI.Controllers
                 List<Event> events = new List<Event>();
 
                 var user = db.Users.Find(int.Parse(User.Identity.Name.Split('|')[0]));
+                var last7Days = DateTime.Now.AddDays(-7);
                 if (User.IsInRole("Father"))
                 {
                     var classrooms = db.Users.Where(s => s.MomId == user.Id || s.DadId == user.Id).Select(son => son.Classroom.Id).ToList();
 
-                    events = db.Events.Where(e => (e.start >= DateTime.Now || e.start >= DateTime.Now) && e.classroomId.HasValue && classrooms.Contains(e.classroomId.Value)).ToList();
+                    events = db.Events.Where(e => e.start >= last7Days && e.classroomId.HasValue && classrooms.Contains(e.classroomId.Value)).ToList();
                 }
                 else if (User.IsInRole("Student"))
                 {
                     var classrooms = db.Users.Where(u => u.Id == user.Id).Select(u => u.Classroom.Id).ToList();
 
-                    events = db.Events.Where(e => (e.start >= DateTime.Now || e.start >= DateTime.Now) && e.classroomId.HasValue && classrooms.Contains(e.classroomId.Value)).ToList();
+                    events = db.Events.Where(e => e.start >= last7Days && e.classroomId.HasValue && classrooms.Contains(e.classroomId.Value)).ToList();
                 }
                 else if (user.IsInRole("Teacher"))
                 {
-                    events = db.Events.Where(e => (e.start >= DateTime.Now || e.start >= DateTime.Now) && e.userId == user.Id).ToList();
+                    events = db.Events.Where(e => e.start >= last7Days && e.userId == user.Id).ToList();
                 }
                 else
                 {
-                    events = db.Events.Where(e => e.start >= DateTime.Now || e.start >= DateTime.Now).ToList();
+                    events = db.Events.Where(e => e.start >= last7Days).ToList();
                 }
 
                 var eventsVM = events.Select(e => new EventVM()
